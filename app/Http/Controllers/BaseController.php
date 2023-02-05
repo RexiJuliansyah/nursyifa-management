@@ -16,16 +16,16 @@ class BaseController extends Controller
             $this->role_id = Auth::user()->ROLE_ID;
 
             $parent_menus = Menu::query()
-                ->join('TB_M_PERMISSION', 'TB_M_MENU.MENU_ID', '=', 'TB_M_PERMISSION.MENU_ID')
-                ->where('TB_M_MENU.PARENT_ID', 0)
-                ->where('TB_M_PERMISSION.ROLE_ID', $this->role_id)
+                ->join('tb_m_permission', 'tb_m_menu.MENU_ID', '=', 'tb_m_permission.MENU_ID')
+                ->where('tb_m_menu.PARENT_ID', 0)
+                ->where('tb_m_permission.ROLE_ID', $this->role_id)
                 ->orderBy('SEQUENCE')
                 ->get();
 
             $child_menus = Menu::query()
-                ->join('TB_M_PERMISSION', 'TB_M_MENU.MENU_ID', '=', 'TB_M_PERMISSION.MENU_ID')
-                ->where('TB_M_MENU.PARENT_ID', '!=', 0)
-                ->where('TB_M_PERMISSION.ROLE_ID', $this->role_id)
+                ->join('TB_M_PERMISSION', 'tb_m_menu.MENU_ID', '=', 'tb_m_permission.MENU_ID')
+                ->where('tb_m_menu.PARENT_ID', '!=', 0)
+                ->where('tb_m_permission.ROLE_ID', $this->role_id)
                 ->orderBy('SEQUENCE')
                 ->get();
             $user = Auth::user();
