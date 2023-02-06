@@ -11,7 +11,7 @@
                     <div class="row panel panel-default pt-40">
                         <div class="col-sm-12 col-xs-12">
                             <div class="mb-30">
-                                <h3 class="text-center txt-dark mb-10">Nursyifa Management</h3>
+                                <h3 class="text-center txt-dark mb-10">Log In</h3>
                                 <!-- <h6 class="text-center nonecase-font txt-grey">Login</h6> -->
                             </div>
                             <div class="form-wrap">
