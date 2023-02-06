@@ -22,6 +22,7 @@ class BaseController extends Controller
                 ->orderBy('SEQUENCE')
                 ->get();
 
+
             $child_menus = Menu::query()
                 ->join('tb_m_permission', 'tb_m_menu.MENU_ID', '=', 'tb_m_permission.MENU_ID')
                 ->where('tb_m_menu.PARENT_ID', '!=', 0)

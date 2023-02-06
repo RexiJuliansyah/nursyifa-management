@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html translate="no">
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -10,8 +10,8 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="{{asset('admin')}}/favicon.ico">
+	<link rel="icon" href="{{asset('admin')}}/favicon.ico" type="image/x-icon">
 
     <!-- vector map CSS -->
     <link href="{{asset('admin')}}/vendors/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -24,21 +24,9 @@
 	</div>
 
     <div class="wrapper pa-0">
-        <header class="sp-header">
-            <div class="sp-logo-wrap pull-left">
-                <a href="index.html">
-                    <img class="brand-img mr-10" src="{{asset('admin')}}/dist/img/logo.png" alt="brand" />
-                    <span class="brand-text">PO-Nursyifa</span>
-                </a>
-            </div>
-            
-            <div class="clearfix"></div>
-        </header>
-
         <!-- Content -->
         @yield('content')
         <!-- /Content -->
-
     </div>
 
     <!-- jQuery -->

@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('auth');
     }
 
@@ -23,6 +20,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('menu.index');
+
+        $data['title'] = 'Dashboard';
+        return view('dashboard.admin.index', compact('data'));
     }
+
 }

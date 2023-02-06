@@ -10,8 +10,8 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="favicon.ico">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="{{asset('admin')}}/favicon.ico">
+	<link rel="icon" href="{{asset('admin')}}/favicon.ico" type="image/x-icon">
 
 	<!-- Data table CSS -->
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>

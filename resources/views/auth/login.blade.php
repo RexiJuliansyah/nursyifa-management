@@ -6,13 +6,13 @@
     <div class="container-fluid">
         <!-- Row -->
         <div class="table-struct full-width full-height">
-            <div class="table-cell vertical-align-middle auth-form-wrap">
+            <div class="table-cell vertical-align-middle auth-form-wrap" style="padding: 50px 0">
                 <div class="auth-form ml-auto mr-auto no-float">
-                    <div class="row panel panel-default pt-40">
-                        <div class="col-sm-12 col-xs-12">
-                            <div class="mb-30">
-                                <h3 class="text-center txt-dark mb-10">Log In</h3>
-                                <!-- <h6 class="text-center nonecase-font txt-grey">Login</h6> -->
+                    <div class="row panel panel-default " style="background-color: #fefefe">
+                        <div class="col-sm-12 col-xs-12" >
+                            <div class="mb-10 text-center">
+                                <img class="brand-img mr-10" src="{{asset('admin')}}/dist/img/logo.jpg" width="150px" height="150px" alt="brand" />
+                                <h6 class="text-center nonecase-font txt-grey">Log In to Your Account</h6>
                             </div>
                             <div class="form-wrap">
                                 @error('USERNAME')
@@ -37,7 +37,7 @@
                                         @enderror
                                     </div>
                                     <div class="form-group text-center">
-                                        <button type="submit" class="btn btn-primary btn-rounded">Login</button>
+                                        <button type="submit" class="btn btn-primary btn-rounded" style="background-color: #019645">Login</button>
                                     </div>
                                 </form>
                             </div>
