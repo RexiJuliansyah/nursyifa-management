@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Elmer I Fast build Admin dashboard for any platform</title>
-	<meta name="description" content="Elmer is a Dashboard & Admin Site Responsive Template by hencework." />
+	<title>PO | Nursyifa</title>
+	<!-- <meta name="description" content="Elmer is a Dashboard & Admin Site Responsive Template by hencework." />
 	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Elmer Admin, Elmeradmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
-	<meta name="author" content="hencework"/>
+	<meta name="author" content="hencework"/> -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 	<!-- Favicon -->
@@ -72,7 +72,7 @@
 				<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-12">
-							<p>2017 &copy; Elmer. Pampered by Hencework</p>
+							<p>2023 &copy; all right reserved</p>
 						</div>
 					</div>
 				</footer>

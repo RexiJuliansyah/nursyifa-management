@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<title>Elmer I Fast build Admin dashboard for any platform</title>
+	<title>PO | Nursyifa</title>
 	<meta name="description" content="Elmer is a Dashboard & Admin Site Responsive Template by hencework." />
-	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Elmer Admin, Elmeradmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
-	<meta name="author" content="hencework"/>
+	<!-- <meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Elmer Admin, Elmeradmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
+	<meta name="author" content="hencework"/> -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
 	<!-- Favicon -->
@@ -28,13 +28,10 @@
             <div class="sp-logo-wrap pull-left">
                 <a href="index.html">
                     <img class="brand-img mr-10" src="{{asset('admin')}}/dist/img/logo.png" alt="brand" />
-                    <span class="brand-text">Elmer</span>
+                    <span class="brand-text">PO-Nursyifa</span>
                 </a>
             </div>
-            <div class="form-group mb-0 pull-right">
-                <span class="inline-block pr-10">Don't have an account?</span>
-                <a class="inline-block btn btn-primary btn-rounded btn-outline" href="signup.html">Sign Up</a>
-            </div>
+            
             <div class="clearfix"></div>
         </header>
 
