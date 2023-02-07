@@ -8,6 +8,7 @@
         ordering: false,
         serverSide: true,
         responsive: true,
+        searching: false,
         ajax: {
             url: "{{ route('system.datatable') }}",
             data: function(d) {
@@ -29,17 +30,14 @@
     $(document).ready(function() {
         
         $("#btn_add").on("click", function() {
-            setProgressLine();
             onAddPrepare();
         });
 
         $("#btn_edit").on("click", function() {
-            setProgressLine();
             onEditPrepare();
         });
 
         $("#btn_delete").on("click", function() {
-            setProgressLine();
             onDeletePrepare();
         });
         

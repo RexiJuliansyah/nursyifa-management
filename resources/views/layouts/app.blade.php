@@ -112,11 +112,9 @@
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	<script src="{{asset('admin')}}/dist/js/init.js"></script>
+	<!-- <script src="{{asset('admin')}}/dist/js/init.js"></script> -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-			setProgressLine()
-
 			toastr.options = {
 				"debug": false,
 				"positionClass": "toast-bottom-right",
@@ -127,7 +125,7 @@
 				"extendedTimeOut": 1000
 			}
 		});
-		
+
 		function setProgressLine() {
 			$('.preloader-it > .la-anim-1').removeClass("la-animate");
 			$(".preloader-it").fadeIn();
@@ -136,6 +134,7 @@
 				$(".preloader-it").delay(400).fadeOut("slow");
 			},100);
 		}
+	
 	</script>
 	
 

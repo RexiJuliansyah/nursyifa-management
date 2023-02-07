@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,12 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('user-datatable', [UserController::class, 'datatable'])->name('user.datatable');
     Route::get('user-getbykey', [UserController::class, 'getbykey'])->name('user.getbykey');
     Route::post('user-store', [UserController::class, 'store'])->name('user.store');
-    Route::delete('user-delete/{QUESTION_ID}', [UserController::class, 'delete'])->name('user.delete');
+    Route::delete('user-delete', [UserController::class, 'delete'])->name('user.delete');
+
+    Route::get('transport', [TransportController::class, 'index'])->name('transport');
+    Route::get('transport-datatable', [TransportController::class, 'datatable'])->name('transport.datatable');
+    Route::get('transport-getbykey', [TransportController::class, 'getbykey'])->name('transport.getbykey');
+    Route::post('transport-store', [TransportController::class, 'store'])->name('transport.store');
+    Route::delete('transport-delete}', [TransportController::class, 'delete'])->name('transport.delete');
 
 });

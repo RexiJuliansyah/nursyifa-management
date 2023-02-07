@@ -22,27 +22,22 @@
     $(document).ready(function() {
         
         $("#btn_add").on("click", function() {
-            setProgressLine();
             onAddPrepare();
         });
 
         $("#btn_edit").on("click", function() {
-            setProgressLine();
             onEditPrepare();
         });
 
         $("#btn_delete").on("click", function() {
-            setProgressLine();
             onDeletePrepare();
         });
 
         $("#btn_save").on("click", function(e) {
-            setProgressLine();
             OnSaveAddEdit();
         });
 
         $("#btn_permission").on("click", function(e) {
-            setProgressLine();
             onPermissionPrepare();
         });
 

@@ -6,15 +6,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class System extends Model
+class Transport extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $table = 'tb_m_system';
-    protected $fillable = ['SYSTEM_TYPE','SYSTEM_CD','SYSTEM_VAL','SYSTEM_DESC'];
+    protected $table = 'tb_m_transport';
+    protected $guarded = ['TRANSPORT_ID'];
+    protected $primaryKey = 'TRANSPORT_ID';
     
     const CREATED_AT = 'CREATED_DATE';
     const UPDATED_AT = 'UPDATED_DATE';

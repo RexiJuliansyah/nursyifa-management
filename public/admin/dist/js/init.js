@@ -14,34 +14,34 @@
 /*****Ready function start*****/
 $(document).ready(function () {
     elmer();
-    $(".preloader-it > .la-anim-1").addClass("la-animate");
+    
 });
 /*****Ready function end*****/
 
 /*****Load function start*****/
-$(window).load(function () {
-    $(".preloader-it").delay(500).fadeOut("slow");
-    /*Progress Bar Animation*/
-    var progressAnimation = $(".progress-anim");
-    if (progressAnimation.length > 0) {
-        for (var i = 0; i < progressAnimation.length; i++) {
-            var $this = $(progressAnimation[i]);
-            $this.waypoint(
-                function () {
-                    var progressBar = $(".progress-anim .progress-bar");
-                    for (var i = 0; i < progressBar.length; i++) {
-                        $this = $(progressBar[i]);
-                        $this.css("width", $this.attr("aria-valuenow") + "%");
-                    }
-                },
-                {
-                    triggerOnce: true,
-                    offset: "bottom-in-view",
-                }
-            );
-        }
-    }
-});
+// $(window).load(function () {
+//     $(".preloader-it").delay(500).fadeOut("slow");
+//     /*Progress Bar Animation*/
+//     var progressAnimation = $(".progress-anim");
+//     if (progressAnimation.length > 0) {
+//         for (var i = 0; i < progressAnimation.length; i++) {
+//             var $this = $(progressAnimation[i]);
+//             $this.waypoint(
+//                 function () {
+//                     var progressBar = $(".progress-anim .progress-bar");
+//                     for (var i = 0; i < progressBar.length; i++) {
+//                         $this = $(progressBar[i]);
+//                         $this.css("width", $this.attr("aria-valuenow") + "%");
+//                     }
+//                 },
+//                 {
+//                     triggerOnce: true,
+//                     offset: "bottom-in-view",
+//                 }
+//             );
+//         }
+//     }
+// });
 /*****Load function* end*****/
 
 /***** Full height function start *****/

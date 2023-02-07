@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="system_cd" class="control-label mb-10">System Code<span style="color: red">*</span></label>
-                                    <input type="number" class="form-control" min="1" max="10" id="system_cd" name="system_cd" placeholder="System Code" required>
+                                    <input type="text" class="form-control" id="system_cd" name="system_cd" placeholder="System Code" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="system_val" class="control-label mb-10">System Value<span style="color: red">*</span></label>

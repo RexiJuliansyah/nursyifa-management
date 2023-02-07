@@ -33,11 +33,11 @@ class UserController extends BaseController
 
         if ($request->ajax()) {
             if ($request->username) {
-                $params['USERNAME'] = $request->username;
+                array_push($params, ['USERNAME', 'like', '%' . $request->username . '%']);
             }
 
             if ($request->role_id) {
-                $params['tb_m_user.ROLE_ID'] = $request->role_id;
+                array_push($params, ['tb_m_user.ROLE_ID', '=', $request->role_id]);
             }
 
             $q = User::query()

@@ -23,15 +23,7 @@
             { data: 'ROLE_NAME', name: 'ROLE_NAME', className: 'text-left' },
             { data: 'CREATED_BY', name: 'CREATED_BY' },
             { data: 'CREATED_DATE', name: 'CREATED_DATE' }
-        ],
-        fnDrawCallback: function (oSettings) {
-            $('#datagrid tbody > tr').removeClass('selected');
-            $('.grid-checkbox').not(this).prop('checked', false);
-
-            $("#btn_edit").prop("disabled", ($("[name='chkRow']:checked").length == 1) ? false : true);
-            $("#btn_delete").prop("disabled", ($("[name='chkRow']:checked").length == 1) ? false : true);
-        },
-        order: [[2, "DESC"]]
+        ]
 
     });
     $(document).ready(function() {
@@ -53,10 +45,14 @@
         
         $("#btn_clear").on("click", function() {
             setProgressLine();
+            $("#search_username").val("");
+            $("#search_role").val("");
+            table.draw();
         });
         
         $("#btn_search").on("click", function() {
             setProgressLine();
+            table.draw();
         });
 
         $("#btn_save").on("click", function(e) {
