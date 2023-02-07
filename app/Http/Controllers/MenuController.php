@@ -36,12 +36,12 @@ class MenuController extends BaseController
 
             if ($request->type) {
                 if ($request->type == 1) {
-                    $q = Menu::where($params)->where('PARENT_ID', '=', "0")->orderBy('SEQUENCE')->get();
+                    $q = Menu::where($params)->where('PARENT_ID', '=', "0")->orderBy('MENU_ID')->get();
                 } else {
-                    $q = Menu::where($params)->where('PARENT_ID', '!=', "0")->orderBy('SEQUENCE')->get();
+                    $q = Menu::where($params)->where('PARENT_ID', '!=', "0")->orderBy('MENU_ID')->get();
                 }
             } else {
-                $q = Menu::where($params)->orderBy('UPDATED_DATE','DESC')->get();
+                $q = Menu::where($params)->orderBy('MENU_ID')->get();
             }
 
             return Datatables::of($q)

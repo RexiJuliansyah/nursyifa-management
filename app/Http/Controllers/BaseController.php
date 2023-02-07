@@ -80,7 +80,7 @@ class BaseController extends Controller
         $menu = Menu::where('MENU_URL', $MENU_URL)->where('MENU_URL', $CURRENT_URL)->get();
 
         if ($menu->isNotEmpty()) {
-            return 'active-page';
+            return 'active';
         } else {
             $exist_menu = Menu::where('MENU_URL', $CURRENT_URL)->get();
             if ($exist_menu->isNotEmpty()) {
@@ -88,7 +88,7 @@ class BaseController extends Controller
             } else {
                 $menus = Menu::where('MENU_URL', $MENU_URL)->where('MENU_URL', strtok($CURRENT_URL, '.'))->get();
                 if ($menus->isNotEmpty()) {
-                    return 'active-page';
+                    return 'active';
                 } else {
                     return '';
                 }
