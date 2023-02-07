@@ -36,6 +36,10 @@
             onEditPrepare();
         });
 
+        $("#btn_delete").on("click", function() {
+            onDeletePrepare();
+        });
+
         $("#btn_clear").on("click", function() {
             setProgressLine();
             $("#search_transport_name").val("");
@@ -169,7 +173,64 @@
 
     }
 
+    function onDeletePrepare() {
+        var isHaveChecked = false;
+        gChecked = 0;
+        $("input[name='chkRow']").each(function() {
+            if ($(this).prop('checked')) {
+                isHaveChecked = true;
+                gChecked = gChecked + 1;
+                gTransportId = $(".grid-checkbox-body:checked").attr('data-TransportId');
+            }
+        });
 
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#667ADD',
+            cancelButtonColor: '#F44934',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setProgressLine();
+                onConfirmDelete();
+            }
+        });
+
+    }
+
+    function onConfirmDelete() {
+        $.ajax({
+            url: "{{ route('transport.delete') }}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "DELETE",
+            dataType: 'json',
+            traditional: true,
+            data: {
+                'TRANSPORT_ID': gTransportId
+            },
+            success: function(response) {
+                if ($.isEmptyObject(response.error)) {
+                    $('#btn_edit').prop('disabled', true);
+                    $('#btn_delete').prop('disabled', true);
+                    toastr.success(response.message)
+                    table.draw();
+                } else {
+                    $('#btn_edit').prop('disabled', true);
+                    $('#btn_delete').prop('disabled', true);
+                    toastr.error(response.error)
+                    table.draw();
+                }
+            },
+            error: function(err) {
+                toastr.error('Not Allowed')
+            }
+        })
+    }
 
     function isNumber(evt) {
         var charCode = (evt.which) ? evt.which : evt.keyCode

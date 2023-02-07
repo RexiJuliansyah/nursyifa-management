@@ -134,4 +134,12 @@ class TransportController extends BaseController
         ])->firstOrFail();
         echo json_encode($query);
     }
+
+    public function delete(Request $request)
+    {
+        Transport::where([
+            'TRANSPORT_ID' => $request->TRANSPORT_ID
+        ])->delete();
+        return response()->json(['message' => 'Data berhasil dihapus!']);
+    }   
 }
