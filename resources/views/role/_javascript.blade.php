@@ -303,8 +303,6 @@
                     '</div>' 
                 );
 
-                console.log('master ' + value.MENU_NAME )
-
                 $("#btn"+ value.MENU_ID).on("click", function() {
                     var checkboxParent = $('input[name=permissionChkRow][data-parentId="' + value.PARENT_ID + '"][data-menuId="' + value.MENU_ID + '"]');
                     checkboxParent.click();
@@ -333,13 +331,10 @@
                             '</div>'
                         );
 
-                        console.log('child ' +  row.MENU_NAME)
                     });
                 }
             }
         });
-
-        console.log('selesai')
 
         return $("#permissionPopup").modal("show");  
     }
