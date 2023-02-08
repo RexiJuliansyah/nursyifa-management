@@ -237,6 +237,7 @@
             type: "GET",
             url: "{{ route('role.getpermission') }}",
             dataType: 'json',
+            async: false,
             traditional: true,
             data: {
                 'ROLE_ID': gRoleId
@@ -252,12 +253,14 @@
                     }
 
                     setCollapseItem(response.data_menu, arrayMenuId, gRoleId);
-                    $("#permissionPopup").modal("show");
+                    
                 } else {
                     toastr.error(response.error);
                 }
             }
         });
+
+        $("#permissionPopup").modal("show");
     }
 
 
