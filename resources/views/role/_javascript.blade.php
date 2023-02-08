@@ -270,11 +270,12 @@
         return true;
     };
 
-    async function setCollapseItem(data, arrayMenuId, id) {
+    function setCollapseItem(data, arrayMenuId, id) {
         
-    await $.each(data, function(key, value) {
-            console.log(key);
+    $.each(data, function(key, value) {
+            
             if (value.PARENT_ID == 0) {
+                
                 if (arrayMenuId.includes(value.MENU_ID)) {
                     checked = "checked";
                 } else {
@@ -302,6 +303,8 @@
                     '</div>' 
                 );
 
+                console.log('master ' + value.MENU_NAME )
+
                 $("#btn"+ value.MENU_ID).on("click", function() {
                     var checkboxParent = $('input[name=permissionChkRow][data-parentId="' + value.PARENT_ID + '"][data-menuId="' + value.MENU_ID + '"]');
                     checkboxParent.click();
@@ -311,7 +314,8 @@
                     $("#collapse"+value.MENU_ID).remove();
                     $("#accor_heading"+ value.MENU_ID).removeClass("activestate");
                 } else {
-                    $.each(returnedData, function(key, row) {
+                     $.each(returnedData, function(key, row) {
+                        
                         if (arrayMenuId.includes(row.MENU_ID)) {
                             checked = "checked";
                         } else {
@@ -328,10 +332,14 @@
                             '</label>' +
                             '</div>'
                         );
+
+                        console.log('child ' +  row.MENU_NAME)
                     });
                 }
             }
         });
+
+        console.log('selesai')
 
         return $("#permissionPopup").modal("show");  
     }
