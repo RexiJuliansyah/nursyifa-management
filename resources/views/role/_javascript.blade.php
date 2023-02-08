@@ -251,7 +251,6 @@
                     for (MENU_ID in response.data_permission) {
                         arrayMenuId.push(response.data_permission[MENU_ID].MENU_ID);
                     }
-
                     setCollapseItem(response.data_menu, arrayMenuId, gRoleId);
                     
                 } else {
@@ -259,8 +258,8 @@
                 }
             }
         });
-
-        $("#permissionPopup").modal("show");
+        
+        
     }
 
 
@@ -271,8 +270,10 @@
         return true;
     };
 
-    function setCollapseItem(data, arrayMenuId, id) {
-        $.each(data, function(key, value) {
+    async function setCollapseItem(data, arrayMenuId, id) {
+        
+    await $.each(data, function(key, value) {
+            console.log(key);
             if (value.PARENT_ID == 0) {
                 if (arrayMenuId.includes(value.MENU_ID)) {
                     checked = "checked";
@@ -331,6 +332,8 @@
                 }
             }
         });
+
+        return $("#permissionPopup").modal("show");  
     }
 
     function OnSavePermission() {
