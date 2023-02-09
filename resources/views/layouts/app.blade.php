@@ -1,76 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html translate="no">
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<title>PO | Nursyifa</title>
-	<!-- <meta name="description" content="Elmer is a Dashboard & Admin Site Responsive Template by hencework." />
-	<meta name="keywords" content="admin, admin dashboard, admin template, cms, crm, Elmer Admin, Elmeradmin, premium admin templates, responsive admin, sass, panel, software, ui, visualization, web app, application" />
-	<meta name="author" content="hencework"/> -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	
-	<!-- Favicon -->
 	<link rel="shortcut icon" href="{{asset('admin')}}/favicon.ico">
 	<link rel="icon" href="{{asset('admin')}}/favicon.ico" type="image/x-icon">
 
-	<!-- Data table CSS -->
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables.net-responsive/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css"/>
-	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 	
 	
 	<link href="{{asset('admin')}}/vendors/bower_components/jstree/dist/themes/default/style.css" rel="stylesheet">
-	<!-- <link href="{{asset('admin')}}/vendors/bower_components/bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet" type="text/css"> -->
 	<link href="{{asset('admin')}}/vendors/bower_components/toastr/toastr.min.css" rel="stylesheet" type="text/css">
 	<link href="{{asset('admin')}}/vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
 	<link href="{{asset('admin')}}/vendors/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-
 	<link href="{{asset('admin')}}/dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <!-- Preloader -->
+
 	<div class="preloader-it">
 		<div class="la-anim-1"></div>
-	</div>
-    
-    <div class="wrapper  theme-1-active pimary-color-blue">
+	</div> 
 
-        <!-- Top Menu Items -->
-        @include('layouts.navbar')
-		<!-- /Top Menu Items -->
-		
-		<!-- Left Sidebar Menu -->
-        @include('layouts.sidebar')
-		<!-- /Left Sidebar Menu -->
+  	<div class="wrapper  theme-1-active pimary-color-blue">
+		@include('layouts.navbar')
+		@include('layouts.sidebar')
+		<div class="page-wrapper" >
+			<div class="container-fluid">
+				<div class="div"  style="background-color=#667add;">
+					<div class="row heading-bg" >
+						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+							<h5 class="txt-dark">@yield('title')</h5>
+						</div>
 
-		<!-- Main Content -->
-		<div class="page-wrapper">
-            <div class="container-fluid">
-				<!-- Title -->
-				<div class="row heading-bg">
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-dark">@yield('title')</h5>
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+							<ol class="breadcrumb">
+									@yield('breadcumb')
+							</ol>
+						</div>
 					</div>
-					<!-- Breadcrumb -->
-					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-						<ol class="breadcrumb">
-                            @yield('breadcumb')
-						</ol>
-					</div>
-					<!-- /Breadcrumb -->
 				</div>
-				<!-- /Title -->
 
-                <!-- Content -->
-                @yield('content')
-                <!-- /Content -->
-			
-				<!-- Footer -->
+				@yield('content')
 				<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-12">
@@ -78,20 +56,16 @@
 						</div>
 					</div>
 				</footer>
-				<!-- /Footer -->
 			</div>
 		</div>
-        <!-- /Main Content -->
-
     </div>
 
-    <!-- jQuery -->
 
-  <script src="{{asset('admin')}}/vendors/bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="{{asset('admin')}}/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  	<script src="{{asset('admin')}}/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+  	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/jstree/dist/jstree.js"></script>
-	<!-- <script src="{{asset('admin')}}/vendors/bower_components/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script> -->
 
 	<script src="{{asset('admin')}}/vendors/bower_components/moment/min/moment-with-locales.min.js"></script>
 	<script src="{{asset('admin')}}/dist/js/jquery.slimscroll.js"></script>
@@ -115,8 +89,8 @@
 	<script src="{{asset('admin')}}/vendors/bower_components/dropify/dist/js/dropify.min.js"></script>
 	<script src="{{asset('admin')}}/dist/js/form-file-upload-data.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 	<script src="{{asset('admin')}}/dist/js/init.js"></script>
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			toastr.options = {
@@ -140,9 +114,5 @@
 		}
 	
 	</script>
-	
-
-
 	@yield('javascript');
-
 </body>

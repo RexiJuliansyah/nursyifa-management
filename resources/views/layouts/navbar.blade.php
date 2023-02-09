@@ -3,12 +3,13 @@
         <div class="nav-header pull-left">
             <div class="logo-wrap">
                 <a href="index.html">
-                    <img class="brand-img" src="{{asset('admin')}}/dist/img/logo.png" alt="brand"/>
+                    <img class="brand-img" src="{{ asset('admin') }}/dist/img/logo.png" alt="brand" />
                     <span class="brand-text">Nursyifa</span>
                 </a>
             </div>
-        </div>	
-        <a id="toggle_nav_btn" class="toggle-left-nav-btn inline-block ml-20 pull-left" href="javascript:void(0);"><i class="zmdi zmdi-menu"></i></a>
+        </div>
+        <a id="toggle_nav_btn" class="toggle-left-nav-btn pull-left ml-20 inline-block" href="javascript:void(0);"><i
+                class="zmdi zmdi-menu"></i></a>
         <a id="toggle_mobile_nav" class="mobile-only-view" href="javascript:void(0);"><i class="zmdi zmdi-more"></i></a>
     </div>
     <div id="mobile_only_nav" class="mobile-only-nav pull-right">
@@ -18,13 +19,15 @@
                     <i class="zmdi zmdi-notifications top-nav-icon"></i>
                     <span class="top-nav-icon-badge">5</span>
                 </a>
-                <ul  class="dropdown-menu alert-dropdown" data-dropdown-in="slideInRight" data-dropdown-out="slideOutRight">
+                <ul class="dropdown-menu alert-dropdown" data-dropdown-in="slideInRight"
+                    data-dropdown-out="slideOutRight">
                     <li>
                         <div class="notification-box-head-wrap">
                             <span class="notification-box-head pull-left inline-block">notifications</span>
-                            <a class="txt-danger pull-right clear-notifications inline-block" href="javascript:void(0)"> clear all </a>
+                            <a class="txt-danger pull-right clear-notifications inline-block" href="javascript:void(0)">
+                                clear all </a>
                             <div class="clearfix"></div>
-                            <hr class="light-grey-hr ma-0"/>
+                            <hr class="light-grey-hr ma-0" />
                         </div>
                     </li>
                     <li>
@@ -35,16 +38,18 @@
                                         <i class="zmdi zmdi-flag"></i>
                                     </div>
                                     <div class="sl-content">
-                                        <span class="inline-block capitalize-font  pull-left truncate head-notifications">
-                                        New subscription created</span>
-                                        <span class="inline-block font-11  pull-right notifications-time">2pm</span>
+                                        <span
+                                            class="capitalize-font pull-left head-notifications inline-block truncate">
+                                            New subscription created</span>
+                                        <span class="font-11 pull-right notifications-time inline-block">2pm</span>
                                         <div class="clearfix"></div>
-                                        <p class="truncate">Your customer subscribed for the basic plan. The customer will pay $25 per month.</p>
+                                        <p class="truncate">Your customer subscribed for the basic plan. The customer
+                                            will pay $25 per month.</p>
                                     </div>
-                                </a>	
+                                </a>
                             </div>
-                            <hr class="light-grey-hr ma-0"/>
-                            
+                            <hr class="light-grey-hr ma-0" />
+
                         </div>
                     </li>
                 </ul>
@@ -52,17 +57,19 @@
 
             <li class="dropdown auth-drp">
                 <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-                    <img src="{{asset('admin')}}/dist/img/user1.png" alt="user_auth" class="user-auth-img img-circle"/><span class="user-online-status"></span>
+                    <img src="{{ asset('admin') }}/dist/img/user1.png" alt="user_auth"
+                        class="user-auth-img img-circle" /><span class="user-online-status"></span>
                 </a>
-                
+
                 <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
                     <li>
                         <a href="profile.html"><i class="zmdi zmdi-account"></i><span>Profile</span></a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
-                            <i class="icon-mid bi bi-box-arrow-left me-2"></i> 
+                            <i class="icon-mid bi bi-box-arrow-left me-2"></i>
                             Logout
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -73,5 +80,5 @@
             </li>
         </ul>
     </div>
-    
+
 </nav>

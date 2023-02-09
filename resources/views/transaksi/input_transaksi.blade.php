@@ -18,7 +18,8 @@
                 <div class="panel-body">
                     <div class="panel panel-default card-view">
                         <h6 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Info Customers</h6>
-                        <hr class="light-grey-hr mb-0"/>
+                        <hr class="light-grey-hr mb-0" />
+
                         <div class="panel-body">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -35,44 +36,36 @@
                         </div>
 
                         <h6 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Info Details</h6>
-                        <hr class="light-grey-hr mb-0"/>
+                        <hr class="light-grey-hr mb-0" />
 
                         <div class="panel-body">
                             <div class="col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label mb-10" for="exampleInputuname_1">Input</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="icon-user"></i>
-                                        </div>
+                                        <div class="input-group-addon"><i class="icon-user"></i></div>
                                         <input type="text" class="form-control" id="exampleInputuname_1" placeholder="Input">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="icon-envelope-open"></i>
-                                        </div>
-                                        <input type="email" class="form-control" id="exampleInputEmail_1" placeholder="Input">
+                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail_1"placeholder="Input">
+                                    </div>
+                                </div>
+                                <<div class="form-group">
+                                    <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail_1"placeholder="Input">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="icon-envelope-open"></i>
-                                        </div>
-                                        <input type="email" class="form-control" id="exampleInputEmail_1" placeholder="Input">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon">
-                                            <i class="icon-envelope-open"></i>
-                                        </div>
-                                        <input type="email" class="form-control" id="exampleInputEmail_1" placeholder="Input">
+                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
+                                        <input type="email" class="form-control" id="exampleInputEmail_1"placeholder="Input">
                                     </div>
                                 </div>
                             </div>
@@ -100,9 +93,9 @@
                     <div class="form-group">
                         <div class="input-group mb-5">
                             <div class="input-group-addon">Bayar</div>
-                            <input type="text" class="form-control" id="exampleInputuname" placeholder="153"> 
+                            <input type="text" class="form-control" id="exampleInputuname" placeholder="153">
                         </div>
-                        <span class="pull-right"> 
+                        <span class="pull-right">
                             <div class="radio-inline pl-0">
                                 <div class="radio radio-success">
                                     <input type="radio" name="radio" id="radio1" value="option1" checked>
@@ -114,7 +107,7 @@
                                     <input type="radio" name="radio" id="radio2" value="option2">
                                     <label for="radio2">DP</label>
                                 </div>
-                            </div> 
+                            </div>
                         </span>
                     </div>
                     <div class="form-group">
@@ -124,26 +117,25 @@
 
                     <div class="table-wrap">
                         <div class="table-responsive">
-                            <table class="table  mb-0">
-                            <tbody>
-                                <tr>
-                                    <td>Total</td>
-                                    <td class="text-right">#######</td>
-                                </tr>
-                            </tbody>
+                            <table class="mb-0 table">
+                                <tbody>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td class="text-right">#######</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
 
-                <div class="panel-footer ">
+                <div class="panel-footer">
                     <div class="button-list">
-                        <button type="submit" id="btn_save" class="btn btn-primary pull-right mb-10 mr-10">Proses Transaksi</button>
+                        <button type="submit" id="btn_save" class="btn btn-primary pull-right mb-10 mr-10">Proses
+                            Transaksi</button>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-
-               
 
             </div>
         </div>
