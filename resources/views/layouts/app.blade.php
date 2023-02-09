@@ -27,7 +27,9 @@
 	<link href="{{asset('admin')}}/vendors/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
+	<link href="{{asset('admin')}}/vendors/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
 	<link href="{{asset('admin')}}/dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -85,8 +87,8 @@
 
     <!-- jQuery -->
 
-    <script src="{{asset('admin')}}/vendors/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="{{asset('admin')}}/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="{{asset('admin')}}/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="{{asset('admin')}}/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/jstree/dist/jstree.js"></script>
 	<!-- <script src="{{asset('admin')}}/vendors/bower_components/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script> -->
@@ -110,9 +112,11 @@
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/dropify/dist/js/dropify.min.js"></script>
+	<script src="{{asset('admin')}}/dist/js/form-file-upload-data.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-	<!-- <script src="{{asset('admin')}}/dist/js/init.js"></script> -->
+	<script src="{{asset('admin')}}/dist/js/init.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			toastr.options = {
