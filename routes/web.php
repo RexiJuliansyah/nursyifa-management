@@ -68,6 +68,6 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::delete('transport-delete}', [TransportController::class, 'delete'])->name('transport.delete');
 
     Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-    Route::get('transaksi/baru', [TransaksiController::class, 'transaksi_baru'])->name('transaksi-baru');
+    Route::get('transaksi-baru', [TransaksiController::class, 'transaksi_baru'])->name('transaksi.baru');
 
 });
