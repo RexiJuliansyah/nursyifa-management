@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label class="control-label mb-10">Jenis Bus</label>
-                                    <select name="search_transport_type" id="search_transport_type" class=" form-control">
+                                    <select name="search_transport_type" id="search_transport_type" class="selectpicker" data-style="form-control btn-default btn-outline">
                                         <option value="">-- All --</option>
                                         @foreach ($data['transport_list'] as $transport)
                                             <option value="{{ $transport->SYSTEM_CD }}">{{ $transport->SYSTEM_VAL }}</option>

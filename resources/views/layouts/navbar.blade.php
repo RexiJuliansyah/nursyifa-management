@@ -1,10 +1,9 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="mobile-only-brand pull-left">
         <div class="nav-header pull-left">
-            <div class="logo-wrap">
-                <a href="index.html">
-                    <img class="brand-img" src="{{ asset('admin') }}/dist/img/logo.png" alt="brand" />
-                    <span class="brand-text">Nursyifa</span>
+            <div class="brand-image mt-10">
+                <a href="###" style="margin-left:-10px">
+                    <img src="{{ asset('admin') }}/dist/img/logonav.png" width="200px" height="55px" alt="brand"  />
                 </a>
             </div>
         </div>

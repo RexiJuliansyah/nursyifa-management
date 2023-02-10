@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -18,8 +19,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $table = 'tb_m_user';
-    protected $guarded = ['USER_ID'];
+    protected $guarded = [];
     protected $primaryKey = 'USER_ID';
+    public $incrementing = false;
     
     const CREATED_AT = 'CREATED_DATE';
     const UPDATED_AT = 'UPDATED_DATE';
@@ -28,9 +30,9 @@ class User extends Authenticatable
     {
        parent::boot();
        static::creating(function($model)
-       {     
-           $model->CREATED_BY = Auth::user()->USERNAME;
-           $model->UPDATED_BY = Auth::user()->USERNAME;
+       {   
+            $model->CREATED_BY = Auth::user()->USERNAME;
+            $model->UPDATED_BY = Auth::user()->USERNAME;
        });
        static::updating(function($model)
        {

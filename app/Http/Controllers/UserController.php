@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use DataTables;
 
 use Illuminate\Support\Facades\Auth;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class UserController extends BaseController
 {
@@ -66,6 +67,10 @@ class UserController extends BaseController
     public function store(Request $request)
     { 
         if ($request->ajax()) {
+            if($request->USER_ID == "") {
+                $request['USER_ID'] = IdGenerator::generate(['table' => 'tb_m_user', 'field' => 'USER_ID', 'length' => 9, 'prefix' => 'US'.date('Y') ]);   
+            }
+
 
             $validator = Validator::make($request->all(), [
                 'USERNAME' => 'required',

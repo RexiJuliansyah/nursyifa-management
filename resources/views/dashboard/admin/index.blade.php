@@ -5,13 +5,13 @@
         <!-- Row -->
         <div class="row">
             <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-                <div class="panel panel-default card-view panel-refresh">
+                <div class="panel panel-success card-view panel-refresh">
                     <div class="refresh-container">
                         <div class="la-anim-1"></div>
                     </div>
                     <div class="panel-heading">
                         <div class="pull-left">
-                            <h6 class="panel-title txt-dark">Property Stats</h6>
+                            <h6 class="panel-title txt-light">Property Stats</h6>
                         </div>
                         <div class="pull-right">
                             <a href="#" class="pull-left refresh mr-15 inline-block">

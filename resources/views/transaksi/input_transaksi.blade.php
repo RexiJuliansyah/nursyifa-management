@@ -8,10 +8,10 @@
 @section('content')
     <div class="row" style="margin-right: -30px; margin-left: -30px;">
         <div class="col-md-8">
-            <div class="panel panel-default">
+            <div class="panel panel-success card-view">
                 <div class="panel-heading">
                     <div class="pull-left">
-                        <h6 class="panel-title txt-dark">Data Transaksi</h6>
+                        <h6 class="panel-title txt-light">Data Transaksi</h6>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -21,16 +21,18 @@
                         <hr class="light-grey-hr mb-0" />
 
                         <div class="panel-body">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label mb-10">Input</label>
-                                    <input type="text" id="firstName" class="form-control form-sm" placeholder="Input">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10">Input<span style="color: red">*</span></label>
+                                        <input type="text" id="firstName" class="form-control form-sm" placeholder="Input">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="control-label mb-10">Input</label>
-                                    <input type="text" id="firstName" class="form-control" placeholder="Input">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10">Input<span style="color: red">*</span></label>
+                                        <input type="text" id="firstName" class="form-control" placeholder="Input">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -39,36 +41,45 @@
                         <hr class="light-grey-hr mb-0" />
 
                         <div class="panel-body">
-                            <div class="col-sm-12 col-xs-12">
-                                <div class="form-group">
-                                    <label class="control-label mb-10" for="exampleInputuname_1">Input</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="icon-user"></i></div>
-                                        <input type="text" class="form-control" id="exampleInputuname_1" placeholder="Input">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-                                        <input type="email" class="form-control" id="exampleInputEmail_1"placeholder="Input">
-                                    </div>
-                                </div>
-                                <<div class="form-group">
-                                    <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-                                        <input type="email" class="form-control" id="exampleInputEmail_1"placeholder="Input">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label mb-10" for="exampleInputEmail_1">Input</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="icon-envelope-open"></i></div>
-                                        <input type="email" class="form-control" id="exampleInputEmail_1"placeholder="Input">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10 text-left">Tanggal Keberangkatan<span style="color: red">*</span></label>
+                                        <div class='input-group date'  >
+                                            <input class="form-control input-daterange-datepicker" id='date' type="text" name="daterange" autocomplete="off" readonly style="background:white;">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar"></span>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="transport_type" class="control-label mb-10">Tujuan<span style="color: red">*</span></label>
+                                        <select name="transport_type" id="transport_type" class="selectpicker" data-style="form-control btn-default btn-outline">
+                                            <option value="">-- Pilih --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10" for="exampleInputEmail_1">Bus<span style="color: red">*</span></label>
+                                        <select name="transport_type" id="transport_type" class="selectpicker" data-style="form-control btn-default btn-outline">
+                                            <option value="">-- Pilih --</option>
+                                        </select>
+                                    </div></div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10" for="exampleInputEmail_1">Supir<span style="color: red">*</span></label>
+                                        <select name="transport_type" id="transport_type" class="selectpicker" data-style="form-control btn-default btn-outline">
+                                            <option value="">-- Pilih --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -76,10 +87,10 @@
         </div>
 
         <div class="col-md-4">
-            <div class="panel panel-default">
+            <div class="panel panel-success card-view">
                 <div class="panel-heading">
                     <div class="pull-left">
-                        <h6 class="panel-title txt-dark">Total</h6>
+                        <h6 class="panel-title txt-light">Total</h6>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -131,8 +142,7 @@
 
                 <div class="panel-footer">
                     <div class="button-list">
-                        <button type="submit" id="btn_save" class="btn btn-primary pull-right mb-10 mr-10">Proses
-                            Transaksi</button>
+                        <button type="submit" id="btn_save" class="btn btn-success pull-right mb-10 mr-10">Proses Transaksi</button>
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -141,4 +151,23 @@
         </div>
     </div>
 
+    
+
+@endsection
+
+@section('javascript')
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('#date').daterangepicker({
+            autoUpdateInput: false,
+            minDate: new moment(),
+            timePicker: false,
+            autoApply: true
+	    }).on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD MMM YYYY') + ' - ' + picker.endDate.format('DD MMM YYYY'));
+        });
+
+    });
+    </script>
 @endsection
