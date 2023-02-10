@@ -70,13 +70,19 @@
 
 
 	<script src="{{asset('admin')}}/dist/js/jquery.slimscroll.js"></script>
-	<script src="{{asset('admin')}}/dist/js/jquery.filedownload.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/jquery.counterup/jquery.counterup.min.js"></script>
 	<script src="{{asset('admin')}}/dist/js/dropdown-bootstrap-extended.js"></script>
 	<script src="{{asset('admin')}}/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/owl.carousel/dist/owl.carousel.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/switchery/dist/switchery.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/echarts-liquidfill.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/toastr/toastr.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/iconpicker-master/dist/iconpicker.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
