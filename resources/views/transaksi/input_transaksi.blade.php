@@ -161,6 +161,7 @@
     $(document).ready(function() {
         $('#date').daterangepicker({
             autoUpdateInput: false,
+            drops: "up",
             minDate: new moment(),
             timePicker: false,
             autoApply: true
