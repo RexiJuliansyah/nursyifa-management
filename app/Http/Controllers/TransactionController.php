@@ -69,6 +69,8 @@ class TransactionController extends BaseController
                 'DATE_FROM' => $request->DATE_FROM,
                 'DATE_TO' => $request->DATE_TO,
                 'DESTINATION' => $request->DESTINATION,
+                'TRANSPORT_CODE' => $request->TRANSPORT_CODE,
+                'DRIVER_ID' => $request->DRIVER_ID,
                 'TRANSACTION_STATUS' => 0
             ]);
 

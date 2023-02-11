@@ -84,7 +84,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Bus<span style="color: red">*</span></label>
-                                        <select name="TRANSPORT_TYPE" id="TRANSPORT_TYPE" class="selectpicker" data-style="form-control btn-default btn-outline" required>
+                                        <select name="TRANSPORT_CODE" id="TRANSPORT_CODE" class="selectpicker" data-style="form-control btn-default btn-outline" required>
                                             <option value="">-- Pilih --</option>
                                             @foreach ($data['transport_list'] as $transport)
                                                 <option value="{{ $transport->TRANSPORT_CODE }}">{{ $transport->TRANSPORT_CODE }} ( {{ $transport->BUS_SEAT_TYPE }} ) </option>
