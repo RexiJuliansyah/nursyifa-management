@@ -6,12 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Transport extends Model
+class Payment extends Model
 {
 
-    protected $table = 'tb_m_transport';
-    protected $guarded = ['TRANSPORT_ID'];
-    protected $primaryKey = 'TRANSPORT_ID';
+    protected $table = 'tb_payment';
+    protected $guarded = ['PAYMENT_ID'];
+    protected $primaryKey = 'PAYMENT_ID';
     
     const CREATED_AT = 'CREATED_DATE';
     const UPDATED_AT = 'UPDATED_DATE';

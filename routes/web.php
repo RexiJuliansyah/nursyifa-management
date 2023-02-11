@@ -7,7 +7,7 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransportController;
-use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +67,8 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::post('transport-store', [TransportController::class, 'store'])->name('transport.store');
     Route::delete('transport-delete}', [TransportController::class, 'delete'])->name('transport.delete');
 
-    Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-    Route::get('transaksi-baru', [TransaksiController::class, 'transaksi_baru'])->name('transaksi.baru');
+    Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi');
+    Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
+    Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
 
 });

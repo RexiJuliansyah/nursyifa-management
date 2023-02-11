@@ -24,7 +24,7 @@
                                     <input type="text" class="form-control" id="search_transport_name" name="search_transport_name" placeholder="Nama Bus" value="">
                                 </div>
                                 <div class="col-sm-4">
-                                    <label class="control-label mb-10">Jenis Bus</label>
+                                    <label class="control-label mb-10">Tipe Seat</label>
                                     <select name="search_transport_type" id="search_transport_type" class="selectpicker" data-style="form-control btn-default btn-outline">
                                         <option value="">-- All --</option>
                                         @foreach ($data['transport_list'] as $transport)
@@ -64,7 +64,7 @@
                                 </th>
                                 <th>Kode Bus</th>
                                 <th>Nama Bus</th>
-                                <th>Jenis Bus</th>
+                                <th>Tipe Seat</th>
                                 <th>Status</th>
                             </tr>
                         </thead>

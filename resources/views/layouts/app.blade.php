@@ -11,7 +11,6 @@
 
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables.net-responsive/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css"/>
-	<!-- <link href="{{asset('admin')}}/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/> -->
 	<link href="{{asset('admin')}}/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/jstree/dist/themes/default/style.css" rel="stylesheet">
 	<link href="{{asset('admin')}}/vendors/bower_components/toastr/toastr.min.css" rel="stylesheet" type="text/css">

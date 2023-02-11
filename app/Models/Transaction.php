@@ -6,12 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Transport extends Model
+class Transaction extends Model
 {
-
-    protected $table = 'tb_m_transport';
-    protected $guarded = ['TRANSPORT_ID'];
-    protected $primaryKey = 'TRANSPORT_ID';
+    protected $table = 'tb_transaction';
+    protected $guarded = [];
+    protected $primaryKey = 'TRANSACTION_ID';
+    public $incrementing = false;
     
     const CREATED_AT = 'CREATED_DATE';
     const UPDATED_AT = 'UPDATED_DATE';
@@ -20,13 +20,13 @@ class Transport extends Model
     {
        parent::boot();
        static::creating(function($model)
-       {     
-           $model->CREATED_BY = Auth::user()->USERNAME;
-           $model->UPDATED_BY = Auth::user()->USERNAME;
+       {   
+            $model->CREATED_BY = Auth::user()->USERNAME;
+            $model->UPDATED_BY = Auth::user()->USERNAME;
        });
        static::updating(function($model)
        {
            $model->UPDATED_BY = Auth::user()->USERNAME;
        });       
-   }
+    }
 }
