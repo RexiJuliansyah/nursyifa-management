@@ -17,6 +17,10 @@
 	<link href="{{asset('admin')}}/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
 	<link href="{{asset('admin')}}/vendors/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css">
+
+	<link href="{{asset('admin')}}/vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
+	<link href="{{asset('admin')}}/vendors/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css"/>
+
 	<link href="{{asset('admin')}}/dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -67,7 +71,7 @@
 	<!-- <script src="{{asset('admin')}}/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script> -->
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-
+	<script src="{{asset('admin')}}/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 	<script src="{{asset('admin')}}/dist/js/jquery.slimscroll.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/waypoints/lib/jquery.waypoints.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/jquery.counterup/jquery.counterup.min.js"></script>
