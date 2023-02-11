@@ -137,7 +137,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label mb-10">Bayar<span style="color: red">*</span></label>
-                            <input type="text" class="form-control" id="PAID_AMOUNT" name="PAID_AMOUNT"  maxlength="10" onkeypress="return isNumber(event)" autocomplete="off" required>
+                            <input type="text" class="form-control" id="PAID_PAYMENT" name="PAID_PAYMENT"  maxlength="10" onkeypress="return isNumber(event)" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="button-list">
