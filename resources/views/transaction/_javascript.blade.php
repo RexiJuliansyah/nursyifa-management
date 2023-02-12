@@ -84,13 +84,19 @@
                 if ($.isEmptyObject(response.error)) {
                     toastr.success(response.message)
                     table.draw();
-                    $('#btn_edit').css('display', 'none');
-                    $('#btn_delete').css('display', 'none');
+                    $('#btn_edit').css("display", "none");
+                    $('#btn_delete').css("display", "none");
+                    $('#btn_detail').css("display", "none");
+                    $('#btn_complete').css("display", "none");
+                    $('#btn_reject').css("display", "none");
                 } else {
                     toastr.error(response.error)
                     table.draw();
-                    $('#btn_edit').css('display', 'none');
-                    $('#btn_delete').css('display', 'none');
+                    $('#btn_edit').css("display", "none");
+                    $('#btn_delete').css("display", "none");
+                    $('#btn_detail').css("display", "none");
+                    $('#btn_complete').css("display", "none");
+                    $('#btn_reject').css("display", "none");
                 }
             },
             error: function(err) {
