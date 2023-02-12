@@ -73,7 +73,7 @@ class UserController extends BaseController
 
 
             $validator = Validator::make($request->all(), [
-                'USERNAME' => 'required',
+                'USERNAME' => 'required|unique:tb_m_user',
                 'FULL_NAME' => 'required',
                 'EMAIL' => 'required',
                 'PASSWORD' => 'required',
@@ -82,6 +82,7 @@ class UserController extends BaseController
             // Error Message
             [
                 'USERNAME.required' => 'Username field is required! <br>',
+                'USERNAME.unique' => 'Username already exist! <br>',
                 'FULL_NAME.required' => 'Fullname field is required! <br>',
                 'EMAIL.required' => 'Email field is required! <br>',
                 'PASSWORD.required' => 'Password field is required! <br>',

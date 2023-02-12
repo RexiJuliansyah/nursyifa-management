@@ -41,6 +41,44 @@ class TransactionController extends BaseController
         return view('transaction/add_transaction', compact('data'));
     }
 
+    public function datatable (Request $request)
+    {
+        $params = [];
+        if ($request->ajax()) {
+
+            if ($request->system_type) {
+                array_push($params, ['SYSTEM_TYPE', 'like', '%' . $request->system_type . '%']);
+            }
+
+            if ($request->system_val) {
+                array_push($params, ['SYSTEM_VAL', 'like', '%' . $request->system_val . '%']);
+            }
+            
+            $q = Transaction::all();
+
+           
+
+            return Datatables::of($q)
+            ->addIndexColumn()
+            ->addColumn('ACTION', function ($q) {
+                return ' <a href="javascript:void(0)" class="text-inverse pr-10" title="Edit" data-toggle="tooltip">
+                            <i class="zmdi zmdi-edit txt-warning"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip">
+                            <i class="zmdi zmdi-delete txt-danger"></i>
+                        </a>';
+            })
+            ->addColumn('DATE_FROM_TO', function ($q) {
+                return with(new Carbon($q->DATE_FROM))->format('d M Y'). ' - ' .with(new Carbon($q->DATE_TO))->format('d M Y');
+            })
+            ->editColumn('CREATED_DATE', function ($q) {
+                return $q->CREATED_DATE ? with(new Carbon($q->CREATED_DATE))->format('d-m-Y H:i:s') : '';
+            })
+            ->rawColumns(['ACTION'])
+            ->make(true);
+        }
+    }
+
     public function store_transaction(Request $request)
     {
 

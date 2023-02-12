@@ -78,7 +78,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Tujuan<span style="color: red">*</span></label>
-                                        <input class="form-control" id='DESTINATION' type="text" name="DESTINATION" placeholder="Kota Tujuan" autocomplete="off" required>
+                                        <input class="form-control" id='DESTINATION' type="text" name="DESTINATION" placeholder="Tujuan Perjalanan" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
