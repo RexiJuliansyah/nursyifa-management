@@ -51,9 +51,7 @@
                     <table id="table-system" class="table table-bordered table-hover display" >
                         <thead class="thead-dark">
                             <tr>
-                                <th style="width: 0px;">
-                                    <input type="checkbox" class="grid-checkbox" name="checkall" id="checkall" style="cursor:pointer"/>
-                                </th>
+                                <th style="width: 0px;">#</th>
                                 <th>System Type</th>
                                 <th>System Code</th>
                                 <th>System Value</th>
@@ -85,25 +83,25 @@
         var pChecked = null;
         // Table Row Click Event
         $(document).ready(function() {
-            $("#checkall").click(function() {
-                $(".grid-checkbox").prop("checked", $("#checkall").is(":checked"));
-                $(this).is(":checked") ? $(".grid-checkbox").parent().parent().addClass('highlight-row') : $(".grid-checkbox").parent().parent().removeClass('highlight-row');
-                $("#btn_edit").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
-                $("#btn_delete").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
-            });
-
             $('#table-system tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
+                
+                var checkbox_grid = $('input[name="chkRow"][data-SystemType="'+ data["SYSTEM_TYPE"] +'"][data-SystemCd="'+ data["SYSTEM_CD"] +'"]');
+
+                if (checkbox_grid.is(":checked")) {
+                    $(".grid-checkbox").prop("checked", false);
+                    $(".grid-checkbox").parent().parent().removeClass('highlight-row');
+                    checkbox_grid.parent().parent().removeClass('highlight-row');
+                    checkbox_grid.prop("checked", false)
+                } else {
+                    $(".grid-checkbox").prop("checked", false);
+                    $(".grid-checkbox").parent().parent().removeClass('highlight-row');
+                    checkbox_grid.parent().parent().addClass('highlight-row');
+                    checkbox_grid.prop("checked", true)
+                }
+
                 $("#btn_edit").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
                 $("#btn_delete").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
-
-                var checkbox_grid = $('input[name="chkRow"][data-SystemType="'+ data["SYSTEM_TYPE"] +'"][data-SystemCd="'+ data["SYSTEM_CD"] +'"]');
-                checkbox_grid.click();
-                if (checkbox_grid.is(":checked")) {
-                    checkbox_grid.parent().parent().addClass('highlight-row');
-                } else {
-                    checkbox_grid.parent().parent().removeClass('highlight-row');
-                }
             });
         });
         // End Table Row Click Event

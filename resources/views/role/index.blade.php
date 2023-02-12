@@ -27,9 +27,7 @@
                     <table id="table-role" class="table table-bordered table-hover display">
                         <thead class="thead-dark">
                             <tr>
-                                <th style="width: 0px;">
-                                    <input type="checkbox" class="grid-checkbox" name="checkall" id="checkall" style="cursor:pointer"/>
-                                </th>
+                                <th style="width: 0px;">#</th>
                                 <th>Role Name</th>
                                 <th>Role Description</th>
                                 <th>Created By</th>
@@ -71,17 +69,23 @@
 
             $('#table-role tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
+                var checkbox_grid = $('input[name="chkRow"][data-RoleId="'+ data["ROLE_ID"] +'"]');
+
+                if (checkbox_grid.is(":checked")) {
+                    $(".grid-checkbox").prop("checked", false);
+                    $(".grid-checkbox").parent().parent().removeClass('highlight-row');
+                    checkbox_grid.parent().parent().removeClass('highlight-row');
+                    checkbox_grid.prop("checked", false)
+                } else {
+                    $(".grid-checkbox").prop("checked", false);
+                    $(".grid-checkbox").parent().parent().removeClass('highlight-row');
+                    checkbox_grid.parent().parent().addClass('highlight-row');
+                    checkbox_grid.prop("checked", true)
+                }
+
                 $("#btn_edit").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
                 $("#btn_delete").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
                 $("#btn_permission").prop("disabled", ($("input[name='chkRow']:checked").length == 1) ? false : true);
-
-                var checkbox_grid = $('input[name="chkRow"][data-RoleId="'+ data["ROLE_ID"] +'"]');
-                checkbox_grid.click();
-                if (checkbox_grid.is(":checked")) {
-                    checkbox_grid.parent().parent().addClass('highlight-row');
-                } else {
-                    checkbox_grid.parent().parent().removeClass('highlight-row');
-                }
             });
         });
         // End Table Row Click Event

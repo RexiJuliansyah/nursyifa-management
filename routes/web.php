@@ -71,5 +71,6 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
+    Route::delete('transaksi-delete}', [TransactionController::class, 'delete'])->name('transaksi.delete');
 
 });

@@ -54,27 +54,43 @@ class TransactionController extends BaseController
                 array_push($params, ['SYSTEM_VAL', 'like', '%' . $request->system_val . '%']);
             }
             
-            $q = Transaction::all();
+            $q = Transaction::select([
+                'tb_transaction.*',
+                'sysA.SYSTEM_VAL as STATUS',
+            ])
+            ->leftJoin('tb_m_system as sysA', 'tb_transaction.TRANSACTION_STATUS', '=', 'sysA.SYSTEM_CD')  
+            ->where('sysA.SYSTEM_TYPE', 'TRANSAKSI_STATUS')
+            ->where($params)
+            ->orderBy('UPDATED_DATE', 'DESC')
+            ->get();
 
            
 
             return Datatables::of($q)
             ->addIndexColumn()
-            ->addColumn('ACTION', function ($q) {
-                return ' <a href="javascript:void(0)" class="text-inverse pr-10" title="Edit" data-toggle="tooltip">
-                            <i class="zmdi zmdi-edit txt-warning"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="text-inverse" title="Delete" data-toggle="tooltip">
-                            <i class="zmdi zmdi-delete txt-danger"></i>
-                        </a>';
+            ->addColumn('checkbox', function ($item) {
+                return '<input type="checkbox" name="chkRow"
+                        data-TransactionId="'.$item->TRANSACTION_ID.'"
+                        class="grid-checkbox grid-checkbox-body" />';
             })
             ->addColumn('DATE_FROM_TO', function ($q) {
                 return with(new Carbon($q->DATE_FROM))->format('d M Y'). ' - ' .with(new Carbon($q->DATE_TO))->format('d M Y');
             })
+            ->editColumn('STATUS', function ($item) {
+                if($item->TRANSACTION_STATUS == 0) {
+                    return '<span class="label label-warning font-weight">'.$item->STATUS .'</span>';
+                } else if ($item->TRANSACTION_STATUS == 1) {
+                    return '<span class="label label-primary">'.$item->STATUS .'</span>';
+                } else if ($item->TRANSACTION_STATUS == 2) {
+                    return '<span class="label label-danger">'.$item->STATUS .'</span>';
+                } else {
+                    return '<span class="label label-success">'.$item->STATUS .'</span>';
+                }
+            })
             ->editColumn('CREATED_DATE', function ($q) {
                 return $q->CREATED_DATE ? with(new Carbon($q->CREATED_DATE))->format('d-m-Y H:i:s') : '';
             })
-            ->rawColumns(['ACTION'])
+            ->rawColumns(['checkbox','STATUS'])
             ->make(true);
         }
     }
@@ -123,14 +139,31 @@ class TransactionController extends BaseController
                     'PAID_PAYMENT' => $request->PAID_PAYMENT,
                     'PAYMENT_METHOD' => $request->PAYMENT_METHOD,
                     'IMG_PAID_PAYMENT' => $fileName,
-                    'PAYMENT_STATUS' => $request->PAID_AMOUNT >= $request->AMOUNT ? 1 : 0,
+                    'PAYMENT_STATUS' => $request->PAID_PAYMENT >= $request->AMOUNT ? 1 : 0,
                 ]);
 
-                return back()->with(['status' => 'success', 'message' => 'Data Transaksi berhasil ditambahkan.']);
+                return redirect()->route('transaksi')->with(['status' => 'success', 'message' => 'Data Transaksi berhasil ditambahkan.']);
             }
             return back()->with(['status' => 'error', 'message' => 'Data Transaksi gagal ditambahkan']);
         }
         return back()->with(['status' => 'error', 'message' => 'Data Transaksi gagal ditambahkan']);
     }
+
+
+
+    public function delete(Request $request)
+    {
+        $delete_transaction = Transaction::where([
+            'TRANSACTION_ID' => $request->TRANSACTION_ID
+        ])->delete();
+        
+        if ($delete_transaction) {
+            Payment::where([
+                'TRANSACTION_ID' => $request->TRANSACTION_ID
+            ])->delete(); 
+        }
+
+        return response()->json(['message' => 'Data berhasil dihapus!']);
+    }   
 
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Transaksi Baru')
 @section('breadcumb')
-    <li><a href="javascript:void()">Transaksi</a></li>
+    <li><a href="{{ route('transaksi') }}">Transaksi</a></li>
     <li class="active"><span>Transaksi Baru</span></li>
 @endsection
 

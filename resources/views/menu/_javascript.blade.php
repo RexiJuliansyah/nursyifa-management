@@ -179,17 +179,20 @@
         });
 
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Yakin akan menghapus data ini?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#667ADD',
-            cancelButtonColor: '#F44934',
-            confirmButtonText: 'Yes, delete it!'
+            buttonsStyling:false,
+            customClass: {
+                confirmButton: 'btn btn-danger',
+                cancelButton: 'btn btn-default mr-10',
+            },
+            confirmButtonText: 'Delete',
+            reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                setProgressLine()
-                onConfirmDelete(ids)
+                setProgressLine();
+                onConfirmDelete();
             }
         });
 
