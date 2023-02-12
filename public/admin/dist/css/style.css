@@ -199,6 +199,10 @@ body {
     overflow-x: hidden;
 }
 
+.login-body {
+    background: #dfe0e2 url(../img/pattern.png) repeat;
+}
+
 a:hover,
 a:active {
     outline: 0;

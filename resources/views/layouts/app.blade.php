@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html translate="no">
+<html translate="no" lang="en">
 <head>
     <meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -29,7 +29,7 @@
 		<div class="la-anim-1"></div>
 	</div> 
 
-  	<div class="wrapper  theme-1-active pimary-color-green">
+  	<div class="wrapper theme-1-active pimary-color-green">
 		@include('layouts.navbar')
 		@include('layouts.sidebar')
 		<div class="page-wrapper" >

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html translate="no">
+<html translate="no" lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="description" content="User login page">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>PO | Nursyifa</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -18,7 +19,7 @@
         <div class="la-anim-1"></div>
     </div>
 
-    <div class="wrapper pa-0">
+    <div class="wrapper pa-0 ma-0">
         @yield('content')
     </div>
 
