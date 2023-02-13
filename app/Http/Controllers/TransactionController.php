@@ -99,10 +99,10 @@ class TransactionController extends BaseController
     {
 
         $validator = Validator::make($request->all(), [
-            'IMG_PAID_PAYMENT' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'IMG_PAID_PAYMENT' => 'required|image|mimes:jpeg,png,jpg|max:3048',
             ], [
-                'IMG_PAID_PAYMENT.mimes' => 'Bukti Pembayaran harus berformat jpeg, png, jpg, gif, svg  <br>',
-                'IMG_PAID_PAYMENT.max' => 'Bukti Pembayaran file maksimal 2 mb',
+                'IMG_PAID_PAYMENT.mimes' => 'Bukti Pembayaran harus berformat jpeg, png, jpg <br>',
+                'IMG_PAID_PAYMENT.max' => 'Bukti Pembayaran file maksimal 3 mb',
             ]);
 
         if ($validator->passes()) {
@@ -120,16 +120,18 @@ class TransactionController extends BaseController
                 'CUSTOMER_CONTACT' => $request->CUSTOMER_CONTACT,
                 'CUSTOMER_AMOUNT' => $request->CUSTOMER_AMOUNT,
                 'REMARK' => $request->REMARK,
+                'TIME' => $request->TIME,
                 'DATE_FROM' => $request->DATE_FROM,
                 'DATE_TO' => $request->DATE_TO,
                 'DESTINATION' => $request->DESTINATION,
                 'TRANSPORT_CODE' => $request->TRANSPORT_CODE,
+                'KONDEKTUR_ID' => $request->KONDEKTUR_ID,
                 'DRIVER_ID' => $request->DRIVER_ID,
                 'TRANSACTION_STATUS' => 0
             ]);
 
             $fileName = 'BUKTI_PEMBARAYAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PAID_PAYMENT->extension();
-            $upload = $request->IMG_PAID_PAYMENT->move(public_path('admin\upload'), $fileName);
+            $upload = $request->IMG_PAID_PAYMENT->move(public_path('admin/upload'), $fileName);
 
             if ($upload) {
                 Payment::query()

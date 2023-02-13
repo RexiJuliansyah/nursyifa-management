@@ -48,27 +48,27 @@
                             </div>
                         </div>
 
-                        <h6 class="txt-dark capitalize-font"><i class="zmdi zmdi-account mr-10"></i>Info Perjalanan</h6>
+                        <h6 class="txt-dark capitalize-font"><i class="zmdi zmdi-info mr-10"></i>Info Perjalanan</h6>
                         <hr class="light-grey-hr mb-0" />
 
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-5">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Tanggal Perjalanan<span style="color: red">*</span></label>
-                                        <div class="input-group">
-                                            <input class="form-control input-daterange-datepicker" id='DATE_FROM_TO' type="text" name="DATE_FROM_TO" autocomplete="off" onkeypress="return false" required>
+                                        <div class="input-group date_range">
+                                            <input class="form-control input-daterange-datepicker" id='DATE_FROM_TO' type="text" name="DATE_FROM_TO" placeholder="DD/MM/YYYY - DD/MM/YYYY" autocomplete="off" onkeypress="return false" required>
                                             <span class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                         <label class="control-label mb-10 text-left">Jam Kebarangkatan</label>
-                                        <div class="input-group date" id="datetimepicker2">
-                                            <input id='TIME' type="text" name="TIME" class="form-control" autocomplete="off" onkeypress="return false" required>
+                                        <div class="input-group time" id="datetimepicker2">
+                                            <input id='TIME' type="text" name="TIME" class="form-control" autocomplete="off" placeholder="00:00" onkeypress="return false" required>
                                             <span class="input-group-addon">
                                                 <span class="fa fa-clock-o"></span>
                                             </span>
@@ -106,12 +106,34 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="control-label mb-10">Keterangan Perjalanan</label>
-                                        <input class="form-control" id='REMARK' type="text" name="REMARK" autocomplete="off">
+                                        <label class="control-label mb-10">Kondektur<span style="color: red">*</span></label>
+                                        <select name="KONDEKTUR_ID" id="KONDEKTUR_ID" class="selectpicker" data-style="form-control btn-default btn-outline" required >
+                                            <option value="" >-- Pilih --</option>
+                                            <option value="KONDEKTUR 001">KONDEKTUR 001</option>
+                                            <option value="KONDEKTUR 001">KONDEKTUR 002</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10">Keterangan Perjalanan</label>
+                                        <textarea class="form-control" id='REMARK' type="text" name="REMARK" autocomplete="off" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="txt-dark">Note : </p>
+                                    <div class="panel panel-default card-view pa-10 pl-30 mb-0" style="border-color:black;">
+                                        <ol class="txt-dark mb-0" style="list-style-type:circle">
+                                            <li style="font-size:12px">(<span style="color: red">*</span>) form wajib di isi</li>
+                                            <li style="font-size:12px">Format upload gambar berupa jpeg, png, jpg </li>
+                                            <li style="font-size:12px">Ukuran gambar max 3 mb </li>
+                                        </ol>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,7 +151,7 @@
                 <div class="panel-body">
                     <div class="panel panel-default card-view">
                         <div class="form-group">
-                            <label class="control-label" style="width:100%">Bukti Pembayaran <div class="pull-right">
+                            <label class="control-label" style="width:100%">Bukti Pembayaran<span style="color: red">*</span> <div class="pull-right">
                                 <div class="form-group md-bootstrap-select">
                                     <select class="selectpicker" data-style="form-control btn-success btn-outline" name="PAYMENT_METHOD">
                                         <option value='CASH'>CASH</option>
