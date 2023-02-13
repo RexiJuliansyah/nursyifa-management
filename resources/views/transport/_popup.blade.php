@@ -23,6 +23,7 @@
                                 <div class="form-group">
                                     <label for="transport_type" class="control-label mb-10">Jenis Bus<span style="color: red">*</span></label>
                                     <select name="transport_type" id="transport_type" class="selectpicker" data-style="form-control btn-default btn-outline">
+                                        <option value="">-- Pilih --</option> 
                                         @foreach ($data['transport_list'] as $transport)
                                             <option value="{{ $transport->SYSTEM_CD }}">{{ $transport->SYSTEM_VAL }}</option>
                                         @endforeach
@@ -31,6 +32,7 @@
                                 <div class="form-group">
                                     <label for="transport_status" class="control-label mb-10">Status<span style="color: red">*</span></label>
                                     <select name="transport_status" id="transport_status" class="selectpicker" data-style="form-control btn-default btn-outline">
+                                        <option value="">-- Pilih --</option>        
                                         @foreach ($data['transport_status_list'] as $status)
                                             <option value="{{ $status->SYSTEM_CD }}">{{ $status->SYSTEM_VAL }}</option>
                                         @endforeach

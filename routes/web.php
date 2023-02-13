@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SystemController;
@@ -24,13 +25,10 @@ use App\Http\Controllers\TransactionController;
 
 
 Auth::routes();
-Route::get('/', function () {
-    return view('auth/login');
-});
-
+Route::get('/', [WelcomeController::class, 'index'])->name('login.view');
 
 Route::group(['middleware' => 'revalidate'], function(){
-
+    
     Route::get('home', [HomeController::class, 'index'])->name('home');
 
     Route::get('menu', [MenuController::class, 'index'])->name('menu');

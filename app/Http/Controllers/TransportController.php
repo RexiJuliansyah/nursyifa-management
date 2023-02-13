@@ -23,7 +23,7 @@ class TransportController extends BaseController
     {
         $data['title'] = 'Bus Master';
         $data['transport_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'BUS_SEAT_TYPE')->get();
-        $data['transport_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_BUS')->orderBy('SYSTEM_CD', 'DESC')->get();
+        $data['transport_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_BUS')->orderBy('SYSTEM_CD')->get();
         return view('transport/index', compact('data'));
     }
 
@@ -83,6 +83,8 @@ class TransportController extends BaseController
             $validator = Validator::make($request->all(), [
                 'TRANSPORT_CODE' => 'required',
                 'TRANSPORT_NAME' => 'required',
+                'TRANSPORT_TYPE' => 'required',
+                'TRANSPORT_STATUS' => 'required',
             ],
             // Error Message
             [

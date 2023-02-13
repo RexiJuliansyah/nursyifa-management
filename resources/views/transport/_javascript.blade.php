@@ -78,6 +78,8 @@
         $('.form-group').removeClass('has-error has-danger');
         $("#transport_code").val("");
         $("#transport_name").val("");
+        $("#transport_type").val("").trigger('change');
+        $("#transport_status").val("").trigger('change');
     }
 
     function onAddPrepare() {
@@ -162,7 +164,7 @@
                 $("#transport_code").val(result.TRANSPORT_CODE);
                 $("#transport_name").val(result.TRANSPORT_NAME);
                 $("#transport_type").val(result.TRANSPORT_TYPE).trigger('change');
-                $("#transport_status").val(result.TRANSPORT_STATUS);
+                $("#transport_status").val(result.TRANSPORT_STATUS).trigger('change');
 
                 $("#addEditPopup").modal('show');
                 $('#addEditPopup').on('shown.bs.modal', function() {
