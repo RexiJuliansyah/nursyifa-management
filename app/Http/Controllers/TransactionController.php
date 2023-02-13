@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Carbon;
 use DataTables;
+use File;
 
 use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -160,11 +161,18 @@ class TransactionController extends BaseController
         ])->delete();
         
         if ($delete_transaction) {
+            $filename = Payment::query()
+            ->where(['TRANSACTION_ID' => $request->TRANSACTION_ID])
+            ->first()->IMG_PAID_PAYMENT;
+
+            if (File::exists(public_path('admin/upload/'.$filename))) {
+                File::delete(public_path('admin/upload/'.$filename));
+            }
+
             Payment::where([
                 'TRANSACTION_ID' => $request->TRANSACTION_ID
             ])->delete(); 
         }
-
         return response()->json(['message' => 'Data berhasil dihapus!']);
     }   
 
