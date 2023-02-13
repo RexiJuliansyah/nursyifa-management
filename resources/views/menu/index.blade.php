@@ -23,7 +23,7 @@
                                 <div class="col-sm-6">
                                     <label class="control-label mb-10">Menu Type</label>
                                     <select name="type" id="type" class="selectpicker" data-style="form-control btn-default btn-outline">
-                                        <option value="">-- All --</option>
+                                        <option value="">-- Semua --</option>
                                         <option value="1">Menu</option>
                                         <option value="2">Sub Menu</option>
                                     </select>

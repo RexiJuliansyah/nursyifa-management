@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\SystemController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\TransactionController;
 
@@ -60,6 +61,12 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('user-getbykey', [UserController::class, 'getbykey'])->name('user.getbykey');
     Route::post('user-store', [UserController::class, 'store'])->name('user.store');
     Route::delete('user-delete', [UserController::class, 'delete'])->name('user.delete');
+
+    Route::get('driver', [DriverController::class, 'index'])->name('driver');
+    Route::get('driver-datatable', [DriverController::class, 'datatable'])->name('driver.datatable');
+    Route::get('driver-getbykey', [DriverController::class, 'getbykey'])->name('driver.getbykey');
+    Route::post('driver-store', [DriverController::class, 'store'])->name('driver.store');
+    Route::delete('driver-delete}', [DriverController::class, 'delete'])->name('driver.delete');
 
     Route::get('transport', [TransportController::class, 'index'])->name('transport');
     Route::get('transport-datatable', [TransportController::class, 'datatable'])->name('transport.datatable');

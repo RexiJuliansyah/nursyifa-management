@@ -1,27 +1,26 @@
 <script type="text/javascript">
     var gScreenMode = null;
     var gChecked = null;
-    var gTransportId = null;
+    var gDriverId = null;
 
-    var table = $("#table-transport").DataTable({
+    var table = $("#table-driver").DataTable({
         ordering: false,
         serverSide: true,
         responsive: true,
         searching: false,
         ajax: {
-            url: "{{ route('transport.datatable') }}",
+            url: "{{ route('driver.datatable') }}",
             data: function(d) {
-                d.transport_name = $("#search_transport_name").val();
-                d.transport_code = $("#search_transport_code").val();
-                d.transport_type = $("#search_transport_type").val();
+                d.driver_name = $("#search_driver_name").val();
+                d.driver_status = $("#search_driver_status").val();
             }
         },
         columns: [
             { data: 'checkbox', className: 'text-center', name: 'checkbox' },
-            { data: 'TRANSPORT_CODE', name: 'TRANSPORT_CODE', className: 'text-left' },
-            { data: 'TRANSPORT_NAME', name: 'TRANSPORT_NAME', className: 'text-left', },
-            { data: 'BUS_TYPE', name: 'BUS_TYPE', className: 'text-left'},
-            { data: 'BUS_STATUS', name: 'BUS_STATUS', className: 'text-center' }
+            { data: 'DRIVER_ID', name: 'DRIVER_ID', className: 'text-left' },
+            { data: 'DRIVER_NAME', name: 'DRIVER_NAME', className: 'text-left', },
+            { data: 'NO_TELP_DRIVER', name: 'NO_TELP_DRIVER', className: 'text-left'},
+            { data: 'STS_DRIVER', name: 'STS_DRIVER', className: 'text-center' }
         ]
 
     });
@@ -42,9 +41,11 @@
 
         $("#btn_clear").on("click", function() {
             setProgressLine();
-            $("#search_transport_name").val("");
-            $("#search_transport_code").val("");
-            $("#search_transport_type").val("").trigger('change');
+
+            $("#search_driver_name").val("");
+            $("#search_driver_status").val("").trigger('change');
+
+
             table.draw();
         });
 
@@ -62,29 +63,28 @@
 
     function setScreenToAddMode() {
         gScreenMode = 'ADD';
-        $(".modal-title").text("Add Master Bus");
-        $("#transport_code").attr('readonly', false);
+        $(".modal-title").text("Add Supir");
         clearAddEdit();
     }
 
     function setScreenToEditMode() {
         gScreenMode = 'EDIT';
-        $(".modal-title").text("Edit Master Menu");
-        $("#transport_code").attr('readonly', true);
+        $(".modal-title").text("Edit Supir");
         clearAddEdit();
     }
 
     function clearAddEdit() {
         $('.form-group').removeClass('has-error has-danger');
-        $("#transport_code").val("");
-        $("#transport_name").val("");
+        $("#driver_name").val(""); 
+        $("#no_telp").val(""); 
+        $("#driver_status").val("").trigger('change');
     }
 
     function onAddPrepare() {
         setScreenToAddMode();
         $('#addEditPopup').modal('show');
         $('#addEditPopup').on('shown.bs.modal', function() {
-            $('#transport_code').focus();
+            $('#driver_name').focus();
         });
     }
 
@@ -95,7 +95,7 @@
             if ($(this).prop('checked')) {
                 isHaveChecked = true;
                 gChecked = gChecked + 1;
-                gTransportId = $(".grid-checkbox-body:checked").attr('data-TransportId');
+                gDriverId = $(".grid-checkbox-body:checked").attr('data-DriverId');
             }
         });
 
@@ -114,11 +114,10 @@
 
         var form_data = {
             'MODE': gScreenMode,
-            'TRANSPORT_ID': $("#transport_id").val(),
-            'TRANSPORT_CODE': $("#transport_code").val(),
-            'TRANSPORT_NAME': $("#transport_name").val(),
-            'TRANSPORT_TYPE': $("#transport_type").val(),
-            'TRANSPORT_STATUS': $("#transport_status").val(),
+            'DRIVER_ID': $("#driver_id").val(),
+            'DRIVER_NAME': $("#driver_name").val(),
+            'NO_TELP_DRIVER': $("#no_telp").val(),
+            'DRIVER_STATUS': $("#driver_status").val(),
         };
 
         $.ajax({
@@ -126,7 +125,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ route('transport.store') }}",
+            url: "{{ route('driver.store') }}",
             dataType: 'json',
             traditional: true,
             data: form_data,
@@ -151,22 +150,21 @@
 
         $.ajax({
             type: "GET",
-            url: "{{ route('transport.getbykey') }}",
+            url: "{{ route('driver.getbykey') }}",
             dataType: 'json',
             traditional: true,
             data: {
-                'TRANSPORT_ID': gTransportId
+                'DRIVER_ID': gDriverId
             },
             success: function(result) {
-                $("#transport_id").val(result.TRANSPORT_ID);
-                $("#transport_code").val(result.TRANSPORT_CODE);
-                $("#transport_name").val(result.TRANSPORT_NAME);
-                $("#transport_type").val(result.TRANSPORT_TYPE).trigger('change');
-                $("#transport_status").val(result.TRANSPORT_STATUS);
+                $("#driver_id").val(result.DRIVER_ID);
+                $("#driver_name").val(result.DRIVER_NAME);
+                $("#no_telp").val(result.NO_TELP_DRIVER);
+                $("#driver_status").val(result.DRIVER_STATUS).trigger('change');
 
                 $("#addEditPopup").modal('show');
                 $('#addEditPopup').on('shown.bs.modal', function() {
-                    $('#transport_code').focus();
+                    $('#driver_name').focus();
                 });
             }
         });
@@ -180,7 +178,7 @@
             if ($(this).prop('checked')) {
                 isHaveChecked = true;
                 gChecked = gChecked + 1;
-                gTransportId = $(".grid-checkbox-body:checked").attr('data-TransportId');
+                gDriverId = $(".grid-checkbox-body:checked").attr('data-DriverId');
             }
         });
 
@@ -206,7 +204,7 @@
 
     function onConfirmDelete() {
         $.ajax({
-            url: "{{ route('transport.delete') }}",
+            url: "{{ route('driver.delete') }}",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -214,7 +212,7 @@
             dataType: 'json',
             traditional: true,
             data: {
-                'TRANSPORT_ID': gTransportId
+                'DRIVER_ID': gDriverId
             },
             success: function(response) {
                 if ($.isEmptyObject(response.error)) {

@@ -87,7 +87,7 @@
         $("#btn_clear").on("click", function() {
             setProgressLine();
             $("#menu_name_search").val("");
-            $("#type").val("");
+            $("#type").val("").trigger('change');
             table.draw();
         });
         
