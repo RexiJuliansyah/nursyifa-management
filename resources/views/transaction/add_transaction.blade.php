@@ -30,18 +30,18 @@
                                     <input type="hidden" id="TRANSACTION_ID" name="TRANSACTION_ID" class="form-control" value="">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Nama Pelanggan<span style="color: red">*</span></label>
-                                        <input type="text" id="CUSTOMER_NAME" name="CUSTOMER_NAME" class="form-control form-sm" placeholder="Nama Pelanggan" autocomplete="off" required>
+                                        <input type="text" id="CUSTOMER_NAME" name="CUSTOMER_NAME" class="form-control form-sm" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label class="control-label mb-10">No Telp / No Whatsapp <span style="color: red">*</span></label>
-                                        <input type="text" id="CUSTOMER_CONTACT" name="CUSTOMER_CONTACT" class="form-control" placeholder="No Telp / No Whatsapp" maxlength="14" onkeypress="return isNumber(event)" autocomplete="off" required>
+                                        <input type="text" id="CUSTOMER_CONTACT" name="CUSTOMER_CONTACT" class="form-control" maxlength="14" onkeypress="return isNumber(event)" autocomplete="off" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
                                     <div class="form-group">
-                                        <label class="control-label mb-10">Jumlah Orang<span style="color: red">*</span></label>
+                                        <label class="control-label mb-10">Jumlah<span style="color: red">*</span></label>
                                         <input type="number" id="CUSTOMER_AMOUNT" name="CUSTOMER_AMOUNT" min='1' class="form-control" autocomplete="off" required>
                                     </div>
                                 </div>
@@ -53,34 +53,37 @@
 
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Tanggal Perjalanan<span style="color: red">*</span></label>
                                         <div class="input-group">
-                                            <input class="form-control input-daterange-datepicker" id='DATE_FROM_TO' type="text" name="DATE_FROM_TO" autocomplete="off" style="background-color: white" onkeypress="return false" required>
+                                            <input class="form-control input-daterange-datepicker" id='DATE_FROM_TO' type="text" name="DATE_FROM_TO" autocomplete="off" onkeypress="return false" required>
                                             <span class="input-group-addon">
                                                 <span class="fa fa-calendar"></span>
                                             </span>
-															</div>
-                                        <!-- <div class='input-group'>
-                                            
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="control-label mb-10">Keterangan Perjalanan</label>
-                                        <input class="form-control" id='REMARK' type="text" name="REMARK" placeholder="Keterangan Perjalanan" autocomplete="off">
+                                        <label class="control-label mb-10 text-left">Jam Kebarangkatan</label>
+                                        <div class="input-group date" id="datetimepicker2">
+                                            <input id='TIME' type="text" name="TIME" class="form-control" autocomplete="off" onkeypress="return false" required>
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-clock-o"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10">Tujuan<span style="color: red">*</span></label>
+                                        <input class="form-control" id='DESTINATION' type="text" name="DESTINATION" autocomplete="off" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="control-label mb-10">Tujuan<span style="color: red">*</span></label>
-                                        <input class="form-control" id='DESTINATION' type="text" name="DESTINATION" placeholder="Tujuan Perjalanan" autocomplete="off" required>
-                                    </div>
-                                </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Bus<span style="color: red">*</span></label>
@@ -101,6 +104,12 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label mb-10">Keterangan Perjalanan</label>
+                                        <input class="form-control" id='REMARK' type="text" name="REMARK" autocomplete="off">
+                                    </div>
+                                </div>
                             </div>
                             
                         </div>
@@ -115,7 +124,6 @@
                     <div class="pull-left">
                         <h6 class="panel-title txt-light">Data Pembayaran</h6>
                     </div>
-                    
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">
@@ -132,7 +140,7 @@
                             <input type="file" id="IMG_PAID_PAYMENT" name="IMG_PAID_PAYMENT" class="dropify" data-height="100" required>
                         </div>
                         <div class="form-group">
-                            <label class="control-label mb-10">Harga<span style="color: red">*</span></label>
+                            <label class="control-label mb-10">Harga Total<span style="color: red">*</span></label>
                             <input type="text" class="form-control" id="AMOUNT" name="AMOUNT" maxlength="10" onkeypress="return isNumber(event)" autocomplete="off" required>
                         </div>
                         <div class="form-group">
@@ -197,6 +205,11 @@
             $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
             $(this).focus();
         });
+
+        $('#TIME').datetimepicker({
+			format: 'HH:mm',
+            useCurrent: false,
+		});
 
     });
 

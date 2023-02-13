@@ -11,6 +11,7 @@
 
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/datatables.net-responsive/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css"/>
+	<link href="{{asset('admin')}}/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/jstree/dist/themes/default/style.css" rel="stylesheet">
 	<link href="{{asset('admin')}}/vendors/bower_components/toastr/toastr.min.css" rel="stylesheet" type="text/css">
@@ -68,7 +69,7 @@
 	<script src="{{asset('admin')}}/vendors/bower_components/jstree/dist/jstree.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/moment/min/moment-with-locales.min.js"></script>
 	<!-- <script src="{{asset('admin')}}/vendors/bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script> -->
-	<!-- <script src="{{asset('admin')}}/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script> -->
+	<script src="{{asset('admin')}}/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 
 	<script src="{{asset('admin')}}/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>

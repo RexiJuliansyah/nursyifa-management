@@ -41,14 +41,14 @@
                         <div class="col-sm-12">
                             <div class="button-list">
                                 <div class="pull-left">
-                                    <a href="{{ route('transaksi.baru') }}" type="button" class="btn btn-success btn-icon left-icon" id="btn_add"><i class="fa fa-plus"></i> Tambah Transaksi</a>
-                                    <button href="#" type="button" class="btn btn-warning btn-icon left-icon" id="btn_edit" style="display:none"><i class="fa fa-pencil"></i><span>Edit</span></button>
-                                    <button href="#" type="button" class="btn btn-danger btn-icon left-icon" id="btn_delete" style="display:none"><i class="fa fa-trash"></i><span>Delete</span></button>
+                                    <a href="{{ route('transaksi.baru') }}" type="button" class="btn btn-success btn-icon btn-sm left-icon pr-10 pl-10" id="btn_add"><i class="fa fa-plus"></i> Tambah Transaksi</a>
+                                    <button href="#" type="button" class="btn btn-warning btn-sm btn-square" id="btn_edit" data-toggle="tooltip" data-original-title="Edit" style="display:none"><i class="fa fa-pencil"></i></button>
+                                    <button href="#" type="button" class="btn btn-danger btn-sm btn-square center-icon" id="btn_delete" data-toggle="tooltip" data-original-title="Delete" style="display:none"><i class="fa fa-trash"></i></button>
                                 </div>
                                 <div class="pull-right">
-                                    <button href="#" type="button" class="btn btn-default btn-icon left-icon txt-dark " id="btn_detail" style="display:none"><i class="fa fa-eye"></i><span>Detail</span></button>
-                                    <button href="#" type="button" class="btn btn-success btn-icon left-icon" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesai</span></button>
-                                    <button href="#" type="button" class="btn btn-danger btn-icon left-icon" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>
+                                    <button href="#" type="button" class="btn btn-default btn-sm txt-dark pr-10 pl-10" id="btn_detail" style="display:none"><span>Detail</span></button>
+                                    <button href="#" type="button" class="btn btn-success btn-sm btn-icon left-icon" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesai</span></button>
+                                    <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>
                                 </div>
                             </div>
                         </div>
