@@ -32,6 +32,35 @@ class TransactionController extends BaseController
         return view('transaction/index');
     }
 
+    public function calender()
+    {
+        $events = [];
+        $all_tansaction = Transaction::all();
+
+        foreach($all_tansaction as $transaction) {
+            if($transaction->TRANSACTION_STATUS == 1){
+                $color = 'blue';
+            } else if($transaction->TRANSACTION_STATUS == 2) {
+                $color = 'red';
+            } else if($transaction->TRANSACTION_STATUS == 3) {
+                $color = 'green';
+            } else {
+                $color = 'yellow';
+            } 
+            array_push($events, [
+                'id' => $transaction->TRANSACTION_ID, 
+                'title' => $transaction->DESTINATION,
+                'start' => Carbon::parse($transaction->DATE_FROM),
+                'end' => Carbon::parse($transaction->DATE_TO)->addDay(),
+                'color' => $color
+            ]);
+        }
+
+        $data['title'] = 'Transaksi';
+        $data['events'] = $events;
+        return view('transaction/calender_transaction', compact('data'));
+    }
+
     public function add_transaction()
     {
         $data['title'] = 'Transaksi';

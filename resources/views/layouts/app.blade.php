@@ -18,6 +18,7 @@
 	<link href="{{asset('admin')}}/vendors/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
 	<link href="{{asset('admin')}}/vendors/bower_components/dropify/dist/css/dropify.min.css" rel="stylesheet" type="text/css">
+	<link href="{{asset('admin')}}/vendors/bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet" type="text/css"/>
 
 	<link href="{{asset('admin')}}/vendors/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
 	<link href="{{asset('admin')}}/vendors/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css"/>
@@ -68,9 +69,10 @@
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-validator/dist/validator.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/jstree/dist/jstree.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/moment/min/moment-with-locales.min.js"></script>
-	<!-- <script src="{{asset('admin')}}/vendors/bower_components/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script> -->
 	<script src="{{asset('admin')}}/vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 	<script src="{{asset('admin')}}/vendors/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<script src="{{asset('admin')}}/vendors/jquery-ui.min.js"></script>
+	<script src="{{asset('admin')}}/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 
 	<script src="{{asset('admin')}}/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 	<script src="{{asset('admin')}}/dist/js/jquery.slimscroll.js"></script>
@@ -94,7 +96,6 @@
 	<script src="{{asset('admin')}}/dist/js/form-file-upload-data.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="{{asset('admin')}}/dist/js/init.js"></script>
-	<!-- <script src="{{asset('admin')}}/dist/js/form-picker-data.js"></script> -->
 
 	<script type="text/javascript">
 		$(document).ready(function() {

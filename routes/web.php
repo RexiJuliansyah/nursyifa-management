@@ -80,6 +80,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::delete('transport-delete}', [TransportController::class, 'delete'])->name('transport.delete');
 
     Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi');
+    Route::get('calender', [TransactionController::class, 'calender'])->name('calender');
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
