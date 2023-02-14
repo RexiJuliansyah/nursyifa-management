@@ -8,6 +8,7 @@ use App\Http\Controllers\SystemController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DriverController;
+use App\Http\Controllers\KondekturController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\TransactionController;
 
@@ -65,6 +66,12 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('driver-getbykey', [DriverController::class, 'getbykey'])->name('driver.getbykey');
     Route::post('driver-store', [DriverController::class, 'store'])->name('driver.store');
     Route::delete('driver-delete}', [DriverController::class, 'delete'])->name('driver.delete');
+
+    Route::get('kondektur', [KondekturController::class, 'index'])->name('kondektur');
+    Route::get('kondektur-datatable', [KondekturController::class, 'datatable'])->name('kondektur.datatable');
+    Route::get('kondektur-getbykey', [KondekturController::class, 'getbykey'])->name('kondektur.getbykey');
+    Route::post('kondektur-store', [KondekturController::class, 'store'])->name('kondektur.store');
+    Route::delete('kondektur-delete}', [KondekturController::class, 'delete'])->name('kondektur.delete');
 
     Route::get('transport', [TransportController::class, 'index'])->name('transport');
     Route::get('transport-datatable', [TransportController::class, 'datatable'])->name('transport.datatable');

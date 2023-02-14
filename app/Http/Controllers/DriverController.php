@@ -73,7 +73,7 @@ class DriverController extends BaseController
     {
         if ($request->ajax()) {
             if($request->DRIVER_ID == "") {
-                $request['DRIVER_ID'] = IdGenerator::generate(['table' => 'tb_m_driver', 'field' => 'DRIVER_ID', 'length' => 6, 'prefix' => 'SPR' ]);   
+                $request['DRIVER_ID'] = IdGenerator::generate(['table' => 'tb_m_driver', 'field' => 'DRIVER_ID', 'length' => 5, 'prefix' => 'SP' ]);   
             }
 
 
