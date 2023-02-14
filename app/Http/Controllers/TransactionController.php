@@ -10,6 +10,7 @@ use App\Models\Payment;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use DataTables;
 use File;
@@ -137,6 +138,15 @@ class TransactionController extends BaseController
                 'TRANSACTION_STATUS' => 0
             ]);
 
+            $update_transport_status = Transport::query()
+            ->where(['TRANSPORT_CODE' => $request->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 0]);
+
+            $update_driver_status = Driver::query()
+            ->where(['DRIVER_ID' => $request->DRIVER_ID])->update(['DRIVER_STATUS' => 0]);
+
+            $update_kondektur_status = Kondektur::query()
+            ->where(['KONDEKTUR_ID' => $request->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 0]);
+
             $fileName = 'BUKTI_PEMBARAYAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PAID_PAYMENT->extension();
             $upload = $request->IMG_PAID_PAYMENT->move(public_path('admin/upload'), $fileName);
 
@@ -162,24 +172,30 @@ class TransactionController extends BaseController
 
     public function delete(Request $request)
     {
-        $delete_transaction = Transaction::where([
-            'TRANSACTION_ID' => $request->TRANSACTION_ID
-        ])->delete();
-        
-        if ($delete_transaction) {
-            $filename = Payment::query()
-            ->where(['TRANSACTION_ID' => $request->TRANSACTION_ID])
-            ->first()->IMG_PAID_PAYMENT;
+        DB::beginTransaction();
+        $transaction = Transaction::find($request->TRANSACTION_ID);
+        $filename = Payment::where(['TRANSACTION_ID' => $request->TRANSACTION_ID])->first()->IMG_PAID_PAYMENT;
+
+        try {
+            DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 1]);
+            DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 1]);
+            DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 1]);
+
+            DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->delete();
+            DB::table('tb_payment')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->delete();
+            DB::commit();
 
             if (File::exists(public_path('admin/upload/'.$filename))) {
-                File::delete(public_path('admin/upload/'.$filename));
+                    File::delete(public_path('admin/upload/'.$filename));
             }
 
-            Payment::where([
-                'TRANSACTION_ID' => $request->TRANSACTION_ID
-            ])->delete(); 
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Data gagal dihapus!']);
         }
+
         return response()->json(['message' => 'Data berhasil dihapus!']);
+ 
     }   
 
 }

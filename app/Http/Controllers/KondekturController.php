@@ -23,7 +23,7 @@ class KondekturController extends BaseController
     public function index()
     {
         $data['title'] = 'Kondektur Master';
-        $data['kondektur_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_KONDEKTUR')->orderBy('SYSTEM_CD')->get();
+        $data['kondektur_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_OPERASIONAL')->orderBy('SYSTEM_CD')->get();
         return view('kondektur/index', compact('data'));
     }
 
@@ -45,9 +45,9 @@ class KondekturController extends BaseController
                 'sysA.SYSTEM_VAL as STS_KONDEKTUR',
             ])
             ->leftJoin('tb_m_system as sysA', 'tb_m_kondektur.KONDEKTUR_STATUS', '=', 'sysA.SYSTEM_CD')
-            ->where('sysA.SYSTEM_TYPE', 'STATUS_KONDEKTUR')
+            ->where('sysA.SYSTEM_TYPE', 'STATUS_OPERASIONAL')
             ->where($params)
-            ->orderBy('UPDATED_DATE', 'DESC')
+            ->orderBy('KONDEKTUR_ID')
             ->get();
 
             return Datatables::of($q)

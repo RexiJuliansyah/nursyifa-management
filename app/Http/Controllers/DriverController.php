@@ -23,7 +23,7 @@ class DriverController extends BaseController
     public function index()
     {
         $data['title'] = 'Supir Master';
-        $data['driver_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_SUPIR')->orderBy('SYSTEM_CD')->get();
+        $data['driver_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_OPERASIONAL')->orderBy('SYSTEM_CD')->get();
         return view('driver/index', compact('data'));
     }
 
@@ -45,9 +45,9 @@ class DriverController extends BaseController
                 'sysA.SYSTEM_VAL as STS_DRIVER',
             ])
             ->leftJoin('tb_m_system as sysA', 'tb_m_driver.DRIVER_STATUS', '=', 'sysA.SYSTEM_CD')
-            ->where('sysA.SYSTEM_TYPE', 'STATUS_SUPIR')
+            ->where('sysA.SYSTEM_TYPE', 'STATUS_OPERASIONAL')
             ->where($params)
-            ->orderBy('UPDATED_DATE', 'DESC')
+            ->orderBy('DRIVER_ID')
             ->get();
 
             return Datatables::of($q)

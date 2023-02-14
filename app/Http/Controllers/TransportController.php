@@ -23,7 +23,7 @@ class TransportController extends BaseController
     {
         $data['title'] = 'Bus Master';
         $data['transport_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'BUS_SEAT_TYPE')->get();
-        $data['transport_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_BUS')->orderBy('SYSTEM_CD')->get();
+        $data['transport_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_OPERASIONAL')->orderBy('SYSTEM_CD')->get();
         return view('transport/index', compact('data'));
     }
 
@@ -53,7 +53,7 @@ class TransportController extends BaseController
             ->leftJoin('tb_m_system as sysA', 'tb_m_transport.TRANSPORT_TYPE', '=', 'sysA.SYSTEM_CD') 
             ->leftJoin('tb_m_system as sysB', 'tb_m_transport.TRANSPORT_STATUS', '=', 'sysB.SYSTEM_CD') 
             ->where('sysA.SYSTEM_TYPE', 'BUS_SEAT_TYPE')
-            ->where('sysB.SYSTEM_TYPE', 'STATUS_BUS')
+            ->where('sysB.SYSTEM_TYPE', 'STATUS_OPERASIONAL')
             ->where($params)
             ->orderBy('UPDATED_DATE', 'DESC')
             ->get();

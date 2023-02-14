@@ -82,7 +82,13 @@
             },
             success: function(response) {
                 if ($.isEmptyObject(response.error)) {
-                    toastr.success(response.message)
+                    Swal.fire({   
+                        title: "Success",   
+                        icon: "success", 
+                        text: response.message,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
                     table.draw();
                     $('#btn_edit').css("display", "none");
                     $('#btn_delete').css("display", "none");
@@ -90,7 +96,13 @@
                     $('#btn_complete').css("display", "none");
                     $('#btn_reject').css("display", "none");
                 } else {
-                    toastr.error(response.error)
+                    Swal.fire({   
+                        title: "Error",   
+                        icon: "error", 
+                        text: response.error,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
                     table.draw();
                     $('#btn_edit').css("display", "none");
                     $('#btn_delete').css("display", "none");
