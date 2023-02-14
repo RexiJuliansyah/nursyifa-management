@@ -17,7 +17,9 @@
                             <img src="{{ asset('admin') }}/dist/img/logoN.png " class="img-responsive" alt="Logo">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-6">
-                        <img src="{{ asset('admin') }}/dist/img/logoT.png " class="img-responsive mb-20 mt-20" alt="Logo">
+                        <div class="text-center">
+                            <img src="{{ asset('admin') }}/dist/img/logoT.png" width="90%" height="80%" class="img-responsive ma-20 pa-10" alt="Logo">
+                        </div>
                             <div class="panel panel-default card-view pa-10" >
                                 <div class="panel-body ma-0 pa-0">
                                     <div class="text-center">
