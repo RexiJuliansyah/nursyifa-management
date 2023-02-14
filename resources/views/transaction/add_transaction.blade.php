@@ -99,8 +99,9 @@
                                         <label class="control-label mb-10">Supir<span style="color: red">*</span></label>
                                         <select name="DRIVER_ID" id="DRIVER_ID" class="selectpicker" data-style="form-control btn-default btn-outline" required >
                                             <option value="" >-- Pilih --</option>
-                                            <option value="SUPIR 001">SUPIR 001</option>
-                                            <option value="SUPIR 001">SUPIR 002</option>
+                                            @foreach ($data['driver_list'] as $driver)
+                                                <option value="{{ $driver->DRIVER_ID }}">{{ $driver->DRIVER_NAME }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -109,8 +110,9 @@
                                         <label class="control-label mb-10">Kondektur<span style="color: red">*</span></label>
                                         <select name="KONDEKTUR_ID" id="KONDEKTUR_ID" class="selectpicker" data-style="form-control btn-default btn-outline" required >
                                             <option value="" >-- Pilih --</option>
-                                            <option value="KONDEKTUR 001">KONDEKTUR 001</option>
-                                            <option value="KONDEKTUR 001">KONDEKTUR 002</option>
+                                            @foreach ($data['kondektur_list'] as $kondektur)
+                                                <option value="{{ $kondektur->KONDEKTUR_ID }}">{{ $kondektur->KONDEKTUR_NAME }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

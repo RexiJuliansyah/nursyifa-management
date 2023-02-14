@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Transport;
+use App\Models\Driver;
+use App\Models\Kondektur;
 use App\Models\Payment;
 
 use Illuminate\Http\Request;
@@ -38,7 +40,11 @@ class TransactionController extends BaseController
             ])
             ->leftJoin('tb_m_system', 'tb_m_transport.TRANSPORT_TYPE', '=', 'tb_m_system.SYSTEM_CD') 
             ->where('tb_m_system.SYSTEM_TYPE', 'BUS_SEAT_TYPE')
+            ->where('tb_m_transport.TRANSPORT_STATUS', 1)
             ->get();
+
+        $data['driver_list'] = Driver::where('DRIVER_STATUS', 1)->get();
+        $data['kondektur_list'] = Kondektur::where('KONDEKTUR_STATUS', 1)->get();
         return view('transaction/add_transaction', compact('data'));
     }
 
