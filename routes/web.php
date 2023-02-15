@@ -82,6 +82,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi');
     Route::get('calender', [TransactionController::class, 'calender'])->name('calender');
     Route::get('transaksi-getbykey', [TransactionController::class, 'getbykey'])->name('transaksi.getbykey');
+    Route::get('calender-getbykey', [TransactionController::class, 'getbykey_calender'])->name('calender.getbykey');
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');

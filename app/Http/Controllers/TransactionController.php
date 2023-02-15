@@ -82,6 +82,8 @@ class TransactionController extends BaseController
     public function getbykey(Request $request) {
         $query = Transaction::select([
             'tb_transaction.*',
+            'tb_m_driver.DRIVER_NAME',
+            'tb_m_kondektur.KONDEKTUR_NAME',
             'tb_payment.PAYMENT_METHOD',
             'tb_payment.AMOUNT',
             'tb_payment.PAID_PAYMENT',
@@ -89,7 +91,21 @@ class TransactionController extends BaseController
             'tb_payment.IMG_PAID_PAYMENT',
             'tb_payment.IMG_INSERT_PAYMENT',
         ])->where(['tb_transaction.TRANSACTION_ID' => $request->TRANSACTION_ID])
-        ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID') 
+        ->leftJoin('tb_m_driver', 'tb_transaction.DRIVER_ID', '=', 'tb_m_driver.DRIVER_ID') 
+        ->leftJoin('tb_m_kondektur', 'tb_transaction.KONDEKTUR_ID', '=', 'tb_m_kondektur.KONDEKTUR_ID') 
+        ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID')
+        ->firstOrFail();
+        echo json_encode($query);
+    }
+
+    public function getbykey_calender(Request $request) {
+        $query = Transaction::select([
+            'tb_transaction.*',
+            'tb_m_driver.DRIVER_NAME',
+            'tb_m_kondektur.KONDEKTUR_NAME',
+        ])->where(['tb_transaction.TRANSACTION_ID' => $request->TRANSACTION_ID])
+        ->leftJoin('tb_m_driver', 'tb_transaction.DRIVER_ID', '=', 'tb_m_driver.DRIVER_ID') 
+        ->leftJoin('tb_m_kondektur', 'tb_transaction.KONDEKTUR_ID', '=', 'tb_m_kondektur.KONDEKTUR_ID') 
         ->firstOrFail();
         echo json_encode($query);
     }

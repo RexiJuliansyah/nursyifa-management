@@ -83,8 +83,8 @@
                 $("#date_from_to").text(moment(result.DATE_FROM).format('DD MMM YYYY') + ' - ' + moment(result.DATE_TO).format('DD MMM YYYY'));
                 $("#time").text(result.TIME);
                 $("#transport").text(result.TRANSPORT_CODE);
-                $("#driver_name").text(result.DRIVER_ID);
-                $("#kondektur_name").text(result.KONDEKTUR_ID);
+                $("#driver_name").text(result.DRIVER_NAME);
+                $("#kondektur_name").text(result.KONDEKTUR_NAME);
                 $("#amount").text(number_format(result.AMOUNT));
                 $("#paid_payment").text(number_format(result.PAID_PAYMENT));
                 $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);

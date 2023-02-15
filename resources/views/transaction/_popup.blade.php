@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title pull-right"># <span id="transaction_id">TRX202302190001</span></h6>
+                <h6 class="modal-title pull-right"># <span id="transaction_id"></span></h6>
                 <h5 class="modal-title">Detail Transaksi</h5>
             </div>
             <div class="form-wrap">
@@ -13,16 +13,16 @@
                             <div class="col-xs-6">
                                 <p class="txt-dark head-font inline-block capitalize-font mb-5">Pelanggan :</p>
                                 <address class="mb-15">
-                                    <span id="customer_name">Rexi Faza Juliansyah</span><br>
-                                    <span id="customer_contact">082664991335</span><br>
-                                    <span id="customer_amount">34</span> Orang<br>
+                                    <span id="customer_name"></span><br>
+                                    <span id="customer_contact"></span><br>
+                                    <span id="customer_amount"></span> Orang<br>
                                 </address> 
                             </div>
                             <div class="col-xs-6">
                                 <p class="txt-dark head-font inline-block capitalize-font">Tujuan Perjalanan :</p>
                                 <address class="mb-10">
-                                    <span id="destination">Jakarta - Bandung</span><br>
-                                    <span id="remark">Wisata Keluarga Bersama Anak anak</span><br>
+                                    <span id="destination"></span><br>
+                                    <span id="remark"></span><br>
                                 </address>
                             </div>
                             <div class="col-xs-12">
@@ -39,11 +39,11 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td id="date_from_to">02 Feb 2023 - 05 Feb 2023</td>
-                                                <td id="time">13:00</td>
-                                                <td id="transport">NS01 (2 - 3)</td>
-                                                <td id="driver_name">Supir 1</td>
-                                                <td id="kondektur_name">Kondektur 1</td>
+                                                <td id="date_from_to"></td>
+                                                <td id="time"></td>
+                                                <td id="transport"></td>
+                                                <td id="driver_name"></td>
+                                                <td id="kondektur_name"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -60,13 +60,13 @@
                                                 <tr>
                                                     <td class="txt-dark">Harga</th>
                                                     <td class="txt-dark">:</th>
-                                                    <td id="amount">1.000.000</td>
+                                                    <td id="amount"></td>
                                                     
                                                 </tr>
                                                 <tr>
                                                     <td class="txt-dark">Dibayar</th>
                                                     <td class="txt-dark">:</th>
-                                                    <td id="paid_payment">1.000.000</td>
+                                                    <td id="paid_payment"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -77,7 +77,7 @@
                                 <div class="col-sm-6 col-sm-offset-6">
                                     <a id="download_img" class="pull-right" target="_blank">
                                         <i class="fa fa-file-image-o" aria-hidden="true"></i> 
-                                        <span id="img_paid_payment">PEMBAYARAN_TRX2023021400002.jpg</span><br>
+                                        <span id="img_paid_payment"></span><br>
                                     </a>
                                 </div>
                             </div>  

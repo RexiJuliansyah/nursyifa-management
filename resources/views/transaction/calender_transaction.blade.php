@@ -26,7 +26,7 @@
 
 <div id="detailCalenderPopup" class="modal fade" role="dialog" aria-labelledby="modal-title"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="modal-title"># <span id="transaction_id"></span></h6>
@@ -117,7 +117,7 @@
             eventClick: function (event) {
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('transaksi.getbykey') }}",
+                    url: "{{ route('calender.getbykey') }}",
                     dataType: 'json',
                     traditional: true,
                     data: {
@@ -133,8 +133,8 @@
                         $("#date_from_to").text(moment(result.DATE_FROM).format('DD MMM YYYY') + ' - ' + moment(result.DATE_TO).format('DD MMM YYYY'));
                         $("#time").text(result.TIME);
                         $("#transport").text(result.TRANSPORT_CODE);
-                        $("#driver_name").text(result.DRIVER_ID);
-                        $("#kondektur_name").text(result.KONDEKTUR_ID);
+                        $("#driver_name").text(result.DRIVER_NAME);
+                        $("#kondektur_name").text(result.KONDEKTUR_NAME);
 
                         $("#detailCalenderPopup").modal('show');
                     }
