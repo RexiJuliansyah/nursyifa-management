@@ -51,7 +51,7 @@ class TransactionController extends BaseController
             array_push($events, [
                 'id' => $transaction->TRANSACTION_ID, 
                 'title' => $transaction->DESTINATION,
-                'start' => Carbon::parse($transaction->DATE_FROM),
+                'start' => Carbon::parse($transaction->DATE_FROM)->addDay(),
                 'end' => Carbon::parse($transaction->DATE_TO)->addDay(),
                 'color' => $color
             ]);
