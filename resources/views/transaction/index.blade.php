@@ -80,7 +80,7 @@
     </div>
 </div>
 <!-- /Row -->
-
+@include('transaction._popup')
 
 @endsection
 

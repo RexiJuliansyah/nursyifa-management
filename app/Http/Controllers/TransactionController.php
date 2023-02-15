@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use DataTables;
 use File;
+use Response;
 
 use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -76,6 +77,21 @@ class TransactionController extends BaseController
         $data['driver_list'] = Driver::where('DRIVER_STATUS', 1)->get();
         $data['kondektur_list'] = Kondektur::where('KONDEKTUR_STATUS', 1)->get();
         return view('transaction/add_transaction', compact('data'));
+    }
+
+    public function getbykey(Request $request) {
+        $query = Transaction::select([
+            'tb_transaction.*',
+            'tb_payment.PAYMENT_METHOD',
+            'tb_payment.AMOUNT',
+            'tb_payment.PAID_PAYMENT',
+            'tb_payment.INSERT_PAYMENT',
+            'tb_payment.IMG_PAID_PAYMENT',
+            'tb_payment.IMG_INSERT_PAYMENT',
+        ])->where(['tb_transaction.TRANSACTION_ID' => $request->TRANSACTION_ID])
+        ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID') 
+        ->firstOrFail();
+        echo json_encode($query);
     }
 
     public function datatable (Request $request)
@@ -176,7 +192,7 @@ class TransactionController extends BaseController
             $update_kondektur_status = Kondektur::query()
             ->where(['KONDEKTUR_ID' => $request->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 0]);
 
-            $fileName = 'BUKTI_PEMBARAYAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PAID_PAYMENT->extension();
+            $fileName = 'PEMBAYARAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PAID_PAYMENT->extension();
             $upload = $request->IMG_PAID_PAYMENT->move(public_path('admin/upload'), $fileName);
 
             if ($upload) {
@@ -197,7 +213,13 @@ class TransactionController extends BaseController
         return back()->with(['status' => 'error', 'message' => 'Data Transaksi gagal ditambahkan']);
     }
 
+    public function open_image($image) {
+        $file = File::get(public_path('admin/upload/').$image);
+        $type = File::mimeType(public_path('admin/upload/').$image);
 
+        $response = Response::make($file, 200);
+        return $response->header("Content-type", $type);
+    }
 
     public function delete(Request $request)
     {

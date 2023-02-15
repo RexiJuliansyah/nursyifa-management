@@ -58,10 +58,14 @@ class KondekturController extends BaseController
                         class="grid-checkbox grid-checkbox-body" />';
               })
             ->editColumn('STS_KONDEKTUR', function ($item) {
-                if($item->KONDEKTUR_STATUS == 1) {
-                    return '<span class="label label-success">'.$item->STS_KONDEKTUR .'</span>';
+                if($item->KONDEKTUR_STATUS == 0) {
+                    return '<span class="label label-warning font-weight">'.$item->STS_KONDEKTUR.'</span>';
+                } else if ($item->KONDEKTUR_STATUS == 1) {
+                    return '<span class="label label-success">'.$item->STS_KONDEKTUR.'</span>';
+                } else if ($item->KONDEKTUR_STATUS == 2) {
+                    return '<span class="label label-primary">'.$item->STS_KONDEKTUR.'</span>';
                 } else {
-                    return '<span class="label label-warning">'.$item->STS_KONDEKTUR .'</span>';
+                    return '<span class="label label-danger">'.$item->STS_KONDEKTUR.'</span>';
                 }
             })
             ->rawColumns(['checkbox', 'STS_KONDEKTUR'])

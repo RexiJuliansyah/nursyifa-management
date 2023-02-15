@@ -55,7 +55,7 @@ class TransportController extends BaseController
             ->where('sysA.SYSTEM_TYPE', 'BUS_SEAT_TYPE')
             ->where('sysB.SYSTEM_TYPE', 'STATUS_OPERASIONAL')
             ->where($params)
-            ->orderBy('UPDATED_DATE', 'DESC')
+            ->orderBy('TRANSPORT_CODE')
             ->get();
 
             return Datatables::of($q)
@@ -66,10 +66,14 @@ class TransportController extends BaseController
                         class="grid-checkbox grid-checkbox-body" />';
               })
             ->editColumn('BUS_STATUS', function ($item) {
-                if($item->TRANSPORT_STATUS == 1) {
-                    return '<span class="label label-success">'.$item->BUS_STATUS .'</span>';
+                if($item->TRANSPORT_STATUS == 0) {
+                    return '<span class="label label-warning font-weight">'.$item->BUS_STATUS.'</span>';
+                } else if ($item->TRANSPORT_STATUS == 1) {
+                    return '<span class="label label-success">'.$item->BUS_STATUS.'</span>';
+                } else if ($item->TRANSPORT_STATUS == 2) {
+                    return '<span class="label label-primary">'.$item->BUS_STATUS.'</span>';
                 } else {
-                    return '<span class="label label-warning">'.$item->BUS_STATUS .'</span>';
+                    return '<span class="label label-danger">'.$item->BUS_STATUS.'</span>';
                 }
             })
             ->rawColumns(['checkbox', 'BUS_STATUS'])

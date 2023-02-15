@@ -58,11 +58,16 @@ class DriverController extends BaseController
                         class="grid-checkbox grid-checkbox-body" />';
               })
             ->editColumn('STS_DRIVER', function ($item) {
-                if($item->DRIVER_STATUS == 1) {
-                    return '<span class="label label-success">'.$item->STS_DRIVER .'</span>';
+                if($item->DRIVER_STATUS == 0) {
+                    return '<span class="label label-warning font-weight">'.$item->STS_DRIVER.'</span>';
+                } else if ($item->DRIVER_STATUS == 1) {
+                    return '<span class="label label-success">'.$item->STS_DRIVER.'</span>';
+                } else if ($item->DRIVER_STATUS == 2) {
+                    return '<span class="label label-primary">'.$item->STS_DRIVER.'</span>';
                 } else {
-                    return '<span class="label label-warning">'.$item->STS_DRIVER .'</span>';
+                    return '<span class="label label-danger">'.$item->STS_DRIVER.'</span>';
                 }
+
             })
             ->rawColumns(['checkbox', 'STS_DRIVER'])
             ->make(true);

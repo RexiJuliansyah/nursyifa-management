@@ -65,25 +65,27 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('driver-datatable', [DriverController::class, 'datatable'])->name('driver.datatable');
     Route::get('driver-getbykey', [DriverController::class, 'getbykey'])->name('driver.getbykey');
     Route::post('driver-store', [DriverController::class, 'store'])->name('driver.store');
-    Route::delete('driver-delete}', [DriverController::class, 'delete'])->name('driver.delete');
+    Route::delete('driver-delete', [DriverController::class, 'delete'])->name('driver.delete');
 
     Route::get('kondektur', [KondekturController::class, 'index'])->name('kondektur');
     Route::get('kondektur-datatable', [KondekturController::class, 'datatable'])->name('kondektur.datatable');
     Route::get('kondektur-getbykey', [KondekturController::class, 'getbykey'])->name('kondektur.getbykey');
     Route::post('kondektur-store', [KondekturController::class, 'store'])->name('kondektur.store');
-    Route::delete('kondektur-delete}', [KondekturController::class, 'delete'])->name('kondektur.delete');
+    Route::delete('kondektur-delete', [KondekturController::class, 'delete'])->name('kondektur.delete');
 
     Route::get('transport', [TransportController::class, 'index'])->name('transport');
     Route::get('transport-datatable', [TransportController::class, 'datatable'])->name('transport.datatable');
     Route::get('transport-getbykey', [TransportController::class, 'getbykey'])->name('transport.getbykey');
     Route::post('transport-store', [TransportController::class, 'store'])->name('transport.store');
-    Route::delete('transport-delete}', [TransportController::class, 'delete'])->name('transport.delete');
+    Route::delete('transport-delete', [TransportController::class, 'delete'])->name('transport.delete');
 
     Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi');
     Route::get('calender', [TransactionController::class, 'calender'])->name('calender');
+    Route::get('transaksi-getbykey', [TransactionController::class, 'getbykey'])->name('transaksi.getbykey');
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
-    Route::delete('transaksi-delete}', [TransactionController::class, 'delete'])->name('transaksi.delete');
+    Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
+    Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
 
 });
