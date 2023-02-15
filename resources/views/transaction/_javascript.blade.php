@@ -80,7 +80,7 @@
                 $("#customer_amount").text(result.CUSTOMER_AMOUNT);
                 $("#destination").text(result.DESTINATION);
                 $("#remark").text(result.REMARK);
-                $("#date_from_to").text(result.DATE_FROM + ' - ' + result.DATE_TO);
+                $("#date_from_to").text(moment(result.DATE_FROM).format('DD MMM YYYY') + ' - ' + moment(result.DATE_TO).format('DD MMM YYYY'));
                 $("#time").text(result.TIME);
                 $("#transport").text(result.TRANSPORT_CODE);
                 $("#driver_name").text(result.DRIVER_ID);
