@@ -41,14 +41,21 @@
                         <div class="col-sm-12">
                             <div class="button-list">
                                 <div class="pull-left">
-                                    <a href="{{ route('transaksi.baru') }}" type="button" class="btn btn-success btn-icon btn-sm left-icon pr-10 pl-10" id="btn_add"><i class="fa fa-plus"></i> Tambah Transaksi</a>
-                                    <button href="#" type="button" class="btn btn-warning btn-sm btn-square" id="btn_edit" data-toggle="tooltip" data-original-title="Edit" style="display:none"><i class="fa fa-pencil"></i></button>
-                                    <button href="#" type="button" class="btn btn-danger btn-sm btn-square center-icon" id="btn_delete" data-toggle="tooltip" data-original-title="Delete" style="display:none"><i class="fa fa-trash"></i></button>
-                                </div>
+                                    @if(Auth::user()->ROLE_ID == 1 || Auth::user()->ROLE_ID == 3)   
+                                        <a href="{{ route('transaksi.baru') }}" type="button" class="btn btn-success btn-icon btn-sm left-icon pr-10 pl-10" id="btn_add"><i class="fa fa-plus"></i> Tambah</a>
+                                        <button href="#" type="button" class="btn btn-warning btn-sm btn-square" id="btn_edit" data-toggle="tooltip" data-original-title="Edit" style="display:none"><i class="fa fa-pencil"></i></button>
+                                        <button href="#" type="button" class="btn btn-danger btn-sm btn-square center-icon" id="btn_delete" data-toggle="tooltip" data-original-title="Delete" style="display:none"><i class="fa fa-trash"></i></button>
+                                    @endif
+                                    </div>
                                 <div class="pull-right">
-                                    <button href="#" type="button" class="btn btn-default btn-sm txt-dark pr-10 pl-10" id="btn_detail" style="display:none"><span>Detail</span></button>
-                                    <button href="#" type="button" class="btn btn-success btn-sm btn-icon left-icon" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesai</span></button>
-                                    <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>
+                                    @if(Auth::user()->ROLE_ID == 1 || Auth::user()->ROLE_ID == 3)         
+                                        <button href="#" type="button" class="btn btn-success btn-sm btn-icon left-icon pr-10 pl-10" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesai</span></button>
+                                        <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon pr-10 pl-10" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>             
+                                    @endif
+                                    @if(Auth::user()->ROLE_ID == 2)   
+                                        <button type="button" class="btn btn-primary btn-sm btn-icon left-icon pr-10 pl-10" id="btn_confirm" style="display:none"><i class="fa fa-check"></i>Konfirmasi Transaksi</button>
+                                    @endif
+                                    <button href="#" type="button" class="btn btn-default btn-sm btn-icon left-icon txt-dark pr-10 pl-10" id="btn_detail" disabled><i class="fa fa-eye"></i><span>Detail</span></button>
                                 </div>
                             </div>
                         </div>
@@ -125,11 +132,12 @@
                     checkbox_grid.parent().parent().removeClass('highlight-row');
                     checkbox_grid.prop("checked", false)
 
+                    $('#btn_detail').prop("disabled", true);
                     $('#btn_edit').css("display", "none");
                     $('#btn_delete').css("display", "none");
-                    $('#btn_detail').css("display", "none");
                     $('#btn_complete').css("display", "none");
                     $('#btn_reject').css("display", "none");
+                    $('#btn_confirm').css("display", "none");
                 } else {
                     $(".grid-checkbox").prop("checked", false);
                     $(".grid-checkbox").parent().parent().removeClass('highlight-row');
@@ -137,7 +145,7 @@
                     checkbox_grid.parent().parent().addClass('highlight-row');
                     checkbox_grid.prop("checked", true)
 
-                    $('#btn_detail').css("display", "inline-block");
+                    $('#btn_detail').prop("disabled", false);
 
                     if(data["TRANSACTION_STATUS"] == 1) {
                         $('#btn_complete').css("display", "inline-block");
@@ -147,14 +155,17 @@
                         $('#btn_delete').css("display", "none");
                         $('#btn_complete').css("display", "none");
                         $('#btn_reject').css("display", "none");
+                        $('#btn_confirm').css("display", "none");
                     }
 
                     if(data["TRANSACTION_STATUS"] == 0) {
                         $('#btn_edit').css("display", "inline-block");
                         $('#btn_delete').css("display", "inline-block");
+                        $('#btn_confirm').css("display", "inline-block");
                     } else {
                         $('#btn_edit').css("display", "none");
                         $('#btn_delete').css("display", "none");
+                        $('#btn_confirm').css("display", "none");
                     }
                 }
             });

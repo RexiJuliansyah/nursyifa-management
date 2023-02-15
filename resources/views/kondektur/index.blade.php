@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Kondekur Master')
+@section('title', 'Kondektur Master')
 @section('breadcumb')
     <li><a href="javascript:void()">Master</a></li>
     <li class="active"><span>Kondektur</span></li>

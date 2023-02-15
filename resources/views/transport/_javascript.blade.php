@@ -62,14 +62,14 @@
 
     function setScreenToAddMode() {
         gScreenMode = 'ADD';
-        $(".modal-title").text("Add Master Bus");
+        $(".modal-title").text("Add Bus");
         $("#transport_code").attr('readonly', false);
         clearAddEdit();
     }
 
     function setScreenToEditMode() {
         gScreenMode = 'EDIT';
-        $(".modal-title").text("Edit Master Menu");
+        $(".modal-title").text("Edit Bus");
         $("#transport_code").attr('readonly', true);
         clearAddEdit();
     }

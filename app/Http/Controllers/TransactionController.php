@@ -237,6 +237,23 @@ class TransactionController extends BaseController
         return $response->header("Content-type", $type);
     }
 
+    public function confirm(Request $request)
+    {
+        DB::beginTransaction();
+        $transaction = Transaction::find($request->TRANSACTION_ID);
+        try {
+            DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 1]);
+            DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 2]);
+            DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 2]);
+            DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 2]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Terjadi kesalahan!']);
+        }
+        return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi']);
+    }
+
     public function delete(Request $request)
     {
         DB::beginTransaction();
@@ -263,6 +280,6 @@ class TransactionController extends BaseController
 
         return response()->json(['message' => 'Data berhasil dihapus!']);
  
-    }   
+    }
 
 }

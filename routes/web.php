@@ -86,6 +86,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
+    Route::post('transaksi-confirm', [TransactionController::class, 'confirm'])->name('transaksi.confirm');
     Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
     Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
 

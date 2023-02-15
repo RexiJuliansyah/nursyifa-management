@@ -35,6 +35,10 @@
             onDetailPrepare();
         });
 
+        $("#btn_confirm").on("click", function() {
+            onConfirmPrepare();
+        });
+
         $("#btn_delete").on("click", function() {
             onDeletePrepare();
         });
@@ -56,15 +60,53 @@
             toastr.warning('Pilih satu data untuk mengubah!')
             return;
         } else {
-            onSuccessDetail();
+            getDetailData();
         }
     }
 
-    function onSuccessDetail() {
-        var url = ""
-        
-        console.log(url);
+    function onConfirmPrepare() {
+        var isHaveChecked = false;
+        gChecked = 0;
+        $("input[name='chkRow']").each(function() {
+            if ($(this).prop('checked')) {
+                isHaveChecked = true;
+                gChecked = gChecked + 1;
+                gTransactionId = $(".grid-checkbox-body:checked").attr('data-TransactionId');
+            }
+        });
 
+        if (!isHaveChecked || gChecked > 1) {
+            toastr.warning('Pilih satu data untuk mengubah!')
+            return;
+        } else {
+            Swal.fire({
+                title: 
+                    '<strong>'+gTransactionId+'</strong>' +
+                    '<h5>Konfirmasi transaksi ini? </h5>', 
+                icon: 'info',
+                html:
+                    'Notifikasi SMS akan dikirimkan kepada <strong>Pelanggan</strong>, ' +
+                    'setelah anda mengkonfirmasi Transaksi ini.',
+                showCancelButton: true,
+                buttonsStyling:false,
+                focusConfirm: false,
+                customClass: {
+                    confirmButton: 'btn btn-primary',
+                    cancelButton: 'btn btn-default mr-10',
+                },
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Close',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setProgressLine();
+                    onConfirmTransaction();
+                }
+            });
+        }
+    }
+
+    function getDetailData() {
         $.ajax({
             type: "GET",
             url: "{{ route('transaksi.getbykey') }}",
@@ -96,6 +138,44 @@
                 $("#detailPopup").modal('show');
             }
         });
+
+    }
+
+    function onConfirmTransaction() {
+        $.ajax({
+            url: "{{ route('transaksi.confirm') }}",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            dataType: 'json',
+            traditional: true,
+            data: {'TRANSACTION_ID': gTransactionId},
+            success: function(response) {
+                if ($.isEmptyObject(response.error)) {
+                    Swal.fire({   
+                        title: "Success",   
+                        icon: "success", 
+                        text: response.message,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
+                    table.draw();
+                    setScreenDefault()
+                } else {
+                    Swal.fire({   
+                        title: "Error",   
+                        icon: "error", 
+                        text: response.error,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
+                    table.draw();
+                    setScreenDefault()
+                }
+            },
+            error: function(err) {
+                toastr.error('Terjadi Kesalahan!')
+            }
+        })
 
     }
 
@@ -152,11 +232,7 @@
                         showConfirmButton: false 
                     });
                     table.draw();
-                    $('#btn_edit').css("display", "none");
-                    $('#btn_delete').css("display", "none");
-                    $('#btn_detail').css("display", "none");
-                    $('#btn_complete').css("display", "none");
-                    $('#btn_reject').css("display", "none");
+                    setScreenDefault()
                 } else {
                     Swal.fire({   
                         title: "Error",   
@@ -166,15 +242,11 @@
                         showConfirmButton: false 
                     });
                     table.draw();
-                    $('#btn_edit').css("display", "none");
-                    $('#btn_delete').css("display", "none");
-                    $('#btn_detail').css("display", "none");
-                    $('#btn_complete').css("display", "none");
-                    $('#btn_reject').css("display", "none");
+                    setScreenDefault()
                 }
             },
             error: function(err) {
-                toastr.error('Not Allowed')
+                toastr.error('Terjadi Kesalahan!')
             }
         })
     }
@@ -193,6 +265,18 @@
 
         // Cetak hasil
         return rupiah;
+    }
+
+    function setScreenDefault() {
+        $('#btn_detail').prop("disabled", true);
+        $(".grid-checkbox").prop("checked", false);
+        $(".grid-checkbox").parent().parent().removeClass('highlight-row');
+
+        $('#btn_edit').css("display", "none");
+        $('#btn_delete').css("display", "none");
+        $('#btn_confirm').css("display", "none");
+        $('#btn_complete').css("display", "none");
+        $('#btn_reject').css("display", "none");
     }
 
 </script>
