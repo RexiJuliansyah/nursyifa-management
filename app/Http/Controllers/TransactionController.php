@@ -84,12 +84,11 @@ class TransactionController extends BaseController
             'tb_transaction.*',
             'tb_m_driver.DRIVER_NAME',
             'tb_m_kondektur.KONDEKTUR_NAME',
-            'tb_payment.PAYMENT_METHOD',
             'tb_payment.AMOUNT',
             'tb_payment.PAID_PAYMENT',
-            'tb_payment.INSERT_PAYMENT',
+            'tb_payment.PENDING_PAYMENT',
             'tb_payment.IMG_PAID_PAYMENT',
-            'tb_payment.IMG_INSERT_PAYMENT',
+            'tb_payment.IMG_PENDING_PAYMENT',
         ])->where(['tb_transaction.TRANSACTION_ID' => $request->TRANSACTION_ID])
         ->leftJoin('tb_m_driver', 'tb_transaction.DRIVER_ID', '=', 'tb_m_driver.DRIVER_ID') 
         ->leftJoin('tb_m_kondektur', 'tb_transaction.KONDEKTUR_ID', '=', 'tb_m_kondektur.KONDEKTUR_ID') 
@@ -178,7 +177,7 @@ class TransactionController extends BaseController
 
             $daterange = explode(' - ', $request->DATE_FROM_TO);
 
-            $request['TRANSACTION_ID'] = IdGenerator::generate(['table' => 'tb_transaction', 'field' => 'TRANSACTION_ID', 'length' => 16, 'prefix' => 'TRX'.date('Ymd') ]);
+            $request['TRANSACTION_ID'] = IdGenerator::generate(['table' => 'tb_transaction', 'field' => 'TRANSACTION_ID', 'length' => 14, 'prefix' => 'TRX'.date('Ymd').'-' ]);
             $request['DATE_FROM'] = Carbon::createFromFormat('d/m/Y', $daterange[0])->format('Y-m-d');
             $request['DATE_TO'] = Carbon::createFromFormat('d/m/Y', $daterange[1])->format('Y-m-d');
 
@@ -211,15 +210,17 @@ class TransactionController extends BaseController
             $fileName = 'PEMBAYARAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PAID_PAYMENT->extension();
             $upload = $request->IMG_PAID_PAYMENT->move(public_path('admin/upload'), $fileName);
 
+            $pending_payment = $request->AMOUNT - $request->PAID_PAYMENT;
+
             if ($upload) {
                 Payment::query()
                 ->create([
                     'TRANSACTION_ID' => $transaction->TRANSACTION_ID,
                     'AMOUNT' => $request->AMOUNT,
                     'PAID_PAYMENT' => $request->PAID_PAYMENT,
-                    'PAYMENT_METHOD' => $request->PAYMENT_METHOD,
+                    'PENDING_PAYMENT' => ($request->PAID_PAYMENT <= $request->AMOUNT) ?  $pending_payment : 0,
                     'IMG_PAID_PAYMENT' => $fileName,
-                    'PAYMENT_STATUS' => $request->PAID_PAYMENT >= $request->AMOUNT ? 1 : 0,
+                    'PAYMENT_STATUS' => $request->PAYMENT_STATUS,
                 ]);
 
                 return redirect()->route('transaksi')->with(['status' => 'success', 'message' => 'Data Transaksi berhasil ditambahkan.']);
