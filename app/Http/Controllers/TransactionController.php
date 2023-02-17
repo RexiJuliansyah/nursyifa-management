@@ -87,6 +87,7 @@ class TransactionController extends BaseController
             'tb_payment.AMOUNT',
             'tb_payment.PAID_PAYMENT',
             'tb_payment.PENDING_PAYMENT',
+            'tb_payment.PAYMENT_STATUS',
             'tb_payment.IMG_PAID_PAYMENT',
             'tb_payment.IMG_PENDING_PAYMENT',
         ])->where(['tb_transaction.TRANSACTION_ID' => $request->TRANSACTION_ID])
@@ -177,7 +178,7 @@ class TransactionController extends BaseController
 
             $daterange = explode(' - ', $request->DATE_FROM_TO);
 
-            $request['TRANSACTION_ID'] = IdGenerator::generate(['table' => 'tb_transaction', 'field' => 'TRANSACTION_ID', 'length' => 14, 'prefix' => 'TRX'.date('Ymd').'-' ]);
+            $request['TRANSACTION_ID'] = IdGenerator::generate(['table' => 'tb_transaction', 'field' => 'TRANSACTION_ID', 'length' => 14, 'prefix' => 'TRX'.date('Ymd')]);
             $request['DATE_FROM'] = Carbon::createFromFormat('d/m/Y', $daterange[0])->format('Y-m-d');
             $request['DATE_TO'] = Carbon::createFromFormat('d/m/Y', $daterange[1])->format('Y-m-d');
 

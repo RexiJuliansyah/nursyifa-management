@@ -133,13 +133,8 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <div class="form-group md-bootstrap-select mt-10">
-                                                <select class="selectpicker" data-style="form-control form-sm btn-success btn-outline pl-10" name="PAYMENT_STATUS">
-                                                    <option value='1'>LUNAS</option>
-                                                    <option value='0'>DP</option>
-                                                </select>
-                                            </div>	
-                                            <input type="file" id="IMG_PAID_PAYMENT" name="IMG_PAID_PAYMENT" class="dropify" data-height="80" required>
+                                            <label class="control-label mb-10">Bukti Pembayaran<span style="color: red">*</span></label>
+                                            <input type="file" id="IMG_PAID_PAYMENT" name="IMG_PAID_PAYMENT" class="dropify" data-height="100" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -157,7 +152,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="control-label mb-10">Sisa</label>
-                                            <input type="text" class="form-control" id="PENDING_PAYMENT" name="PENDING_PAYMENT" placeholder="0" autocomplete="off" readonly>
+                                            <input type="text" class="form-control" id="PENDING_PAYMENT" name="PENDING_PAYMENT" placeholder="0" autocomplete="off" readonly >
                                         </div>
                                     </div>
                                 </div>
@@ -230,6 +225,22 @@
 			format: 'HH:mm',
             useCurrent: false,
 		});
+
+
+        $("#AMOUNT").keyup(function(e){
+            amount = parseInt($("#AMOUNT").val());
+            paid =  parseInt($("#PAID_PAYMENT").val());
+
+            $("#PENDING_PAYMENT").val(amount - paid);
+        });
+
+        $("#PAID_PAYMENT").keyup(function(e){
+            amount = parseInt($("#AMOUNT").val());
+            paid =  parseInt($("#PAID_PAYMENT").val());
+            
+            $("#PENDING_PAYMENT").val(amount - paid);
+
+        });
 
     });
 

@@ -129,6 +129,14 @@
                 $("#kondektur_name").text(result.KONDEKTUR_NAME);
                 $("#amount").text(number_format(result.AMOUNT));
                 $("#paid_payment").text(number_format(result.PAID_PAYMENT));
+                $("#pending_payment").text(number_format(result.PENDING_PAYMENT));
+                $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
+
+                if(result.PAYMENT_STATUS == 1) {
+                    $("#payment_status").append('<span class="label label-success pull-right">LUNAS</span>'); 
+                } else {
+                    $("#payment_status").append('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
+                }
                 $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
                 
                 var url = '{{ route("transaksi.image", ":filename") }}';
