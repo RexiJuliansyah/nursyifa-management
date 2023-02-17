@@ -230,15 +230,17 @@
         $("#AMOUNT").keyup(function(e){
             amount = parseInt($("#AMOUNT").val());
             paid =  parseInt($("#PAID_PAYMENT").val());
+            total = amount - paid;
 
-            $("#PENDING_PAYMENT").val(amount - paid);
+            $("#PENDING_PAYMENT").val((total > 0) ? total : 0);
         });
 
         $("#PAID_PAYMENT").keyup(function(e){
             amount = parseInt($("#AMOUNT").val());
             paid =  parseInt($("#PAID_PAYMENT").val());
+            total = amount - paid;
             
-            $("#PENDING_PAYMENT").val(amount - paid);
+            $("#PENDING_PAYMENT").val((total > 0) ? total : 0);
 
         });
 

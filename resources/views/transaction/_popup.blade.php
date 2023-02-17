@@ -54,7 +54,7 @@
                             <div class="col-xs-12">
                                 <div class="col-sm-6 col-sm-offset-6 pa-0">
 
-                                    <span class="txt-dark" id="payment_status">Status Pembayaran</span>
+                                    <span class="txt-dark" >Status Pembayaran <span id="payment_status"></span></span>
                        
                                     <div class="panel panel-default card-view pa-0 pl-10 pr-10 mt-10">
                                         <table class="table">

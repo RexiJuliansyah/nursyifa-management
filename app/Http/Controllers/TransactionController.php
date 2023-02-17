@@ -221,7 +221,7 @@ class TransactionController extends BaseController
                     'PAID_PAYMENT' => $request->PAID_PAYMENT,
                     'PENDING_PAYMENT' => ($request->PAID_PAYMENT <= $request->AMOUNT) ?  $pending_payment : 0,
                     'IMG_PAID_PAYMENT' => $fileName,
-                    'PAYMENT_STATUS' => $request->PAYMENT_STATUS,
+                    'PAYMENT_STATUS' => ($pending_payment <= 0) ?  1 : 0,
                 ]);
 
                 return redirect()->route('transaksi')->with(['status' => 'success', 'message' => 'Data Transaksi berhasil ditambahkan.']);

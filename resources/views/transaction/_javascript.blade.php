@@ -133,9 +133,9 @@
                 $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
 
                 if(result.PAYMENT_STATUS == 1) {
-                    $("#payment_status").append('<span class="label label-success pull-right">LUNAS</span>'); 
+                    $("#payment_status").html('<span class="label label-success pull-right">LUNAS</span>'); 
                 } else {
-                    $("#payment_status").append('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
+                    $("#payment_status").html('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
                 }
                 $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
                 
