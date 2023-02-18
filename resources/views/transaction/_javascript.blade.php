@@ -43,6 +43,54 @@
             onDeletePrepare();
         });
 
+        $("#btn_complete").on("click", function() {
+            onCompletePrepare();
+        });
+
+        $('#pending-upload').on("submit",function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+                type:'POST',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: "{{ route('transaksi.complete') }}",
+                data: formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success: (response) => {
+                    if ($.isEmptyObject(response.error)) {
+                    Swal.fire({   
+                        title: "Success",   
+                        icon: "success", 
+                        text: response.message,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
+                    table.draw();
+                    setScreenDefault()
+                    $("#completePopup").modal('hide');
+                } else {
+                    Swal.fire({   
+                        title: "Error",   
+                        icon: "error", 
+                        text: response.error,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
+                    table.draw();
+                    setScreenDefault()
+                    $("#completePopup").modal('hide');
+                }
+                },
+                error: function(data){
+                    toastr.error('Terjadi Kesalahan!')
+                    $("#completePopup").modal('hide');
+                }
+            });
+        });
+        
     });
 
     function onDetailPrepare() {
@@ -106,6 +154,25 @@
         }
     }
 
+    function onCompletePrepare() {
+        var isHaveChecked = false;
+        gChecked = 0;
+        $("input[name='chkRow']").each(function() {
+            if ($(this).prop('checked')) {
+                isHaveChecked = true;
+                gChecked = gChecked + 1;
+                gTransactionId = $(".grid-checkbox-body:checked").attr('data-TransactionId');
+            }
+        });
+
+        if (!isHaveChecked || gChecked > 1) {
+            toastr.warning('Pilih satu data untuk mengubah!')
+            return;
+        } else {
+            getCompleteData();
+        }
+    }
+
     function getDetailData() {
         $.ajax({
             type: "GET",
@@ -138,12 +205,47 @@
                     $("#payment_status").html('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
                 }
                 $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
+                $("#img_pending_payment").text(result.IMG_PENDING_PAYMENT);
                 
-                var url = '{{ route("transaksi.image", ":filename") }}';
-                url = url.replace(':filename', result.IMG_PAID_PAYMENT);
-                $("#download_img").attr("href", url);
+                var url_paid = '{{ route("transaksi.image", ":filename") }}';
+                var url_pending = '{{ route("transaksi.image", ":filename") }}';
+
+                url_paid = url_paid.replace(':filename', result.IMG_PAID_PAYMENT);
+                $("#download_paid_img").attr("href", url_paid);
+
+                url_pending = url_pending.replace(':filename', result.IMG_PENDING_PAYMENT);
+                $("#download_pending_img").attr("href", url_pending);
 
                 $("#detailPopup").modal('show');
+            }
+        });
+
+    }
+
+    function getCompleteData() {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('transaksi.getbykey') }}",
+            dataType: 'json',
+            traditional: true,
+            data: {
+                'TRANSACTION_ID': gTransactionId
+            },
+            success: function(result) {
+                $("#transaction_id_p").text(result.TRANSACTION_ID);
+
+                $("#TRANSACTION_ID_H").val(result.TRANSACTION_ID);
+                $("#AMOUNT").val(number_format(result.AMOUNT));
+                $("#PAID_PAYMENT").val(number_format(result.PAID_PAYMENT));
+                $("#PENDING_PAYMENT").val(number_format(result.PENDING_PAYMENT));
+
+                if(result.PAYMENT_STATUS == 1) {
+                    $("#payment_status_p").html('<span class="label label-success pull-right">LUNAS</span>'); 
+                } else {
+                    $("#payment_status_p").html('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
+                }
+
+                $("#completePopup").modal('show');
             }
         });
 

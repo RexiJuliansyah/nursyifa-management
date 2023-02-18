@@ -256,6 +256,57 @@ class TransactionController extends BaseController
         return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi']);
     }
 
+    public function complete(Request $request)
+    {
+            
+        $validator = Validator::make($request->all(), [
+            'IMG_PENDING_PAYMENT' => 'required|image|mimes:jpeg,png,jpg|max:3048',
+        ], [
+            'IMG_PENDING_PAYMENT.mimes' => 'Bukti Pelunasan harus berformat jpeg, png, jpg <br>',
+            'IMG_PENDING_PAYMENT.max' => 'Bukti Pelunasan file maksimal 3 mb',
+        ]);
+
+
+        if ($validator->passes()) {
+            $transaction = Transaction::find($request->TRANSACTION_ID_H);
+            $payment = Payment::where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->firstOrFail();
+
+            $fileName = 'PELUNASAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PENDING_PAYMENT->extension();
+            $upload = $request->IMG_PENDING_PAYMENT->move(public_path('admin/upload'), $fileName);
+
+            if ($upload) {
+                DB::beginTransaction();
+                
+                try {                 
+                    DB::table('tb_payment')
+                        ->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])
+                        ->update([
+                            'PAID_PAYMENT' => $payment->PAID_PAYMENT + $payment->PENDING_PAYMENT,
+                            'PENDING_PAYMENT' => 0,
+                            'IMG_PENDING_PAYMENT' => $fileName,
+                            'PAYMENT_STATUS' => 1,
+                        ]);
+        
+                    DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 3]);
+                    DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 1]);
+                    DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 1]);
+                    DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 1]);
+                    DB::commit();
+
+                    return response()->json(['message' => 'Transaksi telah berhasil dilunasi']);
+
+                } catch (Exception $e) {
+                    DB::rollback();
+                    return response()->json(['error' => 'Terjadi kesalahan!']);
+                }
+            } else {
+                return response()->json(['error' => 'Terjadi kesalahan!']);
+            }
+        } else {
+            return response()->json(['error' => 'Terjadi kesalahan!']);
+        }
+    }
+
     public function delete(Request $request)
     {
         DB::beginTransaction();

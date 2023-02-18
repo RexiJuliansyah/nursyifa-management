@@ -102,7 +102,7 @@
             eventLimit: true,
             eventRender: function(event, element, view)
             {
-                if(event.color == 'blue' || event.color == 'red') {
+                if(event.color == 'blue' || event.color == 'red' || event.color == 'green') {
                     element.css("color", "white");
                 } else {
                     element.css("color", "black");

@@ -82,9 +82,13 @@
                                     
                                 </div> 
                                 <div class="col-sm-6 col-sm-offset-6">
-                                    <a id="download_img" class="pull-right" target="_blank">
+                                    <a id="download_paid_img" class="pull-right" target="_blank">
                                         <i class="fa fa-file-image-o" aria-hidden="true"></i> 
                                         <span id="img_paid_payment"></span><br>
+                                    </a><br/> 
+                                    <a id="download_pending_img" class="pull-right" target="_blank">
+                                        <i class="fa fa-file-image-o" aria-hidden="true"></i> 
+                                        <span id="img_pending_payment"></span><br>
                                     </a>
                                 </div>
                             </div>  

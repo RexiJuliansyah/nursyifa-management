@@ -43,14 +43,14 @@
                                 <div class="pull-left">
                                     @if(Auth::user()->ROLE_ID == 1 || Auth::user()->ROLE_ID == 3)   
                                         <a href="{{ route('transaksi.baru') }}" type="button" class="btn btn-success btn-icon btn-sm left-icon pr-10 pl-10" id="btn_add"><i class="fa fa-plus"></i> Tambah</a>
-                                        <button href="#" type="button" class="btn btn-warning btn-sm btn-square" id="btn_edit" data-toggle="tooltip" data-original-title="Edit" style="display:none"><i class="fa fa-pencil"></i></button>
+                                        <!-- <button href="#" type="button" class="btn btn-warning btn-sm btn-square" id="btn_edit" data-toggle="tooltip" data-original-title="Edit" style="display:none"><i class="fa fa-pencil"></i></button> -->
                                         <button href="#" type="button" class="btn btn-danger btn-sm btn-square center-icon" id="btn_delete" data-toggle="tooltip" data-original-title="Delete" style="display:none"><i class="fa fa-trash"></i></button>
                                     @endif
                                     </div>
                                 <div class="pull-right">
                                     @if(Auth::user()->ROLE_ID == 1 || Auth::user()->ROLE_ID == 3)         
                                         <button href="#" type="button" class="btn btn-success btn-sm btn-icon left-icon pr-10 pl-10" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesai</span></button>
-                                        <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon pr-10 pl-10" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>             
+                                        <!-- <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon pr-10 pl-10" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>              -->
                                     @endif
                                     @if(Auth::user()->ROLE_ID == 2)   
                                         <button type="button" class="btn btn-primary btn-sm btn-icon left-icon pr-10 pl-10" id="btn_confirm" style="display:none"><i class="fa fa-check"></i>Konfirmasi Transaksi</button>
@@ -88,6 +88,7 @@
 </div>
 <!-- /Row -->
 @include('transaction._popup')
+@include('transaction._popup_complete')
 
 @endsection
 

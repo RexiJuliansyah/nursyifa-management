@@ -33,10 +33,6 @@
             onAddPrepare();
         });
 
-        $("#btn_edit").on("click", function() {
-            setProgressLine();
-            //onEditPrepare();
-        });
 
         $("#btn_delete").on("click", function() {
             setProgressLine();
@@ -71,15 +67,6 @@
         clearAddEdit();
     }
 
-    function setScreenToEditMode() {
-        $(".modal-title").text("Edit User");
-        $("#username").attr('disabled', false);
-        $("#full_name").attr('disabled', false);
-        $("#email").attr('disabled', false);
-        $("#password").attr('disabled', false);
-        $("#role_id").attr('disabled', false);
-        clearAddEdit();
-    }
 
     function clearAddEdit() {
         $('.form-group').removeClass('has-error has-danger');

@@ -42,7 +42,7 @@
             <div class="button-list">
                 <div class="pull-left">
                     <button type="button" class="btn btn-primary btn-sm" id="btn_add"><span class="fa fa-plus"></span> Add</button>
-                    <button type="button" class="btn btn-warning btn-sm" id="btn_edit" disabled><span class="fa fa-pencil"></span> Edit</button>
+                    <!-- <button type="button" class="btn btn-warning btn-sm" id="btn_edit" disabled><span class="fa fa-pencil"></span> Edit</button> -->
                     <button type="button" class="btn btn-danger btn-sm" id="btn_delete" disabled><span class="fa fa-trash"></span> Delete</button>
                 </div>
                 <div class="pull-right">
