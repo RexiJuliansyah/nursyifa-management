@@ -1,18 +1,18 @@
 @extends('layouts.app')
-@section('title', 'Transaksi')
+@section('title', 'Kalender Transaksi')
 @section('breadcumb')
     <li>Transaksi</li>
-    <li class="active"><span>List Transaksi</span></li>
+    <li class="active"><span>Kalender Transaksi</span></li>
 @endsection
 
 
 @section('content')
-<div class="row">
+<div class="row" style="margin-right: -30px; margin-left: -30px;">
     <div class="col-lg-12">
-        <div class="panel panel-success card-view">
+        <div class="panel panel-success card-view mt-10">
 
-                <div class="panel-heading">
-                    <div class="pull-left"><h6 class="panel-title txt-light">Data Transaksi</h6></div>
+                <div class="panel-heading pt-10 pb-10">
+                    <div class="pull-left"><h6 class="panel-title txt-light">Kalender</h6></div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body">

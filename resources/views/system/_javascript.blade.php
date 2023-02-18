@@ -8,7 +8,6 @@
         ordering: false,
         serverSide: true,
         responsive: true,
-        searching: false,
         ajax: {
             url: "{{ route('system.datatable') }}",
             data: function(d) {

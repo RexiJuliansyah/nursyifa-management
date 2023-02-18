@@ -31,8 +31,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="role_id" class="control-label mb-10">Role<span style="color: red">*</span></label>
-                                        <select class="form-control" id="role_id" name="role_id">
-                                            <option value="" disabled selected>Select One</option>
+                                        <select class="selectpicker" data-style="form-control btn-default btn-outline" id="role_id" name="role_id">
+                                            <option value="" disabled selected>-- Pilih --</option>
                                             @foreach ($data['role_list'] as $role)
                                                 <option value="{{ $role->ROLE_ID }}">{{ $role->ROLE_NAME }}</option>
                                             @endforeach
@@ -47,7 +47,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                    <button type="submit" id="btn_save" class="btn btn-primary btn-sm">Save</button>
+                    <button type="submit" id="btn_save" class="btn btn-success btn-sm">Save</button>
                 </div>
             </div>
         </div>

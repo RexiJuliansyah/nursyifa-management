@@ -291,7 +291,7 @@
 
                 $("#accordion").append(
 
-                    '<div class="panel panel-default">' +
+                    '<div class="panel panel-success">' +
                     '<div class="panel-heading activestate" role="tab" id="accor_heading' + value.MENU_ID + '">' +
                     '<a role="button" id="btn'+value.MENU_ID+'" aria-expanded="true">' +
                     '<input type="checkbox" class="grid-checkbox grid-checkbox-permission grid-checkbox-body mr-10"' +

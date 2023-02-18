@@ -7,7 +7,6 @@
         ordering: false,
         serverSide: true,
         responsive: true,
-        searching: false,
         ajax: {
             url: "{{ route('kondektur.datatable') }}",
             data: function(d) {

@@ -12,9 +12,9 @@
 <input type="hidden" id="message" name="message" class="form-control" value="{{session()->get('message')}}">
 
 <div class="row">
-    <div class="panel panel-success card-view">
+    <div class="panel panel-success card-view mt-10">
 
-        <div class="panel-heading">
+        <div class="panel-heading pt-10 pb-10">
             <div class="pull-left">
                 <h6 class="panel-title txt-light">List Transaksi</h6>
             </div>
@@ -22,8 +22,8 @@
         </div>
         
         <div class="panel-body">
-                <div class="panel panel-default card-view ma-0 pt-10 pb-10">
-                    <div class="row">
+                <div class="panel panel-default card-view ma-0 pt-0 pb-10">
+                    <!-- <div class="row">
                         <div class="col-sm-4">
                             <label class="control-label mb-10">Kode Transaksi</label>
                             <input type="text" class="form-control" id="search_system_val" name="search_system_val" placeholder="System Value" value="">
@@ -36,7 +36,7 @@
                             <label class="control-label mb-10">Tanggal</label>
                             <input type="text" class="form-control" id="search_system_type" name="search_system_type" placeholder="System Type" value="">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="button-list">

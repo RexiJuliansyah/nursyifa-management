@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title', 'Transaksi Baru')
+@section('title', 'Transaksi')
 @section('breadcumb')
     <li><a href="{{ route('transaksi') }}">Transaksi</a></li>
-    <li class="active"><span>Transaksi Baru</span></li>
+    <li class="active"><span>Tambah Transaksi</span></li>
 @endsection
 
 @section('content')
@@ -14,8 +14,8 @@
     <form method="POST" data-toggle="validator" enctype="multipart/form-data" id="form_data" action="{{ route('transaksi.store') }}" >
     @csrf
         <div class="col-md-12">
-            <div class="panel panel-success card-view">
-                <div class="panel-heading">
+            <div class="panel panel-success card-view mt-10">
+                <div class="panel-heading pt-10 pb-10">
                     <div class="pull-left"><h6 class="panel-title txt-light">Tambah Transaksi</h6></div>
                     <div class="clearfix"></div>
                 </div>

@@ -18866,8 +18866,8 @@ ul.wysihtml5-toolbar a.wysihtml5-command-active.fc-today-button {
     border-bottom: 1px solid #dedede;
 }
 .accordion-struct.panel-group .panel .panel-heading.activestate {
-    background: #667add;
-    border-bottom: 1px solid #667add;
+    background: #4aa23c;
+    border-bottom: 1px solid #4aa23c;
 }
 .accordion-struct.panel-group .panel .panel-heading.activestate a {
     color: #fff;
@@ -19562,8 +19562,8 @@ table.dataTable > thead:first-child > tr:first-child > th {
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button:active,
 .dataTables_wrapper .dataTables_paginate .paginate_button:focus {
-    background: #667add;
-    border-color: #667add;
+    background: #4aa23c;
+    border-color: #4aa23c;
     color: #fff !important;
     box-shadow: none;
 }

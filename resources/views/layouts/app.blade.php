@@ -33,28 +33,16 @@
 
   	<div class="wrapper theme-1-active pimary-color-green">
 		@include('layouts.navbar')
+		
 		@include('layouts.sidebar')
-		<div class="page-wrapper" >
+		
+		<div class="page-wrapper">
 			<div class="container-fluid">
-				<div class="div"  style="background-color=#667add;">
-					<div class="row heading-bg" >
-						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-							<h5 class="txt-dark">@yield('title')</h5>
-						</div>
-
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-							<ol class="breadcrumb">
-									@yield('breadcumb')
-							</ol>
-						</div>
-					</div>
-				</div>
-
 				@yield('content')
 				<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-12">
-							<p>2023 &copy; all right reserved</p>
+							<p>2023 &copy; Perusahaan Otobus Nursyifa</p>
 						</div>
 					</div>
 				</footer>
@@ -120,5 +108,6 @@
 		}
 	
 	</script>
-	@yield('javascript');
+	@yield('javascript')
 </body>
+</html>

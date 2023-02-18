@@ -7,7 +7,6 @@
         ordering: false,
         serverSide: true,
         responsive: true,
-        fixedHeader: true,
         ajax: {
             url: "{{ route('user.datatable') }}",
             data: function(d) {
@@ -33,7 +32,6 @@
             onAddPrepare();
         });
 
-
         $("#btn_delete").on("click", function() {
             setProgressLine();
             //onDeletePrepare();
@@ -42,7 +40,7 @@
         $("#btn_clear").on("click", function() {
             setProgressLine();
             $("#search_username").val("");
-            $("#search_role").val("");
+            $("#search_role").val("").trigger('change');
             table.draw();
         });
         
@@ -74,7 +72,7 @@
         $("#full_name").val("");
         $("#email").val("");
         $("#password").val("");
-        $("#role_id").val("");
+        $("#role_id").val("").trigger('change');
     }
 
     function onAddPrepare() {
@@ -84,10 +82,6 @@
             $('#username').focus();
         });
     }
-
-
-
-
 
     function OnSaveAddEdit() {
         $('#btn_save').prop('disabled', true);
