@@ -18,13 +18,13 @@
         columns: [
             { data: 'checkbox', className: 'text-center', name: 'checkbox' },
             { data: 'TRANSACTION_ID', name: 'TRANSACTION_ID', className: 'text-left' },
-            { data: 'TRANSPORT_CODE', name: 'TRANSPORT_CODE', className: 'text-center' },
             { data: 'CUSTOMER_NAME', name: 'CUSTOMER_NAME', className: 'text-center', },
+            { data: 'TRANSPORT_CODE', name: 'TRANSPORT_CODE', className: 'text-center' },
             { data: 'DESTINATION', name: 'DESTINATION', className: 'text-center'},
             { data: 'DATE_FROM_TO', name: 'DATE_FROM_TO', className: 'text-center', width: "210px", },
+            { data: 'STATUS_PEMBAYARAN', name: 'STATUS_PEMBAYARAN', className: 'text-center' },       
             { data: 'STATUS', name: 'STATUS', className: 'text-center' },
-            { data: 'CREATED_BY', name: 'CREATED_BY' },
-            { data: 'CREATED_DATE', name: 'CREATED_DATE' },
+            { data: 'CREATED_BY', name: 'CREATED_BY', className: 'text-center' },
         ]
 
     });
@@ -43,8 +43,12 @@
             onDeletePrepare();
         });
 
-        $("#btn_complete").on("click", function() {
+        $("#btn_lunas").on("click", function() {
             onCompletePrepare();
+        });
+
+        $("#btn_complete").on("click", function() {
+            $("#completePopup").modal('show');
         });
 
         $('#pending-upload').on("submit",function(e) {
@@ -54,7 +58,7 @@
             $.ajax({
                 type:'POST',
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url: "{{ route('transaksi.complete') }}",
+                url: "{{ route('transaksi.lunas') }}",
                 data: formData,
                 cache:false,
                 contentType: false,
@@ -70,7 +74,7 @@
                     });
                     table.draw();
                     setScreenDefault()
-                    $("#completePopup").modal('hide');
+                    $("#bayarPopup").modal('hide');
                 } else {
                     Swal.fire({   
                         title: "Error",   
@@ -81,12 +85,12 @@
                     });
                     table.draw();
                     setScreenDefault()
-                    $("#completePopup").modal('hide');
+                    // $("#bayarPopup").modal('hide');
                 }
                 },
                 error: function(data){
                     toastr.error('Terjadi Kesalahan!')
-                    $("#completePopup").modal('hide');
+                    // $("#bayarPopup").modal('hide');
                 }
             });
         });
@@ -245,7 +249,7 @@
                     $("#payment_status_p").html('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
                 }
 
-                $("#completePopup").modal('show');
+                $("#bayarPopup").modal('show');
             }
         });
 
@@ -385,8 +389,8 @@
         $('#btn_edit').css("display", "none");
         $('#btn_delete').css("display", "none");
         $('#btn_confirm').css("display", "none");
+        $('#btn_lunas').css("display", "none");
         $('#btn_complete').css("display", "none");
-        $('#btn_reject').css("display", "none");
     }
 
 </script>

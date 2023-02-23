@@ -125,9 +125,11 @@ class TransactionController extends BaseController
             
             $q = Transaction::select([
                 'tb_transaction.*',
+                'tb_payment.PAYMENT_STATUS',
                 'sysA.SYSTEM_VAL as STATUS',
             ])
-            ->leftJoin('tb_m_system as sysA', 'tb_transaction.TRANSACTION_STATUS', '=', 'sysA.SYSTEM_CD')  
+            ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID')
+            ->leftJoin('tb_m_system as sysA', 'tb_transaction.TRANSACTION_STATUS', '=', 'sysA.SYSTEM_CD')
             ->where('sysA.SYSTEM_TYPE', 'TRANSAKSI_STATUS')
             ->where($params)
             ->orderBy('UPDATED_DATE', 'DESC')
@@ -147,19 +149,23 @@ class TransactionController extends BaseController
             })
             ->editColumn('STATUS', function ($item) {
                 if($item->TRANSACTION_STATUS == 0) {
-                    return '<span class="label label-warning font-weight">'.$item->STATUS .'</span>';
+                    return '<span class="label label-warning font-weight"><strong>'.$item->STATUS .'</strong></span>';
                 } else if ($item->TRANSACTION_STATUS == 1) {
-                    return '<span class="label label-primary">'.$item->STATUS .'</span>';
+                    return '<span class="label label-primary"><strong>'.$item->STATUS .'</strong></span>';
                 } else if ($item->TRANSACTION_STATUS == 2) {
-                    return '<span class="label label-danger">'.$item->STATUS .'</span>';
+                    return '<span class="label label-danger"><strong>'.$item->STATUS .'</strong></span>';
                 } else {
-                    return '<span class="label label-success">'.$item->STATUS .'</span>';
+                    return '<span class="label label-success"><strong>'.$item->STATUS .'</strong></span>';
                 }
             })
-            ->editColumn('CREATED_DATE', function ($q) {
-                return $q->CREATED_DATE ? with(new Carbon($q->CREATED_DATE))->format('d-m-Y H:i:s') : '';
+            ->addColumn('STATUS_PEMBAYARAN', function ($item) {
+                if($item->PAYMENT_STATUS == 0) {
+                    return '<span class="text-primary"><strong>DANA PERTAMA</strong></span>';
+                } else {
+                    return '<span class="text-success"><strong>LUNAS</strong></span>';
+                }
             })
-            ->rawColumns(['checkbox','STATUS'])
+            ->rawColumns(['checkbox','STATUS','STATUS_PEMBAYARAN'])
             ->make(true);
         }
     }
@@ -256,7 +262,7 @@ class TransactionController extends BaseController
         return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi']);
     }
 
-    public function complete(Request $request)
+    public function transaksi_lunas(Request $request)
     {
             
         $validator = Validator::make($request->all(), [
@@ -287,10 +293,9 @@ class TransactionController extends BaseController
                             'PAYMENT_STATUS' => 1,
                         ]);
         
-                    DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 3]);
-                    DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 1]);
-                    DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 1]);
-                    DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 1]);
+                    // DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 1]);
+                    // DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 1]);
+                    // DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 1]);
                     DB::commit();
 
                     return response()->json(['message' => 'Transaksi telah berhasil dilunasi']);

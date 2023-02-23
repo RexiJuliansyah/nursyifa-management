@@ -49,8 +49,9 @@
                                     </div>
                                 <div class="pull-right">
                                     @if(Auth::user()->ROLE_ID == 1 || Auth::user()->ROLE_ID == 3)         
-                                        <button href="#" type="button" class="btn btn-success btn-sm btn-icon left-icon pr-10 pl-10" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesai</span></button>
-                                        <!-- <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon pr-10 pl-10" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button>              -->
+                                        <button href="#" type="button" class="btn btn-primary btn-sm btn-icon left-icon pr-10 pl-10" id="btn_lunas" style="display:none"><i class="fa fa-check"></i><span>Selesaikan Pembayaran</span></button>
+                                        <button href="#" type="button" class="btn btn-success btn-sm btn-icon left-icon pr-10 pl-10" id="btn_complete" style="display:none"><i class="fa fa-check"></i><span>Selesaikan Transaksi</span></button>
+                                        <!-- <button href="#" type="button" class="btn btn-danger btn-sm btn-icon left-icon pr-10 pl-10" id="btn_reject" style="display:none"><i class="fa fa-close"></i><span>Batal</span></button> -->
                                     @endif
                                     @if(Auth::user()->ROLE_ID == 2)   
                                         <button type="button" class="btn btn-primary btn-sm btn-icon left-icon pr-10 pl-10" id="btn_confirm" style="display:none"><i class="fa fa-check"></i>Konfirmasi Transaksi</button>
@@ -68,13 +69,13 @@
                             <tr>
                                 <th style="width: 0px;">#</th>
                                 <th>Kode Transaksi</th>
-                                <th>Bus</th>
                                 <th>Pelanggan</th>
+                                <th>Bus</th>
                                 <th>Tujuan</th>
                                 <th>Tanggal Perjalanan</th>
-                                <th>Status</th>
+                                <th>Pembayaran</th>
+                                <th>Status Transaksi</th>
                                 <th>Dibuat Oleh</th>
-                                <th>Dibuat Tanggal</th>
                             </tr>
                         </thead>
                         <tbody style="cursor:pointer">
@@ -88,6 +89,7 @@
 </div>
 <!-- /Row -->
 @include('transaction._popup')
+@include('transaction._popup_bayar')
 @include('transaction._popup_complete')
 
 @endsection
@@ -124,6 +126,8 @@
             $('#table-transaksi tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
 
+                console.log(data);
+
                 var checkbox_grid = $('input[name="chkRow"][data-TransactionId="'+ data["TRANSACTION_ID"] +'"]');
 
                 if (checkbox_grid.is(":checked")) {
@@ -136,9 +140,9 @@
                     $('#btn_detail').prop("disabled", true);
                     $('#btn_edit').css("display", "none");
                     $('#btn_delete').css("display", "none");
-                    $('#btn_complete').css("display", "none");
-                    $('#btn_reject').css("display", "none");
+                    $('#btn_lunas').css("display", "none");
                     $('#btn_confirm').css("display", "none");
+                    $('#btn_complete').css("display", "none");
                 } else {
                     $(".grid-checkbox").prop("checked", false);
                     $(".grid-checkbox").parent().parent().removeClass('highlight-row');
@@ -149,14 +153,19 @@
                     $('#btn_detail').prop("disabled", false);
 
                     if(data["TRANSACTION_STATUS"] == 1) {
-                        $('#btn_complete').css("display", "inline-block");
-                        $('#btn_reject').css("display", "inline-block");
+                        if(data["PAYMENT_STATUS"] == 0) {
+                            $('#btn_lunas').css("display", "inline-block");
+                            $('#btn_complete').css("display", "none");
+                        } else {
+                            $('#btn_lunas').css("display", "none");
+                            $('#btn_complete').css("display", "inline-block");
+                        }
                     } else {
                         $('#btn_edit').css("display", "none");
                         $('#btn_delete').css("display", "none");
-                        $('#btn_complete').css("display", "none");
-                        $('#btn_reject').css("display", "none");
+                        $('#btn_lunas').css("display", "none");
                         $('#btn_confirm').css("display", "none");
+                        $('#btn_complete').css("display", "none");
                     }
 
                     if(data["TRANSACTION_STATUS"] == 0) {
