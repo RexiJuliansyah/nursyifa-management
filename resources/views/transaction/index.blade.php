@@ -97,6 +97,7 @@
 @section('javascript')
 
 @include('transaction._javascript')
+@include('transaction._javascript_complete')
     <script type="text/javascript">
 
         $(document).ready(function() {
@@ -125,8 +126,6 @@
 
             $('#table-transaksi tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
-
-                console.log(data);
 
                 var checkbox_grid = $('input[name="chkRow"][data-TransactionId="'+ data["TRANSACTION_ID"] +'"]');
 

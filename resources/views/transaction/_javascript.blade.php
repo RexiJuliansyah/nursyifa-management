@@ -44,12 +44,9 @@
         });
 
         $("#btn_lunas").on("click", function() {
-            onCompletePrepare();
+            onLunasPrepare();
         });
 
-        $("#btn_complete").on("click", function() {
-            $("#completePopup").modal('show');
-        });
 
         $('#pending-upload').on("submit",function(e) {
             e.preventDefault();
@@ -158,7 +155,7 @@
         }
     }
 
-    function onCompletePrepare() {
+    function onLunasPrepare() {
         var isHaveChecked = false;
         gChecked = 0;
         $("input[name='chkRow']").each(function() {
@@ -173,7 +170,7 @@
             toastr.warning('Pilih satu data untuk mengubah!')
             return;
         } else {
-            getCompleteData();
+            getLunasData();
         }
     }
 
@@ -226,7 +223,7 @@
 
     }
 
-    function getCompleteData() {
+    function getLunasData() {
         $.ajax({
             type: "GET",
             url: "{{ route('transaksi.getbykey') }}",
@@ -363,6 +360,33 @@
                 toastr.error('Terjadi Kesalahan!')
             }
         })
+    }
+
+    function onCompletePrepare() {
+        Swal.fire({
+            title: 
+                '<strong>'+gTransactionId+'</strong>' +
+                '<h5>Selesaikan transaksi? </h5>', 
+            icon: 'info',
+            html:
+                'Transaksi yang telah selesai tidak dapat dirubah, ' +
+                'setelah anda menyelesaikan Transaksi ini.',
+            showCancelButton: true,
+            buttonsStyling:false,
+            focusConfirm: false,
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-default mr-10',
+            },
+            confirmButtonText: 'Selesai',
+            cancelButtonText: 'Close',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setProgressLine();
+                onConfirmComplete();
+            }
+        });
     }
 
     function number_format(angka) {

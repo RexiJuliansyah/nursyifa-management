@@ -312,6 +312,22 @@ class TransactionController extends BaseController
         }
     }
 
+    public function transaksi_complete(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            DB::table('tb_transaction')->where(['TRANSACTION_ID' => $request->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 3]);
+            DB::commit();
+
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Terjadi kesalahan!']);
+        }
+
+        return response()->json(['message' => 'Transaksi telah berhasil diselesaikan']);
+ 
+    }
+
     public function delete(Request $request)
     {
         DB::beginTransaction();

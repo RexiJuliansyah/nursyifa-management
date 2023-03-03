@@ -11,6 +11,7 @@ use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KondekturController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,9 +87,14 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
-    Route::post('transaksi-complete', [TransactionController::class, 'transaksi_lunas'])->name('transaksi.lunas');
+    Route::post('transaksi-pelunasan', [TransactionController::class, 'transaksi_lunas'])->name('transaksi.lunas');
     Route::post('transaksi-confirm', [TransactionController::class, 'confirm'])->name('transaksi.confirm');
     Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
     Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
+    Route::post('transaksi-complete', [TransactionController::class, 'transaksi_complete'])->name('transaksi.complete');
+
+    Route::get('expense-datatable', [ExpenseController::class, 'datatable'])->name('expense.datatable');
+    Route::post('expense-store', [ExpenseController::class, 'store'])->name('expense.store');
+    Route::delete('expense-delete', [ExpenseController::class, 'delete'])->name('expense.delete');
 
 });
