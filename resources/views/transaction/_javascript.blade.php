@@ -47,6 +47,9 @@
             onLunasPrepare();
         });
 
+        // $("#btn_confirm_sms").on("click", function() {
+        //     onConfirmTransaction();
+        // });
 
         $('#pending-upload').on("submit",function(e) {
             e.preventDefault();
@@ -128,30 +131,7 @@
             toastr.warning('Pilih satu data untuk mengubah!')
             return;
         } else {
-            Swal.fire({
-                title: 
-                    '<strong>'+gTransactionId+'</strong>' +
-                    '<h5>Konfirmasi transaksi ini? </h5>', 
-                icon: 'info',
-                html:
-                    'Notifikasi SMS akan dikirimkan kepada <strong>Pelanggan</strong>, ' +
-                    'setelah anda mengkonfirmasi Transaksi ini.',
-                showCancelButton: true,
-                buttonsStyling:false,
-                focusConfirm: false,
-                customClass: {
-                    confirmButton: 'btn btn-primary',
-                    cancelButton: 'btn btn-default mr-10',
-                },
-                confirmButtonText: 'Confirm',
-                cancelButtonText: 'Close',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    setProgressLine();
-                    onConfirmTransaction();
-                }
-            });
+            getConfirmData();
         }
     }
 
@@ -252,14 +232,51 @@
 
     }
 
+    function getConfirmData() {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('transaksi.getbykey') }}",
+            dataType: 'json',
+            traditional: true,
+            data: {
+                'TRANSACTION_ID': gTransactionId
+            },
+            success: function(result) {
+                var sms_template = 'PO NURSYIFA' + '\r\n \r\n' + 
+                'Kepada Bpk/Ibu ' + result.CUSTOMER_NAME + ' Yth,' + '\r\n' + 
+                'Terimakasih telah melakukan reservasi, kode pemesanan Anda ' + result.TRANSACTION_ID + '. \r\n \r\n' + 
+                'Tujuan Perjalanan ' + result.DESTINATION + ', Tanggal ' + moment(result.DATE_FROM).format('DD/MM/YYYY') + ', Pukul ' + result.TIME + ' WIB.' + '\r\n \r\n' + 
+                'Agar dimohon hadir tepat waktu' + '. \r\n' + 
+                'Terima Kasih.';
+
+                $("#transaction_id_sms").text(result.TRANSACTION_ID);
+                
+
+
+                $("#nama_pelanggan").val(result.CUSTOMER_NAME);
+                $("#nomor_pelanggan").val(result.CUSTOMER_CONTACT);
+                $("#jadwal_keberangkatan").val(moment(result.DATE_FROM).format('DD/MM/YYYY') + ' ' + result.TIME );
+                $("#template_sms").val(sms_template);
+
+                $("#confirmPopup").modal('show');
+            }
+        });
+
+    }
+
     function onConfirmTransaction() {
         $.ajax({
-            url: "{{ route('transaksi.confirm') }}",
+            url: "{{ route('transaksi.confirmsms') }}",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             type: "POST",
             dataType: 'json',
             traditional: true,
-            data: {'TRANSACTION_ID': gTransactionId},
+            data: {
+                'TRANSACTION_ID': gTransactionId,
+                'NO_PELANGGAN': $("#nomor_pelanggan").val(),
+                'PESAN': $("#template_sms").val(),
+                
+            },
             success: function(response) {
                 if ($.isEmptyObject(response.error)) {
                     Swal.fire({   
@@ -282,6 +299,8 @@
                     table.draw();
                     setScreenDefault()
                 }
+
+                $("#confirmPopup").modal('hide');
             },
             error: function(err) {
                 toastr.error('Terjadi Kesalahan!')

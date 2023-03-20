@@ -89,6 +89,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
     Route::post('transaksi-pelunasan', [TransactionController::class, 'transaksi_lunas'])->name('transaksi.lunas');
     Route::post('transaksi-confirm', [TransactionController::class, 'confirm'])->name('transaksi.confirm');
+    Route::post('transaksi-confirm-sms', [TransactionController::class, 'confirm_send_sms'])->name('transaksi.confirmsms');
     Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
     Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
     Route::post('transaksi-complete', [TransactionController::class, 'transaksi_complete'])->name('transaksi.complete');
