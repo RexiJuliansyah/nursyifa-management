@@ -34,15 +34,15 @@
                                             <input type="text" id="CUSTOMER_NAME" name="CUSTOMER_NAME" class="form-control form-sm" autocomplete="off" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="control-label mb-10">No Telp / No Whatsapp <span style="color: red">*</span></label>
                                             <input type="text" id="CUSTOMER_CONTACT" name="CUSTOMER_CONTACT" class="form-control" maxlength="14" onkeypress="return isNumber(event)" autocomplete="off" required>
                                         </div>
                                     </div>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3">
                                         <div class="form-group">
-                                            <label class="control-label mb-10">Jumlah<span style="color: red">*</span></label>
+                                            <label class="control-label mb-10">Jumlah Penumpang<span style="color: red">*</span></label>
                                             <input type="number" id="CUSTOMER_AMOUNT" name="CUSTOMER_AMOUNT" min='1' class="form-control" placeholder="0" autocomplete="off" required>
                                         </div>
                                     </div>

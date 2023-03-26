@@ -12,6 +12,7 @@ use App\Http\Controllers\KondekturController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('home-getChartData', [HomeController::class, 'getChartData'])->name('home.getChartData');
+    Route::get('schedule', [HomeController::class, 'datatable_schedule'])->name('schedule.datatable');
 
     Route::get('menu', [MenuController::class, 'index'])->name('menu');
     Route::get('menu-datatable', [MenuController::class, 'datatable'])->name('menu.datatable');
@@ -88,8 +90,9 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('transaksi-baru', [TransactionController::class, 'add_transaction'])->name('transaksi.baru');
     Route::get('transaksi-datatable', [TransactionController::class, 'datatable'])->name('transaksi.datatable');
     Route::post('transaksi-store', [TransactionController::class, 'store_transaction'])->name('transaksi.store');
-    Route::post('transaksi-complete', [TransactionController::class, 'transaksi_lunas'])->name('transaksi.lunas');
+    Route::post('transaksi-pelunasan', [TransactionController::class, 'transaksi_lunas'])->name('transaksi.lunas');
     Route::post('transaksi-confirm', [TransactionController::class, 'confirm'])->name('transaksi.confirm');
+    Route::post('transaksi-confirm-sms', [TransactionController::class, 'confirm_send_sms'])->name('transaksi.confirmsms');
     Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
     Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
     Route::get('transaksi-getByDateRangeForDashboard', [TransactionController::class, 'getByDateRangeForDashboard'])->name('transaksi.getByDateRangeForDashboard');
@@ -97,5 +100,9 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('report', [ReportController::class, 'index'])->name('report');
     Route::get('report-datatable', [ReportController::class, 'datatable'])->name('report.datatable');
     Route::get('report-export-excel', [ReportController::class, 'export_excel'])->name('report.export-excel');
+    Route::post('transaksi-complete', [TransactionController::class, 'transaksi_complete'])->name('transaksi.complete');
 
+    Route::get('expense-datatable', [ExpenseController::class, 'datatable'])->name('expense.datatable');
+    Route::post('expense-store', [ExpenseController::class, 'store'])->name('expense.store');
+    Route::delete('expense-delete', [ExpenseController::class, 'delete'])->name('expense.delete');
 });

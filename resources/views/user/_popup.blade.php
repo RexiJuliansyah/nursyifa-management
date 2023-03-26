@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label for="role_id" class="control-label mb-10">Role<span style="color: red">*</span></label>
                                         <select class="selectpicker" data-style="form-control btn-default btn-outline" id="role_id" name="role_id">
-                                            <option value="" disabled selected>-- Pilih --</option>
+                                            <option value="">-- Pilih --</option>
                                             @foreach ($data['role_list'] as $role)
                                                 <option value="{{ $role->ROLE_ID }}">{{ $role->ROLE_NAME }}</option>
                                             @endforeach

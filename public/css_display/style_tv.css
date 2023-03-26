@@ -1,0 +1,117 @@
+body 
+{
+  background-image: url("bg_image.jpg");
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+  
+  
+@font-face {
+  font-family: digital7;
+  src: url(digital-7.woff);
+}
+
+.header {
+  background-color: #000000cf;
+  padding: 5px 40px;
+  text-align: center;
+}
+
+.footer {
+  padding: 10px;
+  text-align: center;
+  position:fixed;
+  bottom:10px;
+  width:100%;
+}
+  
+.jam {
+  font-size: 55px;
+  font-family: digital7;
+  text-shadow: 0 0 20px #fff;
+  letter-spacing: 5px;
+    color: #fff;
+    user-select: none;
+    opacity:1;
+}
+
+.tgl {
+  font-size: 34px;
+  text-shadow: 0 0 8px #fff;
+  color: #fff;
+  user-select: none;
+}
+
+.bulan {
+  font-size: 18px;
+  text-shadow: 0 0 8px #fff;
+  color: #fff;
+  user-select: none;
+}
+
+#schedule {
+  cursor: none; /* hide cursor */
+}
+
+.col-sm {
+  box-shadow: 0 34px 28px 0 rgba(0, 0, 0, 0.2), 0 26px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 12px;
+}
+
+table.dataTable thead tr {
+  background-color: #000000e2;
+  color: #fff;
+  font-size: 20px;
+}
+
+table.dataTable tbody td {
+  color: #fff;
+  font-size: 18px;
+}
+
+table.dataTable tfoot tr {
+  background-color: #000000e2;
+  color: #fff;
+  font-size: 20px;
+}
+
+table tbody tr:nth-child(1), table tbody tr:nth-child(3), table tbody tr:nth-child(5),
+table tbody tr:nth-child(7), table tbody tr:nth-child(9), table tbody tr:nth-child(11),
+table tbody tr:nth-child(13), table tbody tr:nth-child(15)
+{
+  background-color: #202253;
+
+}
+
+table tbody tr:nth-child(2), table tbody tr:nth-child(4), table tbody tr:nth-child(6),
+table tbody tr:nth-child(8), table tbody tr:nth-child(10), table tbody tr:nth-child(12),
+table tbody tr:nth-child(14)
+{
+  background-color: #1f2e69;
+
+}
+
+table tbody td:nth-child(2), table tbody td:nth-child(5), table tbody td:nth-child(6), table tbody td:nth-child(7) {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+div.slider {
+  display: none;
+}
+
+td.details-control {
+  background: url('https://datatables.net/examples/resources/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+
+tr.shown td.details-control {
+  background: url('https://datatables.net/examples/resources/details_close.png') no-repeat center center;
+}
+
+tr.shown {
+  background-color: #f7897b !important;
+}
+
+    
