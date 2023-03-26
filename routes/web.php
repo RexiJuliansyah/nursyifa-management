@@ -32,6 +32,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('login.view');
 Route::group(['middleware' => 'revalidate'], function(){
     
     Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('schedule', [HomeController::class, 'datatable_schedule'])->name('schedule.datatable');
 
     Route::get('menu', [MenuController::class, 'index'])->name('menu');
     Route::get('menu-datatable', [MenuController::class, 'datatable'])->name('menu.datatable');
