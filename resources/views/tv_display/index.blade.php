@@ -12,9 +12,6 @@
     <link href="{{asset('admin')}}/vendors/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('admin')}}/vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
-
     <link href="{{ asset('css_display') }}/style_tv.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -60,11 +57,11 @@
     <footer class="footer container-fluid pl-30 pr-30 mb-0">
         <div class="row">
             <div class="col-12">
-                <h3 class="text-white">2023 &copy; Perusahaan Otobus Nursyifa
+                <h4 style="color: white;">2023 &copy; Perusahaan Otobus Nursyifa
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="icon-mid bi bi-box-arrow-left me-2"></i> Keluar
                     </a>
-                </h3>
+                </h4>
                 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
