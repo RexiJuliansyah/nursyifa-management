@@ -100,7 +100,7 @@
 
                                     <div class="form-group">
                                         <label class="control-label mb-10">No Telepon</label>
-                                        <input type="text" class="form-control" id="nomor_pelanggan" name="nomor_pelanggan"  readonly>
+                                        <input type="text" class="form-control" id="nomor_pelanggan" name="nomor_pelanggan" required autocomplete="off">
                                     </div>
 
                                     <div class="form-group">
@@ -111,7 +111,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label class="control-label mb-10">Template SMS</label>
-                                        <textarea class="form-control" id='template_sms' type="text" name="template_sms" style="word-wrap: break-word; resize: vertical;" rows="14"></textarea>
+                                        <textarea class="form-control" id='template_sms' type="text" name="template_sms" style="word-wrap: break-word; resize: vertical;" rows="11" readonly></textarea>
                                     </div>
                                 </div>
 

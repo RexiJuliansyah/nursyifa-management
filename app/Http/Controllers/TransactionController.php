@@ -361,28 +361,56 @@ class TransactionController extends BaseController
     public function confirm_send_sms(Request $request)
     {
 
-        $userkey = 'a566152cf82b';
-        $passkey = '64cd368e081aa18e3d02a595';
-        $telepon = $request->NO_PELANGGAN;
-        $message = $request->PESAN;
-        $url = 'https://console.zenziva.net/reguler/api/sendsms/';
-        
-        $curlHandle = curl_init();
-        curl_setopt($curlHandle, CURLOPT_URL, $url);
-        curl_setopt($curlHandle, CURLOPT_HEADER, 0);
-        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
-        curl_setopt($curlHandle, CURLOPT_POST, 1);
-        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, array(
-            'userkey' => $userkey,
-            'passkey' => $passkey,
-            'to' => $telepon,
-            'message' => $message
-        ));
-        $results = json_decode(curl_exec($curlHandle), true);
-        curl_close($curlHandle);
+        $validator = Validator::make($request->all(), [
+            'TRANSACTION_ID' => 'required',
+            'NO_PELANGGAN' => 'required',
+            'PESAN' => 'required',
+        ], [
+            'NO_PELANGGAN.required' => 'No Pelanggan tidak boleh kosong! <br>',
+            'PESAN.required' => 'Pesan tidak boleh kosong! <br>'
+        ]);
+
+        if ($validator->passes()) {
+            DB::beginTransaction();
+            $transaction = Transaction::find($request->TRANSACTION_ID);
+            try {
+                DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 1]);
+                DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 2]);
+                DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 2]);
+                DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 2]);
+                DB::commit();
+
+                $userkey = 'a566152cf82b';
+                $passkey = '64cd368e081aa18e3d02a595';
+                $telepon = $request->NO_PELANGGAN;
+                $message = $request->PESAN;
+                $url = 'https://console.zenziva.net/reguler/api/sendsms/';
+                
+                $curlHandle = curl_init();
+                curl_setopt($curlHandle, CURLOPT_URL, $url);
+                curl_setopt($curlHandle, CURLOPT_HEADER, 0);
+                curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, 2);
+                curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($curlHandle, CURLOPT_TIMEOUT,30);
+                curl_setopt($curlHandle, CURLOPT_POST, 1);
+                curl_setopt($curlHandle, CURLOPT_POSTFIELDS, array(
+                    'userkey' => $userkey,
+                    'passkey' => $passkey,
+                    'to' => $telepon,
+                    'message' => $message
+                ));
+
+                $results = json_decode(curl_exec($curlHandle), true);
+                curl_close($curlHandle);
+            } catch (Exception $e) {
+                DB::rollback();
+                return response()->json(['error' => 'Terjadi kesalahan!']);
+            }
+
+        }else {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
 
         return response()->json(['message' => 'Data berhasil dikonfirmasi!']);
 

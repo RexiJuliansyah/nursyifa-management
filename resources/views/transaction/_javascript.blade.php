@@ -47,9 +47,9 @@
             onLunasPrepare();
         });
 
-        // $("#btn_confirm_sms").on("click", function() {
-        //     onConfirmTransaction();
-        // });
+        $("#btn_confirm_sms").on("click", function() {
+            onConfirmTransaction();
+        });
 
         $('#pending-upload').on("submit",function(e) {
             e.preventDefault();
@@ -242,20 +242,18 @@
                 'TRANSACTION_ID': gTransactionId
             },
             success: function(result) {
-                var sms_template = 'PO NURSYIFA' + '\r\n \r\n' + 
-                'Kepada Bpk/Ibu ' + result.CUSTOMER_NAME + ' Yth,' + '\r\n' + 
-                'Terimakasih telah melakukan reservasi, kode pemesanan Anda ' + result.TRANSACTION_ID + '. \r\n \r\n' + 
-                'Tujuan Perjalanan ' + result.DESTINATION + ', Tanggal ' + moment(result.DATE_FROM).format('DD/MM/YYYY') + ', Pukul ' + result.TIME + ' WIB.' + '\r\n \r\n' + 
-                'Agar dimohon hadir tepat waktu' + '. \r\n' + 
-                'Terima Kasih.';
+                var sms_template = 'PO NURSYIFA: ' + '\r\n' +
+                'Kepada Bpk/Ibu ' + result. CUSTOMER_NAME + ' Yth.'  + '\r\n \r\n' +
+                'Transaksi Telah Dikonfirmasi. ' + '\r\n' +
+                'Tujuan Keberangkatan: ' + 
+                ' \r\n' + result.TRANSACTION_ID + '/'+ result.DESTINATION.toUpperCase() +'/' + moment(result.DATE_FROM).format('DD-MM-YYYY') + '/' + result.TIME + '.' + '\r\n \r\n' +
+                'Agar Dimohon Hadir Tepat Waktu.' + ' Terima Kasih.';
 
                 $("#transaction_id_sms").text(result.TRANSACTION_ID);
-                
-
 
                 $("#nama_pelanggan").val(result.CUSTOMER_NAME);
-                $("#nomor_pelanggan").val(result.CUSTOMER_CONTACT);
-                $("#jadwal_keberangkatan").val(moment(result.DATE_FROM).format('DD/MM/YYYY') + ' ' + result.TIME );
+                // $("#nomor_pelanggan").val(result.CUSTOMER_CONTACT);
+                $("#jadwal_keberangkatan").val(moment(result.DATE_FROM).format('DD MMM YYYY') + ' ' + result.TIME );
                 $("#template_sms").val(sms_template);
 
                 $("#confirmPopup").modal('show');
@@ -288,19 +286,12 @@
                     });
                     table.draw();
                     setScreenDefault()
+                    $("#confirmPopup").modal('hide');
                 } else {
-                    Swal.fire({   
-                        title: "Error",   
-                        icon: "error", 
-                        text: response.error,
-                        timer: 2000,   
-                        showConfirmButton: false 
-                    });
-                    table.draw();
-                    setScreenDefault()
+                    toastr.error(response.error)
                 }
 
-                $("#confirmPopup").modal('hide');
+                
             },
             error: function(err) {
                 toastr.error('Terjadi Kesalahan!')
