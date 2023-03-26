@@ -18,6 +18,7 @@ use Response;
 
 use Illuminate\Support\Facades\Auth;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
+use stdClass;
 
 class TransactionController extends BaseController
 {
@@ -96,6 +97,49 @@ class TransactionController extends BaseController
         ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID')
         ->firstOrFail();
         echo json_encode($query);
+    }
+
+    public function getByDateRangeForDashboard(Request $request) {
+        $daterange = explode(' - ', $request->DATE_FROM_TO);
+
+        $date_from = Carbon::createFromFormat('d/m/Y', $daterange[0])->format('Y-m-d');
+        $date_to = Carbon::createFromFormat('d/m/Y', $daterange[1])->format('Y-m-d');
+        $total_price = 0;
+        $total_lunas_price = 0;
+
+        $query = Transaction::select([
+            'tb_transaction.*',
+            'tb_m_driver.DRIVER_NAME',
+            'tb_m_kondektur.KONDEKTUR_NAME',
+            'tb_payment.AMOUNT',
+            'tb_payment.PAID_PAYMENT',
+            'tb_payment.PENDING_PAYMENT',
+            'tb_payment.PAYMENT_STATUS',
+            'tb_payment.IMG_PAID_PAYMENT',
+            'tb_payment.IMG_PENDING_PAYMENT',
+        ])->whereBetween('tb_transaction.DATE_FROM', [$date_from, $date_to])
+        ->leftJoin('tb_m_driver', 'tb_transaction.DRIVER_ID', '=', 'tb_m_driver.DRIVER_ID') 
+        ->leftJoin('tb_m_kondektur', 'tb_transaction.KONDEKTUR_ID', '=', 'tb_m_kondektur.KONDEKTUR_ID') 
+        ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID')
+        ->get();
+
+        foreach ($query as $item) {
+            $total_price = $total_price + $item->AMOUNT;
+            $total_lunas_price = $total_lunas_price + $item->PAID_PAYMENT;
+        }
+        
+        $return = new stdClass();
+        $return->TRANSACTION_COUNT = $query->count();;
+        $return->TOTAL_PRICE = 'Rp. ' . number_format($total_price, 0, '', '.');
+        $return->TOTAL_LUNAS_PRICE = 'Rp. ' . number_format($total_lunas_price, 0, '', '.');
+        $return->TOTAL_PENDING_PRICE = 'Rp. ' . number_format($total_price - $total_lunas_price, 0, '', '.');
+        $return->PENDING_TRANSACTION_COUNT = $query->where('TRANSACTION_STATUS', 0)->count(); 
+        $return->ACTIVE_TRANSACTION_COUNT = $query->where('TRANSACTION_STATUS', 1)->count(); 
+        $return->CANCEL_TRANSACTION_COUNT = $query->where('TRANSACTION_STATUS', 2)->count(); 
+        $return->COMPLETE_TRANSACTION_COUNT = $query->where('TRANSACTION_STATUS', 3)->count(); 
+
+
+        echo json_encode($return);
     }
 
     public function getbykey_calender(Request $request) {

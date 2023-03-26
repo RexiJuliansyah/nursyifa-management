@@ -3,6 +3,123 @@
 @section('content')
     <div class="container-fluid">
         <!-- Row -->
+        <div class="row pt-10" style="display: flex; justify-content: end;">
+            <div class="col-sm-2 pr-0">
+                <div class="form-group pull-right" style="padding-top: 11px">
+                    <label class="control-label">Tanggal Transaksi</label>
+                </div>
+            </div>
+            <div class="col-sm-3 pl-0">
+                <div class="form-group">
+                    <div class="input-group date_range">
+                        <input class="form-control input-daterange-datepicker" id='DATE_FROM_TO' type="text"
+                            name="DATE_FROM_TO" placeholder="DD/MM/YYYY - DD/MM/YYYY" autocomplete="off"
+                            onkeypress="return false" required>
+                        <span class="input-group-addon">
+                            <span class="fa fa-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 pl-0">
+                <div class="form-group pull-left" style="padding-top: 3px; padding-left:9px">
+                    <button type="button" class="btn btn-success btn-icon btn-sm left-icon pr-10 pl-10" id="btn_search"><i
+                            class="fa fa-search"></i>Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view pa-0">
+                    <div class="panel-wrapper in collapse">
+                        <div class="panel-body pa-0">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-8 data-wrap-left pl-0 pr-0 text-center">
+                                            <span class="txt-dark counter block"><span
+                                                    class="counter-anim">{{ $data['transport_list_count'] }}</span></span>
+                                            <span class="weight-500 uppercase-font block">Jumlah Bis</span>
+                                        </div>
+                                        <div class="col-xs-4 data-wrap-right pl-0 pr-0 text-center">
+                                            <i class="fa fa-bus data-right-rep-icon txt-light-grey"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view pa-0">
+                    <div class="panel-wrapper in collapse">
+                        <div class="panel-body pa-0">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-8 data-wrap-left pl-0 pr-0 text-center">
+                                            <span class="txt-dark counter block"><span
+                                                    class="counter-anim">{{ $data['driver_list_count'] + $data['kondektur_list_count'] }}</span></span>
+                                            <span class="weight-500 uppercase-font block">Supir + Kondektur</span>
+                                        </div>
+                                        <div class="col-xs-4 data-wrap-right pl-0 pr-0 text-center">
+                                            <i class="fa fa-users data-right-rep-icon txt-light-grey"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view pa-0">
+                    <div class="panel-wrapper in collapse">
+                        <div class="panel-body pa-0">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-8 data-wrap-left pl-0 pr-0 text-center">
+                                            <span class="txt-dark counter block"><span class="counter-anim"
+                                                    id="transaction_count"></span></span>
+                                            <span class="weight-500 uppercase-font block">Total Transaksi</span>
+                                        </div>
+                                        <div class="col-xs-4 data-wrap-right pl-0 pr-0 text-center">
+                                            <i class="fa fa-exchange data-right-rep-icon txt-light-grey"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default card-view pa-0">
+                    <div class="panel-wrapper in collapse">
+                        <div class="panel-body pa-0">
+                            <div class="sm-data-box">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-xs-8 data-wrap-left pl-0 pr-0 text-center">
+                                            <span class="txt-dark counter block"><span class="counter-anim"
+                                                    id="total_price"></span></span>
+                                            <span class="weight-500 uppercase-font block">Total Pembayaran</span>
+                                        </div>
+                                        <div class="col-xs-4 data-wrap-right pl-0 pr-0 text-center">
+                                            <i class="fa fa-usd data-right-rep-icon txt-light-grey"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Row -->
+        <!-- Row -->
         <div class="row">
             <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                 <div class="panel panel-default card-view panel-refresh">
@@ -11,7 +128,7 @@
                     </div>
                     <div class="panel-heading">
                         <div class="pull-left">
-                            <h6 class="panel-title txt-dark">Property Stats</h6>
+                            <h6 class="panel-title txt-dark">Grafik Transaksi</h6>
                         </div>
                         <div class="pull-right">
                             <a href="#" class="pull-left refresh mr-15 inline-block">
@@ -45,7 +162,7 @@
                 <div class="panel card-view">
                     <div class="panel-heading small-panel-heading relative">
                         <div class="pull-left">
-                            <h6 class="panel-title">Monthly Revenue</h6>
+                            <h6 class="panel-title">Pembayaran</h6>
                         </div>
                         <div class="clearfix"></div>
                         <div class="head-overlay"></div>
@@ -57,14 +174,17 @@
                                     <div class="row">
                                         <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
                                             <span class="block"><i
-                                                    class="zmdi zmdi-trending-up txt-warning font-18 mr-5"></i><span
-                                                    class="weight-500 uppercase-font">growth</span></span>
-                                            <span class="txt-dark counter block">$<span
-                                                    class="counter-anim">15,678</span></span>
+                                                    class="zmdi zmdi-check txt-success font-18 mr-5"></i><span
+                                                    class="weight-500 uppercase-font">Lunas</span></span>
+                                            <span class="txt-dark counter block"><span class="counter-anim"
+                                                    id="total_lunas_price"></span></span>
                                         </div>
-                                        <div class="col-xs-6 data-wrap-right pl-0 pr-0 text-center">
-                                            <div id="sparkline_6" style="width: 100px; overflow: hidden; margin: 0px auto;">
-                                            </div>
+                                        <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
+                                            <span class="block"><i
+                                                    class="zmdi zmdi-time-interval txt-warning font-18 mr-5"></i><span
+                                                    class="weight-500 uppercase-font">Belum Dibayar</span></span>
+                                            <span class="txt-dark counter block"><span class="counter-anim"
+                                                    id="total_pending_price"></span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -75,7 +195,7 @@
                 <div class="panel card-view">
                     <div class="panel-heading small-panel-heading relative">
                         <div class="pull-left">
-                            <h6 class="panel-title">Category Overview</h6>
+                            <h6 class="panel-title">Transaksi</h6>
                         </div>
                         <div class="clearfix"></div>
                         <div class="head-overlay"></div>
@@ -85,108 +205,33 @@
                             <div class="sm-data-box">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
-                                            <span class=""><i
-                                                    class="zmdi zmdi-trending-up txt-warning font-18 mr-5"></i><span
-                                                    class="weight-500 uppercase-font">growth</span></span>
-                                            <span class="txt-dark counter block">$<span
-                                                    class="counter-anim">5,676</span></span>
+                                        <div class="col-xs-3 data-wrap-left pr-0 text-center">
+                                            <span class="block"><i
+                                                    class="zmdi zmdi-time-interval txt-warning font-18 mr-5"></i><span
+                                                    class="weight-500 uppercase-font"
+                                                    style="font-size: 13px">Pending</span></span>
+                                            <span class="txt-dark counter block" id="pending_count"></span>
                                         </div>
-                                        <div class="col-xs-6 data-wrap-right pl-0 pr-0 text-center">
-                                            <div id="sparkline_7" style="width: 100px; overflow: hidden; margin: 0px auto;">
-                                            </div>
+                                        <div class="col-xs-3 data-wrap-left text-center">
+                                            <span class="block"><i
+                                                    class="zmdi zmdi-swap-vertical txt-primary font-18 mr-5"></i><span
+                                                    class="weight-500 uppercase-font"
+                                                    style="font-size: 13px">Aktif</span></span>
+                                            <span class="txt-dark counter block" id="active_count"></span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Row -->
-        <!-- Row -->
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="panel panel-default card-view pa-0">
-                    <div class="panel-wrapper in collapse">
-                        <div class="panel-body pa-0">
-                            <div class="sm-data-box">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
-                                            <span class="txt-dark counter block"><span
-                                                    class="counter-anim">914,001</span></span>
-                                            <span class="weight-500 uppercase-font font-13 block">All Properties</span>
+                                        <div class="col-xs-3 data-wrap-left text-center" style="padding-left: 5px">
+                                            <span class="block"><i
+                                                    class="zmdi zmdi-close txt-danger font-18 mr-5"></i><span
+                                                    class="weight-500 uppercase-font"
+                                                    style="font-size: 13px">Cancel</span></span>
+                                            <span class="txt-dark counter block" id="cancel_count"></span>
                                         </div>
-                                        <div class="col-xs-6 data-wrap-right pl-0 pr-0 text-center">
-                                            <i class="icon-user-following data-right-rep-icon txt-light-grey"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="panel panel-default card-view pa-0">
-                    <div class="panel-wrapper in collapse">
-                        <div class="panel-body pa-0">
-                            <div class="sm-data-box">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
-                                            <span class="txt-dark counter block"><span
-                                                    class="counter-anim">46.41</span>%</span>
-                                            <span class="weight-500 uppercase-font block">growth rate</span>
-                                        </div>
-                                        <div class="col-xs-6 data-wrap-right pl-0 pr-0 text-center">
-                                            <i class="icon-graph data-right-rep-icon txt-light-grey"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="panel panel-default card-view pa-0">
-                    <div class="panel-wrapper in collapse">
-                        <div class="panel-body pa-0">
-                            <div class="sm-data-box">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
-                                            <span class="txt-dark counter block"><span
-                                                    class="counter-anim">4,054,876</span></span>
-                                            <span class="weight-500 uppercase-font block">Totle Sales</span>
-                                        </div>
-                                        <div class="col-xs-6 data-wrap-right pl-0 pr-0 text-center">
-                                            <i class="icon-layers data-right-rep-icon txt-light-grey"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                <div class="panel panel-default card-view pa-0">
-                    <div class="panel-wrapper in collapse">
-                        <div class="panel-body pa-0">
-                            <div class="sm-data-box">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-xs-6 data-wrap-left pl-0 pr-0 text-center">
-                                            <span class="txt-dark counter block"><span
-                                                    class="counter-anim">4,054</span></span>
-                                            <span class="weight-500 uppercase-font block">Rented</span>
-                                        </div>
-                                        <div class="col-xs-6 data-wrap-right pl-0 pr-0 text-center">
-                                            <i class="icon-flag data-right-rep-icon txt-light-grey"></i>
+                                        <div class="col-xs-3 data-wrap-left pl-0 text-center">
+                                            <span class="block"><i
+                                                    class="zmdi zmdi-check txt-success font-18 mr-5"></i><span
+                                                    class="weight-500 uppercase-font"
+                                                    style="font-size: 13px">Selesai</span></span>
+                                            <span class="txt-dark counter block" id="complete_count"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -203,73 +248,36 @@
                 <div class="panel panel-default card-view">
                     <div class="panel-heading">
                         <div class="pull-left">
-                            <h6 class="panel-title txt-dark">Project Sales</h6>
+                            <h6 class="panel-title txt-dark">Data Transaksi</h6>
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="panel-wrapper in collapse">
                         <div class="panel-body">
-                            <div class="table-wrap">
-                                <div class="table-responsive">
-                                    <table class="table-hover mb-0 table">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Products</th>
-                                                <th>Popularity</th>
-                                                <th>Sales</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Milk Powder</td>
-                                                <td><span class="peity-bar" data-width="90"
-                                                        data-peity='{ "fill": ["#667add"], "stroke":["#667add"]}'
-                                                        data-height="40">0,-3,-2,-4,5,-4,3,-2,5,-1</span> </td>
-                                                <td><span class="text-danger text-semibold"><i class="fa fa-level-down"
-                                                            aria-hidden="true"></i> 28.76%</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Air Conditioner</td>
-                                                <td><span class="peity-bar" data-width="90"
-                                                        data-peity='{ "fill": ["#667add"], "stroke":["#667add"]}'
-                                                        data-height="40">0,-1,1,-2,-3,1,-2,-3,1,-2</span> </td>
-                                                <td><span class="text-warning text-semibold"><i class="fa fa-level-down"
-                                                            aria-hidden="true"></i> 8.55%</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>RC Cars</td>
-                                                <td><span class="peity-bar" data-width="90"
-                                                        data-peity='{ "fill": ["#667add"], "stroke":["#667add"]}'
-                                                        data-height="40">0,3,6,1,2,4,6,3,2,1</span> </td>
-                                                <td><span class="text-success text-semibold"><i class="fa fa-level-up"
-                                                            aria-hidden="true"></i> 58.56%</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Down Coat</td>
-                                                <td><span class="peity-bar" data-width="90"
-                                                        data-peity='{ "fill": ["#667add"], "stroke":["#667add"]}'
-                                                        data-height="40">0,3,6,4,5,4,7,3,4,2</span> </td>
-                                                <td><span class="text-info text-semibold"><i class="fa fa-level-up"
-                                                            aria-hidden="true"></i> 35.76%</span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Xyz Byke</td>
-                                                <td><span class="peity-bar" data-width="90"
-                                                        data-peity='{ "fill": ["#667add"], "stroke":["#667add"]}'
-                                                        data-height="40">0,3,6,4,5,4,7,3,4,2</span> </td>
-                                                <td><span class="text-info text-semibold"><i class="fa fa-level-up"
-                                                            aria-hidden="true"></i> 35.76%</span> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-success btn-sm left-icon pr-10 pl-10"
+                                    id="btn_export_excel"><i class="fa fa-file-excel-o"></i> Export
+                                    Excel</button>
                             </div>
+                            <table id="table-report" class="table-bordered display table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Kode Transaksi</th>
+                                        <th>Pelanggan</th>
+                                        <th>Bus</th>
+                                        <th>Tujuan</th>
+                                        <th>Tanggal Perjalanan</th>
+                                        <th>Pembayaran</th>
+                                        <th>Status Transaksi</th>
+                                        <th>Harga</th>
+                                        <th>Dibayar</th>
+                                        <th>Dibuat Oleh</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="cursor:pointer">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -284,5 +292,29 @@
 
 @section('javascript')
     <script src="{{ asset('admin') }}/vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
-    <script src="{{ asset('admin') }}/dist/js/dashboard6-data.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var date = new Date();
+            var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+            $('#DATE_FROM_TO').daterangepicker({
+                autoUpdateInput: false,
+                timePicker: false,
+                autoApply: true,
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+
+            }).on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format(
+                    'DD/MM/YYYY'));
+                $(this).focus();
+            });
+
+            $("#DATE_FROM_TO").val(moment(firstDay).format('DD/MM/YYYY') + ' - ' + moment(lastDay).format(
+                'DD/MM/YYYY'));
+        });
+    </script>
+    @include('dashboard.admin._javascript')
 @endsection

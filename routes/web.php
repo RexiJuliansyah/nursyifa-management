@@ -9,6 +9,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\KondekturController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\TransactionController;
 
@@ -31,6 +32,7 @@ Route::get('/', [WelcomeController::class, 'index'])->name('login.view');
 Route::group(['middleware' => 'revalidate'], function(){
     
     Route::get('home', [HomeController::class, 'index'])->name('home');
+    Route::get('home-getChartData', [HomeController::class, 'getChartData'])->name('home.getChartData');
 
     Route::get('menu', [MenuController::class, 'index'])->name('menu');
     Route::get('menu-datatable', [MenuController::class, 'datatable'])->name('menu.datatable');
@@ -90,5 +92,10 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::post('transaksi-confirm', [TransactionController::class, 'confirm'])->name('transaksi.confirm');
     Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
     Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
+    Route::get('transaksi-getByDateRangeForDashboard', [TransactionController::class, 'getByDateRangeForDashboard'])->name('transaksi.getByDateRangeForDashboard');
+
+    Route::get('report', [ReportController::class, 'index'])->name('report');
+    Route::get('report-datatable', [ReportController::class, 'datatable'])->name('report.datatable');
+    Route::get('report-export-excel', [ReportController::class, 'export_excel'])->name('report.export-excel');
 
 });
