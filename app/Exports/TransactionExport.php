@@ -136,7 +136,7 @@ class TransactionExport implements
     {
         return [
             BeforeWriting::class => function (BeforeWriting $event) {
-                $templateFile = new LocalTemporaryFile(storage_path('template\Report_Template.xlsx'));
+                $templateFile = new LocalTemporaryFile(storage_path('template/Report_Template.xlsx'));
                 $event->writer->reopen($templateFile, Excel::XLSX);
                 $sheet = $event->writer->getSheetByIndex(0);
 
