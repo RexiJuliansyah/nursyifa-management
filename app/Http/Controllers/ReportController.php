@@ -32,23 +32,23 @@ class ReportController extends BaseController
     {
         $params = [];
         if ($request->transport_code) {
-            array_push($params, ['TRANSPORT_CODE', 'like', '%' . $request->transport_code . '%']);
+            array_push($params, ['tb_transaction.TRANSPORT_CODE', 'like', '%' . $request->transport_code . '%']);
         }
 
         if ($request->destination) {
-            array_push($params, ['DESTINATION', 'like', '%' . $request->destination . '%']);
+            array_push($params, ['tb_transaction.DESTINATION', 'like', '%' . $request->destination . '%']);
         }
 
         if ($request->customer) {
-            array_push($params, ['CUSTOMER_NAME', 'like', '%' . $request->customer . '%']);
+            array_push($params, ['tb_transaction.CUSTOMER_NAME', 'like', '%' . $request->customer . '%']);
         }
 
         if (isset($request->payment_status)) {
-            array_push($params, ['PAYMENT_STATUS', 'like', '%' . $request->payment_status . '%']);
+            array_push($params, ['tb_payment.PAYMENT_STATUS', 'like', '%' . $request->payment_status . '%']);
         }
 
         if (isset($request->transaction_status)) {
-            array_push($params, ['TRANSACTION_STATUS', 'like', '%' . $request->transaction_status . '%']);
+            array_push($params, ['tb_transaction.TRANSACTION_STATUS', 'like', '%' . $request->transaction_status . '%']);
         }
 
         $q = Transaction::select([
