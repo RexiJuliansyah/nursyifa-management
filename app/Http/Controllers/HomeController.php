@@ -10,12 +10,7 @@ use App\Models\Kondektur;
 use Illuminate\Support\Carbon;
 use Carbon\CarbonPeriod;
 use stdClass;
-use App\Models\Transaction;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
 
 use DataTables;
 
