@@ -45,6 +45,10 @@
             onExportExcel();
         });
 
+        $("#btn_export_pdf").on("click", function(e) {
+            onExportPdf();
+        });
+
     });
 
     function initTable() {
@@ -116,6 +120,11 @@
                     className: 'text-center'
                 },
                 {
+                    data: 'EXPENSE',
+                    name: 'EXPENSE',
+                    className: 'text-center'
+                },
+                {
                     data: 'CREATED_BY',
                     name: 'CREATED_BY',
                     className: 'text-center'
@@ -140,5 +149,21 @@
 
         window.location = url;
 
+    }
+
+    function onExportPdf() {
+        var query = {
+            'transport_code': $("#search_transport_code").val(),
+            'destination': $("#search_destination").val(),
+            'customer': $("#search_customer").val(),
+            'payment_status': $("#search_payment_status").val(),
+            'transaction_status': $("#search_transaction_status").val(),
+            'DATE_FROM_TO': $('#DATE_FROM_TO').val()
+        }
+
+
+        var url = "{{ URL::to('report-export-pdf') }}?" + $.param(query)
+
+        window.location = url;
     }
 </script>

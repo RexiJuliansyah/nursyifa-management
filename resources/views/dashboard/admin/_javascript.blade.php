@@ -76,6 +76,10 @@
         $("#btn_export_excel").on("click", function(e) {
             onExportExcel();
         });
+
+        $("#btn_export_pdf").on("click", function(e) {
+            onExportPdf();
+        });
     });
 
     function onSearch() {
@@ -271,6 +275,17 @@
         }
 
         var url = "{{ URL::to('report-export-excel') }}?" + $.param(query)
+
+        window.location = url;
+    }
+
+    function onExportPdf() {
+        var query = {
+            'DATE_FROM_TO': $('#DATE_FROM_TO').val()
+        }
+
+
+        var url = "{{ URL::to('report-export-pdf') }}?" + $.param(query)
 
         window.location = url;
     }

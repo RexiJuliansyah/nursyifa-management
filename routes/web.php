@@ -100,6 +100,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('report', [ReportController::class, 'index'])->name('report');
     Route::get('report-datatable', [ReportController::class, 'datatable'])->name('report.datatable');
     Route::get('report-export-excel', [ReportController::class, 'export_excel'])->name('report.export-excel');
+    Route::get('report-export-pdf', [ReportController::class, 'export_pdf'])->name('report.export-pdf');
     Route::post('transaksi-complete', [TransactionController::class, 'transaksi_complete'])->name('transaksi.complete');
 
     Route::get('expense-datatable', [ExpenseController::class, 'datatable'])->name('expense.datatable');

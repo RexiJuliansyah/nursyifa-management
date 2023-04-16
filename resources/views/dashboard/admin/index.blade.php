@@ -258,6 +258,9 @@
                                 <button type="button" class="btn btn-success btn-sm left-icon pr-10 pl-10"
                                     id="btn_export_excel"><i class="fa fa-file-excel-o"></i> Export
                                     Excel</button>
+                                <button type="button" class="btn btn-danger btn-sm center-icon pr-10 pl-10"
+                                    id="btn_export_pdf"><i class="fa fa-file-pdf-o"></i> Export
+                                    PDF</button>
                             </div>
                             <table id="table-report" class="table-bordered display table">
                                 <thead class="thead-dark">

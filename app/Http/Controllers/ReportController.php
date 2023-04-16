@@ -11,6 +11,8 @@ use Illuminate\Support\Carbon;
 use DataTables;
 use Maatwebsite\Excel\Facades\Excel;
 use Exception;
+use PDF;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends BaseController
 {
@@ -59,6 +61,7 @@ class ReportController extends BaseController
             'tb_payment.PAID_PAYMENT',
             'tb_payment.PENDING_PAYMENT',
             'sysA.SYSTEM_VAL as STATUS',
+            DB::raw('(select sum(EXPENSE_AMOUNT) from tb_expense where TRANSACTION_ID = tb_transaction.TRANSACTION_ID) as TOTAL_EXPENSE')
         ])
             ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID')
             ->leftJoin('tb_m_system as sysA', 'tb_transaction.TRANSACTION_STATUS', '=', 'sysA.SYSTEM_CD')
@@ -119,6 +122,11 @@ class ReportController extends BaseController
                 ->addColumn('DIBAYAR', function ($q) {
                     return 'Rp. ' . number_format($q->PAID_PAYMENT, 0, '', '.');
                 })
+                ->addColumn('EXPENSE', function ($q) {
+                    if ($q->TOTAL_EXPENSE != null) {
+                        return 'Rp. ' . number_format($q->TOTAL_EXPENSE, 0, '', '.');
+                    } else { return $q->TOTAL_EXPENSE; }
+                })
                 ->rawColumns(['checkbox', 'STATUS', 'STATUS_PEMBAYARAN'])
                 ->make(true);
         }
@@ -137,6 +145,9 @@ class ReportController extends BaseController
             $transaction->AMOUNT = 'Rp. ' . number_format($transaction->AMOUNT, 0, '', '.');
             $transaction->PAID_PAYMENT = 'Rp. ' . number_format($transaction->PAID_PAYMENT, 0, '', '.');
             $transaction->DATE_FROM_TO = with(new Carbon($transaction->DATE_FROM))->format('d M Y') . ' - ' . with(new Carbon($transaction->DATE_TO))->format('d M Y');
+            if ($transaction->TOTAL_EXPENSE != null) {
+                $transaction->TOTAL_EXPENSE = 'Rp. ' . number_format($transaction->TOTAL_EXPENSE, 0, '', '.');
+            }
         }
 
         try {
@@ -162,5 +173,28 @@ class ReportController extends BaseController
         // $export = new TransactionExport($transaction_list);
 
         // return Excel::download($export, 'siswa.xlsx');
+    }
+
+    
+    public function export_pdf(Request $request)
+    {
+    	$transaction_list = $this->get_transaction_data($request);
+        foreach ($transaction_list as $transaction) {
+            if ($transaction->PAYMENT_STATUS == 0) {
+                $transaction->PAYMENT_STATUS_VAL = "DANA PERTAMA";
+            } else {
+                $transaction->PAYMENT_STATUS_VAL = "LUNAS";
+            }
+
+            $transaction->AMOUNT = 'Rp. ' . number_format($transaction->AMOUNT, 0, '', '.');
+            $transaction->PAID_PAYMENT = 'Rp. ' . number_format($transaction->PAID_PAYMENT, 0, '', '.');
+            $transaction->DATE_FROM_TO = with(new Carbon($transaction->DATE_FROM))->format('d M Y') . ' - ' . with(new Carbon($transaction->DATE_TO))->format('d M Y');
+            if ($transaction->TOTAL_EXPENSE != null) {
+                $transaction->TOTAL_EXPENSE = 'Rp. ' . number_format($transaction->TOTAL_EXPENSE, 0, '', '.');
+            }
+        }
+ 
+    	$pdf = PDF::loadview('report/report_pdf', ['data'=>$transaction_list])->setPaper('a4', 'landscape');
+    	return $pdf->download('transaction_report_'.time().'.pdf');
     }
 }

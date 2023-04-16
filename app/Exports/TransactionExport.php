@@ -57,6 +57,7 @@ class TransactionExport implements
             'Status Transaksi',
             'Harga',
             'Dibayar',
+            'Total Expense',
             'Dibuat Oleh',
         ];
     }
@@ -74,7 +75,7 @@ class TransactionExport implements
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A' . $this->header_line . ':L' . $this->transaction->count() + $this->header_line)->applyFromArray([
+        $sheet->getStyle('A' . $this->header_line . ':M' . $this->transaction->count() + $this->header_line)->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => Border::BORDER_THIN,
@@ -128,6 +129,7 @@ class TransactionExport implements
             $transaction->STATUS,
             $transaction->AMOUNT,
             $transaction->PAID_PAYMENT,
+            $transaction->TOTAL_EXPENSE,
             $transaction->CREATED_BY,
         ];
     }
