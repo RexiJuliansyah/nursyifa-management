@@ -70,18 +70,22 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::get('driver-getbykey', [DriverController::class, 'getbykey'])->name('driver.getbykey');
     Route::post('driver-store', [DriverController::class, 'store'])->name('driver.store');
     Route::delete('driver-delete', [DriverController::class, 'delete'])->name('driver.delete');
+    Route::get('driver-driverSelect2', [DriverController::class, 'driverSelect2'])->name('driver.driverSelect2');
 
     Route::get('kondektur', [KondekturController::class, 'index'])->name('kondektur');
     Route::get('kondektur-datatable', [KondekturController::class, 'datatable'])->name('kondektur.datatable');
     Route::get('kondektur-getbykey', [KondekturController::class, 'getbykey'])->name('kondektur.getbykey');
     Route::post('kondektur-store', [KondekturController::class, 'store'])->name('kondektur.store');
     Route::delete('kondektur-delete', [KondekturController::class, 'delete'])->name('kondektur.delete');
+    Route::get('kondektur-kondekturSelect2', [KondekturController::class, 'kondekturSelect2'])->name('kondektur.kondekturSelect2');
+    
 
     Route::get('transport', [TransportController::class, 'index'])->name('transport');
     Route::get('transport-datatable', [TransportController::class, 'datatable'])->name('transport.datatable');
     Route::get('transport-getbykey', [TransportController::class, 'getbykey'])->name('transport.getbykey');
     Route::post('transport-store', [TransportController::class, 'store'])->name('transport.store');
     Route::delete('transport-delete', [TransportController::class, 'delete'])->name('transport.delete');
+    Route::get('transport-transportSelect2', [TransportController::class, 'transportSelect2'])->name('transport.transportSelect2');
 
     Route::get('transaksi', [TransactionController::class, 'index'])->name('transaksi');
     Route::get('calender', [TransactionController::class, 'calender'])->name('calender');

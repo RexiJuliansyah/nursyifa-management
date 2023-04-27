@@ -66,17 +66,6 @@ class TransactionController extends BaseController
     public function add_transaction()
     {
         $data['title'] = 'Transaksi';
-        $data['transport_list'] = Transport::select([
-                'tb_m_transport.*',
-                'tb_m_system.SYSTEM_VAL as BUS_SEAT_TYPE',
-            ])
-            ->leftJoin('tb_m_system', 'tb_m_transport.TRANSPORT_TYPE', '=', 'tb_m_system.SYSTEM_CD') 
-            ->where('tb_m_system.SYSTEM_TYPE', 'BUS_SEAT_TYPE')
-            ->where('tb_m_transport.TRANSPORT_STATUS', 1)
-            ->get();
-
-        $data['driver_list'] = Driver::where('DRIVER_STATUS', 1)->get();
-        $data['kondektur_list'] = Kondektur::where('KONDEKTUR_STATUS', 1)->get();
         return view('transaction/add_transaction', compact('data'));
     }
 

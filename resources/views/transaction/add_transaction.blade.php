@@ -77,32 +77,20 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="control-label mb-10">Bus<span style="color: red">*</span></label>
-                                            <select name="TRANSPORT_CODE" id="TRANSPORT_CODE" class="selectpicker" data-style="form-control btn-default btn-outline pl-10" required>
-                                                <option value="">-- Pilih --</option>
-                                                @foreach ($data['transport_list'] as $transport)
-                                                    <option value="{{ $transport->TRANSPORT_CODE }}">{{ $transport->TRANSPORT_CODE }} - {{ $transport->TRANSPORT_NAME }} ( {{ $transport->BUS_SEAT_TYPE }} ) </option>
-                                                @endforeach
+                                            <select name="TRANSPORT_CODE" id="TRANSPORT_CODE" class="form-control btn-default btn-outline pl-10" disabled required>
                                             </select>
                                         </div></div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="control-label mb-10">Supir<span style="color: red">*</span></label>
-                                            <select name="DRIVER_ID" id="DRIVER_ID" class="selectpicker" data-style="form-control btn-default btn-outline pl-10" required >
-                                                <option value="" >-- Pilih --</option>
-                                                @foreach ($data['driver_list'] as $driver)
-                                                    <option value="{{ $driver->DRIVER_ID }}">{{ $driver->DRIVER_NAME }}</option>
-                                                @endforeach
+                                            <select name="DRIVER_ID" id="DRIVER_ID" class="form-control" disabled required >
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label class="control-label mb-10">Kondektur<span style="color: red">*</span></label>
-                                            <select name="KONDEKTUR_ID" id="KONDEKTUR_ID" class="selectpicker" data-style="form-control btn-default btn-outline pl-10" required >
-                                                <option value="" >-- Pilih --</option>
-                                                @foreach ($data['kondektur_list'] as $kondektur)
-                                                    <option value="{{ $kondektur->KONDEKTUR_ID }}">{{ $kondektur->KONDEKTUR_NAME }}</option>
-                                                @endforeach
+                                            <select name="KONDEKTUR_ID" id="KONDEKTUR_ID" class="form-control" disabled required >
                                             </select>
                                         </div>
                                     </div>
@@ -204,8 +192,6 @@
             });
         } 
 
-
-
         $('#DATE_FROM_TO').daterangepicker({
             autoUpdateInput: false,
             drops: "up",
@@ -219,6 +205,64 @@
 	    }).on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'));
             $(this).focus();
+            
+            $("#TRANSPORT_CODE").attr("disabled", false);
+            $("#DRIVER_ID").attr("disabled", false);
+            $("#KONDEKTUR_ID").attr("disabled", false);
+
+            $("#TRANSPORT_CODE").select2({
+                placeholder: "-- Pilih --",
+                ajax: {
+                    url: "{{ route('transport.transportSelect2') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            date_from_to: picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'),
+                            term: params.term || '',
+                            page: params.page || 1
+                        }
+                    },
+                    cache: true
+                }
+            });
+            $('#TRANSPORT_CODE').val(null).trigger('change');
+
+            $("#DRIVER_ID").select2({
+                placeholder: "-- Pilih --",
+                ajax: {
+                    url: "{{ route('driver.driverSelect2') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            date_from_to: picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'),
+                            term: params.term || '',
+                            page: params.page || 1
+                        }
+                    },
+                    cache: true
+                }
+            });
+            $('#DRIVER_ID').val(null).trigger('change');
+
+            $("#KONDEKTUR_ID").select2({
+                placeholder: "-- Pilih --",
+                ajax: {
+                    url: "{{ route('kondektur.kondekturSelect2') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            date_from_to: picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'),
+                            term: params.term || '',
+                            page: params.page || 1
+                        }
+                    },
+                    cache: true
+                }
+            });
+            $('#KONDEKTUR_ID').val(null).trigger('change');
         });
 
         $('#TIME').datetimepicker({

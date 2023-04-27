@@ -6,6 +6,7 @@ use App\Models\Kondektur;
 use App\Models\System;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 
@@ -141,5 +142,49 @@ class KondekturController extends BaseController
             'KONDEKTUR_ID' => $request->KONDEKTUR_ID
         ])->delete();
         return response()->json(['message' => 'Data berhasil dihapus!']);
-    }   
+    }  
+    
+    public function kondekturSelect2(Request $request){
+
+        if ($request->ajax()) {
+
+            $daterange = explode(' - ', $request->date_from_to);
+            $date_from = Carbon::createFromFormat('d/m/Y', $daterange[0])->format('Y-m-d');
+            $date_to = Carbon::createFromFormat('d/m/Y', $daterange[1])->format('Y-m-d');
+
+
+            $term = trim($request->term);
+
+            $posts = DB::table('tb_m_kondektur')
+            ->select([
+                'tb_m_kondektur.KONDEKTUR_ID as id',
+                'tb_m_kondektur.KONDEKTUR_NAME AS text',
+            ])
+            ->leftJoin(DB::raw('(SELECT * FROM tb_transaction 
+                WHERE (tb_transaction.DATE_FROM BETWEEN "'.$date_from.'" AND "'.$date_to.'")
+                OR (tb_transaction.DATE_TO BETWEEN "'.$date_from.'" AND "'.$date_to.'") 
+                OR (tb_transaction.DATE_FROM <= "'.$date_from.'" AND tb_transaction.DATE_TO >= "'.$date_to.'"))
+                transaction'), function($join)
+            {
+                $join->on('transaction.KONDEKTUR_ID', '=', 'tb_m_kondektur.KONDEKTUR_ID');
+            })
+            ->whereNull('transaction.TRANSACTION_ID')
+            ->where('tb_m_kondektur.KONDEKTUR_NAME', 'LIKE',  '%' . $term. '%')
+            ->orderBy('tb_m_kondektur.KONDEKTUR_ID', 'asc')->simplePaginate(10);
+           
+            $morePages=true;
+            $pagination_obj= json_encode($posts);
+            if (empty($posts->nextPageUrl())){
+                $morePages=false;
+            }
+            $results = array(
+                "results" => $posts->items(),
+                "pagination" => array(
+                    "more" => $morePages
+                )
+            );
+        
+            return response()->json($results);
+        }
+    }
 }
