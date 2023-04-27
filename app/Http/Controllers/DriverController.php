@@ -24,7 +24,6 @@ class DriverController extends BaseController
     public function index()
     {
         $data['title'] = 'Supir Master';
-        $data['driver_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_OPERASIONAL')->orderBy('SYSTEM_CD')->get();
         return view('driver/index', compact('data'));
     }
 
@@ -35,10 +34,6 @@ class DriverController extends BaseController
 
             if ($request->driver_name) {
                 array_push($params, ['DRIVER_NAME', 'like', '%' . $request->driver_name . '%']);
-            }
-
-            if ($request->driver_status) {
-                array_push($params, ['DRIVER_STATUS', 'like', '%' . $request->driver_status . '%']);
             }
             
             $q = Driver::select([
@@ -86,13 +81,11 @@ class DriverController extends BaseController
             $validator = Validator::make($request->all(), [
                 'DRIVER_NAME' => 'required',
                 'NO_TELP_DRIVER' => 'required',
-                'DRIVER_STATUS' => 'required',
             ],
             // Error Message
             [
                 'DRIVER_NAME.required' => 'Name Supir tidak boleh kosong! <br>',
                 'NO_TELP_DRIVER.required' => 'No Telepon tidak boleh kosong! <br>',
-                'DRIVER_STATUS.required' => 'Status tidak boleh kosong! <br>',
             ]);
 
             
@@ -112,7 +105,7 @@ class DriverController extends BaseController
                         'DRIVER_ID' => $request->DRIVER_ID,
                         'DRIVER_NAME' => $request->DRIVER_NAME,
                         'NO_TELP_DRIVER' => $request->NO_TELP_DRIVER,
-                        'DRIVER_STATUS' => $request->DRIVER_STATUS
+                        'DRIVER_STATUS' => 1
                     ]);
                 }
                 else {

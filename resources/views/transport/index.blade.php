@@ -62,7 +62,6 @@
                             <th>Kode Bus</th>
                             <th>Nama Bus</th>
                             <th>Tipe Seat</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody style="cursor:pointer">

@@ -24,15 +24,6 @@
                         <label class="control-label mb-10">Nama Kondektur</label>
                         <input type="text" class="form-control" id="search_kondektur_name" name="search_kondektur_name" placeholder="Nama Kondektur" value="">
                     </div>
-                    <div class="col-sm-6">
-                        <label class="control-label mb-10">Status</label>
-                        <select name="search_kondektur_status" id="search_kondektur_status" class="selectpicker" data-style="form-control btn-default btn-outline">
-                            <option value="">-- Semua --</option>
-                            @foreach ($data['kondektur_status_list'] as $status)
-                                <option value="{{ $status->SYSTEM_CD }}">{{ $status->SYSTEM_VAL }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -58,7 +49,6 @@
                             <th>Kode Kondetur</th>
                             <th>Nama Kondetur</th>
                             <th>No Telp / Whatsapp</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody style="cursor:pointer">

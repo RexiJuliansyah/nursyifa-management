@@ -11,15 +11,13 @@
             url: "{{ route('driver.datatable') }}",
             data: function(d) {
                 d.driver_name = $("#search_driver_name").val();
-                d.driver_status = $("#search_driver_status").val();
             }
         },
         columns: [
             { data: 'checkbox', className: 'text-center', name: 'checkbox' },
             { data: 'DRIVER_ID', name: 'DRIVER_ID', className: 'text-left' },
             { data: 'DRIVER_NAME', name: 'DRIVER_NAME', className: 'text-left', },
-            { data: 'NO_TELP_DRIVER', name: 'NO_TELP_DRIVER', className: 'text-left'},
-            { data: 'STS_DRIVER', name: 'STS_DRIVER', className: 'text-center' }
+            { data: 'NO_TELP_DRIVER', name: 'NO_TELP_DRIVER', className: 'text-left'}
         ]
 
     });
@@ -42,8 +40,6 @@
             setProgressLine();
 
             $("#search_driver_name").val("");
-            $("#search_driver_status").val("").trigger('change');
-
 
             table.draw();
         });
@@ -76,7 +72,6 @@
         $('.form-group').removeClass('has-error has-danger');
         $("#driver_name").val(""); 
         $("#no_telp").val(""); 
-        $("#driver_status").val("").trigger('change');
     }
 
     function onAddPrepare() {
@@ -116,7 +111,6 @@
             'DRIVER_ID': $("#driver_id").val(),
             'DRIVER_NAME': $("#driver_name").val(),
             'NO_TELP_DRIVER': $("#no_telp").val(),
-            'DRIVER_STATUS': $("#driver_status").val(),
         };
 
         $.ajax({
@@ -159,7 +153,6 @@
                 $("#driver_id").val(result.DRIVER_ID);
                 $("#driver_name").val(result.DRIVER_NAME);
                 $("#no_telp").val(result.NO_TELP_DRIVER);
-                $("#driver_status").val(result.DRIVER_STATUS).trigger('change');
 
                 $("#addEditPopup").modal('show');
                 $('#addEditPopup').on('shown.bs.modal', function() {

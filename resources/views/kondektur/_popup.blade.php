@@ -20,15 +20,6 @@
                                     <label for="no_telp" class="control-label mb-10">No Telp / Whatsapp<span style="color: red">*</span></label>
                                     <input type="text" class="form-control" id="no_telp" name="no_telp"  required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="kondektur_status" class="control-label mb-10">Status<span style="color: red">*</span></label>
-                                    <select name="kondektur_status" id="kondektur_status" class="selectpicker" data-style="form-control btn-default btn-outline">
-                                        <option value="">-- Pilih --</option>    
-                                        @foreach ($data['kondektur_status_list'] as $status)
-                                            <option value="{{ $status->SYSTEM_CD }}">{{ $status->SYSTEM_VAL }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </form>
                         </div>
                     </div>

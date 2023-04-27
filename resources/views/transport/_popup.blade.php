@@ -29,15 +29,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="transport_status" class="control-label mb-10">Status<span style="color: red">*</span></label>
-                                    <select name="transport_status" id="transport_status" class="selectpicker" data-style="form-control btn-default btn-outline">
-                                        <option value="">-- Pilih --</option>        
-                                        @foreach ($data['transport_status_list'] as $status)
-                                            <option value="{{ $status->SYSTEM_CD }}">{{ $status->SYSTEM_VAL }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </form>
                         </div>
                     </div>

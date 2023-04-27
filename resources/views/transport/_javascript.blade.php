@@ -19,8 +19,7 @@
             { data: 'checkbox', className: 'text-center', name: 'checkbox' },
             { data: 'TRANSPORT_CODE', name: 'TRANSPORT_CODE', className: 'text-left' },
             { data: 'TRANSPORT_NAME', name: 'TRANSPORT_NAME', className: 'text-left', },
-            { data: 'BUS_TYPE', name: 'BUS_TYPE', className: 'text-left'},
-            { data: 'BUS_STATUS', name: 'BUS_STATUS', className: 'text-center' }
+            { data: 'BUS_TYPE', name: 'BUS_TYPE', className: 'text-left'}
         ]
 
     });
@@ -78,7 +77,6 @@
         $("#transport_code").val("");
         $("#transport_name").val("");
         $("#transport_type").val("").trigger('change');
-        $("#transport_status").val("").trigger('change');
     }
 
     function onAddPrepare() {
@@ -119,7 +117,6 @@
             'TRANSPORT_CODE': $("#transport_code").val(),
             'TRANSPORT_NAME': $("#transport_name").val(),
             'TRANSPORT_TYPE': $("#transport_type").val(),
-            'TRANSPORT_STATUS': $("#transport_status").val(),
         };
 
         $.ajax({
@@ -163,7 +160,6 @@
                 $("#transport_code").val(result.TRANSPORT_CODE);
                 $("#transport_name").val(result.TRANSPORT_NAME);
                 $("#transport_type").val(result.TRANSPORT_TYPE).trigger('change');
-                $("#transport_status").val(result.TRANSPORT_STATUS).trigger('change');
 
                 $("#addEditPopup").modal('show');
                 $('#addEditPopup').on('shown.bs.modal', function() {

@@ -24,7 +24,6 @@ class KondekturController extends BaseController
     public function index()
     {
         $data['title'] = 'Kondektur Master';
-        $data['kondektur_status_list'] = System::select('SYSTEM_CD', 'SYSTEM_VAL')->where('SYSTEM_TYPE', '=', 'STATUS_OPERASIONAL')->orderBy('SYSTEM_CD')->get();
         return view('kondektur/index', compact('data'));
     }
 
@@ -35,10 +34,6 @@ class KondekturController extends BaseController
 
             if ($request->kondektur_name) {
                 array_push($params, ['KONDEKTUR_NAME', 'like', '%' . $request->kondektur_name . '%']);
-            }
-
-            if ($request->kondektur_status) {
-                array_push($params, ['KONDEKTUR_STATUS', 'like', '%' . $request->kondektur_status . '%']);
             }
             
             $q = Kondektur::select([
@@ -85,13 +80,11 @@ class KondekturController extends BaseController
             $validator = Validator::make($request->all(), [
                 'KONDEKTUR_NAME' => 'required',
                 'NO_TELP_KONDEKTUR' => 'required',
-                'KONDEKTUR_STATUS' => 'required',
             ],
             // Error Message
             [
                 'KONDEKTUR_NAME.required' => 'Name Kondektur tidak boleh kosong! <br>',
                 'NO_TELP_KONDEKTUR.required' => 'No Telepon tidak boleh kosong! <br>',
-                'KONDEKTUR_STATUS.required' => 'Status tidak boleh kosong! <br>',
             ]);
 
             
@@ -111,7 +104,7 @@ class KondekturController extends BaseController
                         'KONDEKTUR_ID' => $request->KONDEKTUR_ID,
                         'KONDEKTUR_NAME' => $request->KONDEKTUR_NAME,
                         'NO_TELP_KONDEKTUR' => $request->NO_TELP_KONDEKTUR,
-                        'KONDEKTUR_STATUS' => $request->KONDEKTUR_STATUS
+                        'KONDEKTUR_STATUS' => 1
                     ]);
                 }
                 else {

@@ -89,14 +89,12 @@ class TransportController extends BaseController
                 'TRANSPORT_CODE' => 'required',
                 'TRANSPORT_NAME' => 'required',
                 'TRANSPORT_TYPE' => 'required',
-                'TRANSPORT_STATUS' => 'required',
             ],
             // Error Message
             [
                 'TRANSPORT_CODE.required' => 'Kode Bus tidak boleh kosong! <br>',
                 'TRANSPORT_NAME.required' => 'Nama Bus tidak boleh kosong! <br>',
                 'TRANSPORT_TYPE.required' => 'Jenis Bus boleh kosong! <br>',
-                'TRANSPORT_STATUS.required' => 'Status tidak boleh kosong! <br>',
             ]);
 
             
@@ -115,9 +113,8 @@ class TransportController extends BaseController
                     ->create([
                         'TRANSPORT_CODE' => $request->TRANSPORT_CODE,
                         'TRANSPORT_NAME' => $request->TRANSPORT_NAME,
-                        'TRANSPORT_STATUS' => $request->TRANSPORT_STATUS,
                         'TRANSPORT_TYPE' => $request->TRANSPORT_TYPE,
-                        'TRANSPORT_STATUS' => $request->TRANSPORT_STATUS
+                        'TRANSPORT_STATUS' => 1
                     ]);
                 }
                 else {

@@ -24,15 +24,6 @@
                         <label class="control-label mb-10">Nama Supir</label>
                         <input type="text" class="form-control" id="search_driver_name" name="search_driver_name" placeholder="Nama Supir" value="">
                     </div>
-                    <div class="col-sm-6">
-                        <label class="control-label mb-10">Status</label>
-                        <select name="search_driver_status" id="search_driver_status" class="selectpicker" data-style="form-control btn-default btn-outline">
-                            <option value="">-- Semua --</option>
-                            @foreach ($data['driver_status_list'] as $status)
-                                <option value="{{ $status->SYSTEM_CD }}">{{ $status->SYSTEM_VAL }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
@@ -58,7 +49,6 @@
                             <th>Kode Supir</th>
                             <th>Nama Supir</th>
                             <th>No Telp / Whatsapp</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody style="cursor:pointer">

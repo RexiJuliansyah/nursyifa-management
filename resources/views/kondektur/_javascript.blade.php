@@ -11,15 +11,13 @@
             url: "{{ route('kondektur.datatable') }}",
             data: function(d) {
                 d.kondektur_name = $("#search_kondektur_name").val();
-                d.kondektur_status = $("#search_kondektur_status").val();
             }
         },
         columns: [
             { data: 'checkbox', className: 'text-center', name: 'checkbox' },
             { data: 'KONDEKTUR_ID', name: 'KONDEKTUR_ID', className: 'text-left' },
             { data: 'KONDEKTUR_NAME', name: 'KONDEKTUR_NAME', className: 'text-left', },
-            { data: 'NO_TELP_KONDEKTUR', name: 'NO_TELP_KONDEKTUR', className: 'text-left'},
-            { data: 'STS_KONDEKTUR', name: 'STS_KONDEKTUR', className: 'text-center' }
+            { data: 'NO_TELP_KONDEKTUR', name: 'NO_TELP_KONDEKTUR', className: 'text-left'}
         ]
 
     });
@@ -40,11 +38,7 @@
 
         $("#btn_clear").on("click", function() {
             setProgressLine();
-
             $("#search_kondektur_name").val("");
-            $("#search_kondektur_status").val("").trigger('change');
-
-
             table.draw();
         });
 
@@ -75,8 +69,7 @@
     function clearAddEdit() {
         $('.form-group').removeClass('has-error has-danger');
         $("#kondektur_name").val(""); 
-        $("#no_telp").val(""); 
-        $("#kondektur_status").val("").trigger('change');
+        $("#no_telp").val("");
     }
 
     function onAddPrepare() {
@@ -116,7 +109,6 @@
             'KONDEKTUR_ID': $("#kondektur_id").val(),
             'KONDEKTUR_NAME': $("#kondektur_name").val(),
             'NO_TELP_KONDEKTUR': $("#no_telp").val(),
-            'KONDEKTUR_STATUS': $("#kondektur_status").val(),
         };
 
         $.ajax({
@@ -159,7 +151,6 @@
                 $("#kondektur_id").val(result.KONDEKTUR_ID);
                 $("#kondektur_name").val(result.KONDEKTUR_NAME);
                 $("#no_telp").val(result.NO_TELP_KONDEKTUR);
-                $("#kondektur_status").val(result.KONDEKTUR_STATUS).trigger('change');
 
                 $("#addEditPopup").modal('show');
                 $('#addEditPopup').on('shown.bs.modal', function() {
