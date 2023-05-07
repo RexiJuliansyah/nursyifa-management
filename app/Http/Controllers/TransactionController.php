@@ -390,7 +390,7 @@ class TransactionController extends BaseController
             $transaction = Transaction::find($request->TRANSACTION_ID);
             try {
                 DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 1]);
-                DB::commit();
+                
 
                 $userkey = 'a566152cf82b';
                 $passkey = '64cd368e081aa18e3d02a595';
@@ -416,8 +416,10 @@ class TransactionController extends BaseController
                 $results = json_decode(curl_exec($curlHandle), true);
 
                 if($results["status"] == 0) { // saldo habis
-                    return response()->json(['error' => 'Saldo Tidak mencukupi']);
                     DB::rollback();
+                    return response()->json(['error' => 'Saldo Tidak mencukupi']);
+                } else {
+                    DB::commit();
                 }
 
                 // dd($results);

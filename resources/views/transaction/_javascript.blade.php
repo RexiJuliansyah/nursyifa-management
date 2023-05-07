@@ -292,7 +292,13 @@
                     setScreenDefault()
                     $("#confirmPopup").modal('hide');
                 } else {
-                    toastr.error(response.error)
+                    Swal.fire({   
+                        title: "Error",   
+                        icon: "error", 
+                        text: response.error,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
                 }
 
                 
