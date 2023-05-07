@@ -47,8 +47,12 @@
             onLunasPrepare();
         });
 
-        $("#btn_confirm_sms").on("click", function() {
+        $("#btn_confirm_no_sms").on("click", function() {
             onConfirmTransaction();
+        });
+
+        $("#btn_confirm_sms").on("click", function() {
+            onConfirmSMSTransaction();
         });
 
         $('#pending-upload').on("submit",function(e) {
@@ -252,7 +256,7 @@
                 $("#transaction_id_sms").text(result.TRANSACTION_ID);
 
                 $("#nama_pelanggan").val(result.CUSTOMER_NAME);
-                // $("#nomor_pelanggan").val(result.CUSTOMER_CONTACT);
+                $("#nomor_pelanggan").val(result.CUSTOMER_CONTACT);
                 $("#jadwal_keberangkatan").val(moment(result.DATE_FROM).format('DD MMM YYYY') + ' ' + result.TIME );
                 $("#template_sms").val(sms_template);
 
@@ -263,6 +267,44 @@
     }
 
     function onConfirmTransaction() {
+        $.ajax({
+            url: "{{ route('transaksi.confirm') }}",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type: "POST",
+            dataType: 'json',
+            traditional: true,
+            data: {
+                'TRANSACTION_ID': gTransactionId,
+                'NO_PELANGGAN': $("#nomor_pelanggan").val(),
+                'PESAN': $("#template_sms").val(),
+                
+            },
+            success: function(response) {
+                if ($.isEmptyObject(response.error)) {
+                    Swal.fire({   
+                        title: "Success",   
+                        icon: "success", 
+                        text: response.message,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
+                    table.draw();
+                    setScreenDefault()
+                    $("#confirmPopup").modal('hide');
+                } else {
+                    toastr.error(response.error)
+                }
+
+                
+            },
+            error: function(err) {
+                toastr.error('Terjadi Kesalahan!')
+            }
+        })
+
+    }
+
+    function onConfirmSMSTransaction() {
         $.ajax({
             url: "{{ route('transaksi.confirmsms') }}",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -288,7 +330,13 @@
                     setScreenDefault()
                     $("#confirmPopup").modal('hide');
                 } else {
-                    toastr.error(response.error)
+                    Swal.fire({   
+                        title: "Error",   
+                        icon: "error", 
+                        text: response.error,
+                        timer: 2000,   
+                        showConfirmButton: false 
+                    });
                 }
 
                 

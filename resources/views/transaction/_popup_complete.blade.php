@@ -82,7 +82,7 @@
                 <h6 class="modal-title pull-right"># <span id="transaction_id_sms"></span></h6>
                 <h5 class="modal-title">Transaksi</h5>
             </div>
-            <form method="POST" data-toggle="validator" action="javascript:void(0)" >
+            <form method="POST" action="javascript:void(0)" >
                 <div class="form-wrap">
                     <div class="modal-body pb-0">
                         <div class="panel panel-default card-view">
@@ -100,7 +100,7 @@
 
                                     <div class="form-group">
                                         <label class="control-label mb-10">No Telepon</label>
-                                        <input type="text" class="form-control" id="nomor_pelanggan" name="nomor_pelanggan" required autocomplete="off">
+                                        <input type="text" class="form-control" id="nomor_pelanggan" name="nomor_pelanggan" readonly required autocomplete="off">
                                     </div>
 
                                     <div class="form-group">
@@ -116,14 +116,15 @@
                                 </div>
 
                                 <div class="col-sm-12 mb-10">
-                                    Notifikasi SMS akan dikirimkan, setelah anda mengkonfirmasi Transaksi ini.
+                                    Notifikasi SMS akan dikirimkan otomatis, setelah anda mengkonfirmasi Transaksi ini.
                                 </div>
                             </div>
                         </div>
                         </div>
                     <div class="modal-footer pt-0">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary btn-sm btn-icon left-icon pr-10 pl-10" id="btn_confirm_sms"><i class="fa fa-check"></i><span>Konfirmasi</span>
+                        <button type="submit" class="btn btn-warning btn-sm btn-icon left-icon pr-10 pl-10" id="btn_confirm_no_sms"><i class="fa fa-check"></i><span>Konfirmasi Tanpa Kirim SMS</span>
+                        <button type="submit" class="btn btn-primary btn-sm btn-icon left-icon pr-10 pl-10" id="btn_confirm_sms"><i class="fa fa-check"></i><span>Konfirmasi & Kirim SMS</span>
                     </div>
                 </div>
             </form>

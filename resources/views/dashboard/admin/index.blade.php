@@ -108,7 +108,7 @@
                                             <span class="weight-500 uppercase-font block">Total Pembayaran</span>
                                         </div>
                                         <div class="col-xs-4 data-wrap-right pl-0 pr-0 text-center">
-                                            <i class="fa fa-usd data-right-rep-icon txt-light-grey"></i>
+                                            <i class="fa fa-money data-right-rep-icon txt-light-grey"></i>
                                         </div>
                                     </div>
                                 </div>

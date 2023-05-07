@@ -238,15 +238,6 @@ class TransactionController extends BaseController
                 'TRANSACTION_STATUS' => 0
             ]);
 
-            $update_transport_status = Transport::query()
-            ->where(['TRANSPORT_CODE' => $request->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 0]);
-
-            $update_driver_status = Driver::query()
-            ->where(['DRIVER_ID' => $request->DRIVER_ID])->update(['DRIVER_STATUS' => 0]);
-
-            $update_kondektur_status = Kondektur::query()
-            ->where(['KONDEKTUR_ID' => $request->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 0]);
-
             $fileName = 'PEMBAYARAN_'.$transaction->TRANSACTION_ID.'.'.$request->IMG_PAID_PAYMENT->extension();
             $upload = $request->IMG_PAID_PAYMENT->move(public_path('admin/upload'), $fileName);
 
@@ -276,23 +267,6 @@ class TransactionController extends BaseController
 
         $response = Response::make($file, 200);
         return $response->header("Content-type", $type);
-    }
-
-    public function confirm(Request $request)
-    {
-        DB::beginTransaction();
-        $transaction = Transaction::find($request->TRANSACTION_ID);
-        try {
-            DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 1]);
-            DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 2]);
-            DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 2]);
-            DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 2]);
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollback();
-            return response()->json(['error' => 'Terjadi kesalahan!']);
-        }
-        return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi']);
     }
 
     public function transaksi_lunas(Request $request)
@@ -348,9 +322,6 @@ class TransactionController extends BaseController
         $transaction = Transaction::find($request->TRANSACTION_ID);
         try {
             DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 3]);
-            DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 1]);
-            DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 1]);
-            DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 1]);
             DB::commit();
 
         } catch (Exception $e) {
@@ -369,9 +340,6 @@ class TransactionController extends BaseController
         $filename = Payment::where(['TRANSACTION_ID' => $request->TRANSACTION_ID])->first()->IMG_PAID_PAYMENT;
 
         try {
-            DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 1]);
-            DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 1]);
-            DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 1]);
 
             DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->delete();
             DB::table('tb_payment')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->delete();
@@ -388,6 +356,20 @@ class TransactionController extends BaseController
 
         return response()->json(['message' => 'Data berhasil dihapus!']);
  
+    }
+
+    public function confirm(Request $request)
+    {
+        DB::beginTransaction();
+        $transaction = Transaction::find($request->TRANSACTION_ID);
+        try {
+            DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 1]);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Terjadi kesalahan!']);
+        }
+        return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi']);
     }
 
     // SMS NOTIF
@@ -408,9 +390,6 @@ class TransactionController extends BaseController
             $transaction = Transaction::find($request->TRANSACTION_ID);
             try {
                 DB::table('tb_transaction')->where(['TRANSACTION_ID' => $transaction->TRANSACTION_ID])->update(['TRANSACTION_STATUS' => 1]);
-                DB::table('tb_m_transport')->where(['TRANSPORT_CODE' => $transaction->TRANSPORT_CODE])->update(['TRANSPORT_STATUS' => 2]);
-                DB::table('tb_m_kondektur')->where(['KONDEKTUR_ID' => $transaction->KONDEKTUR_ID])->update(['KONDEKTUR_STATUS' => 2]);
-                DB::table('tb_m_driver')->where(['DRIVER_ID' => $transaction->DRIVER_ID])->update(['DRIVER_STATUS' => 2]);
                 DB::commit();
 
                 $userkey = 'a566152cf82b';
@@ -435,17 +414,24 @@ class TransactionController extends BaseController
                 ));
 
                 $results = json_decode(curl_exec($curlHandle), true);
+
+                if($results["status"] == 0) { // saldo habis
+                    return response()->json(['error' => 'Saldo Tidak mencukupi']);
+                    DB::rollback();
+                }
+
+                // dd($results);
                 curl_close($curlHandle);
             } catch (Exception $e) {
                 DB::rollback();
                 return response()->json(['error' => 'Terjadi kesalahan!']);
             }
 
-        }else {
+        } else {
             return response()->json(['error' => $validator->errors()->all()]);
         }
 
-        return response()->json(['message' => 'Data berhasil dikonfirmasi!']);
+        return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi!']);
 
     }
 
