@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Expense;
 use App\Models\Transport;
 use App\Models\Driver;
 use App\Models\Kondektur;
@@ -67,6 +68,32 @@ class TransactionController extends BaseController
     {
         $data['title'] = 'Transaksi';
         return view('transaction/add_transaction', compact('data'));
+    }
+
+    public function detail_transaction($transaction_id)
+    {
+        $data['title'] = 'Transaksi';
+        $data['detail_transaction'] = Transaction::select([
+            'tb_transaction.*',
+            'tb_m_driver.DRIVER_NAME',
+            'tb_m_kondektur.KONDEKTUR_NAME',
+            'tb_payment.AMOUNT',
+            'tb_payment.PAID_PAYMENT',
+            'tb_payment.PENDING_PAYMENT',
+            'tb_payment.PAYMENT_STATUS',
+            'tb_payment.IMG_PAID_PAYMENT',
+            'tb_payment.IMG_PENDING_PAYMENT',
+        ])->where(['tb_transaction.TRANSACTION_ID' => $transaction_id])
+        ->leftJoin('tb_m_driver', 'tb_transaction.DRIVER_ID', '=', 'tb_m_driver.DRIVER_ID') 
+        ->leftJoin('tb_m_kondektur', 'tb_transaction.KONDEKTUR_ID', '=', 'tb_m_kondektur.KONDEKTUR_ID') 
+        ->leftJoin('tb_payment', 'tb_transaction.TRANSACTION_ID', '=', 'tb_payment.TRANSACTION_ID')
+        ->firstOrFail();
+
+        $data['detail_expense'] = Expense::where(['TRANSACTION_ID' => $transaction_id])
+        ->orderBy('UPDATED_DATE', 'DESC')
+        ->get();
+
+        return view('transaction/detail_transaction', compact('data'));
     }
 
     public function getbykey(Request $request) {
@@ -436,5 +463,7 @@ class TransactionController extends BaseController
         return response()->json(['message' => 'Transaksi telah berhasil dikonfirmasi!']);
 
     }
+
+
 
 }

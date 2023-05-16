@@ -57,7 +57,7 @@ class TransactionExport implements
             'Status Transaksi',
             'Harga',
             'Dibayar',
-            'Total Expense',
+            'Pengeluaran',
             'Dibuat Oleh',
         ];
     }

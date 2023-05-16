@@ -100,6 +100,7 @@ Route::group(['middleware' => 'revalidate'], function(){
     Route::delete('transaksi-delete', [TransactionController::class, 'delete'])->name('transaksi.delete');
     Route::get('transaksi/img/{IMAGE}', [TransactionController::class, 'open_image'])->name('transaksi.image');
     Route::get('transaksi-getByDateRangeForDashboard', [TransactionController::class, 'getByDateRangeForDashboard'])->name('transaksi.getByDateRangeForDashboard');
+    Route::get('transaksi/{TRANSACTION_ID}', [TransactionController::class, 'detail_transaction'])->name('transaksi.detail');
 
     Route::get('report', [ReportController::class, 'index'])->name('report');
     Route::get('report-datatable', [ReportController::class, 'datatable'])->name('report.datatable');

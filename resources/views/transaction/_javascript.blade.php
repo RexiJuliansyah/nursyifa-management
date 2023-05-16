@@ -116,7 +116,9 @@
             toastr.warning('Pilih satu data untuk mengubah!')
             return;
         } else {
-            getDetailData();
+            var url = '{{ route("transaksi.detail", ":id") }}';
+            url = url.replace(':id', gTransactionId);
+            location.href = url
         }
     }
 
@@ -158,54 +160,56 @@
         }
     }
 
-    function getDetailData() {
-        $.ajax({
-            type: "GET",
-            url: "{{ route('transaksi.getbykey') }}",
-            dataType: 'json',
-            traditional: true,
-            data: {
-                'TRANSACTION_ID': gTransactionId
-            },
-            success: function(result) {
-                $("#transaction_id").text(result.TRANSACTION_ID);
-                $("#customer_name").text(result.CUSTOMER_NAME);
-                $("#customer_contact").text(result.CUSTOMER_CONTACT);
-                $("#customer_amount").text(result.CUSTOMER_AMOUNT);
-                $("#destination").text(result.DESTINATION);
-                $("#remark").text(result.REMARK);
-                $("#date_from_to").text(moment(result.DATE_FROM).format('DD MMM YYYY') + ' - ' + moment(result.DATE_TO).format('DD MMM YYYY'));
-                $("#time").text(result.TIME);
-                $("#transport").text(result.TRANSPORT_CODE);
-                $("#driver_name").text(result.DRIVER_NAME);
-                $("#kondektur_name").text(result.KONDEKTUR_NAME);
-                $("#amount").text(number_format(result.AMOUNT));
-                $("#paid_payment").text(number_format(result.PAID_PAYMENT));
-                $("#pending_payment").text(number_format(result.PENDING_PAYMENT));
-                $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
+    // function getDetailData() {
+    //     var url = '{{ route("transaksi.detail", ":filename") }}';
 
-                if(result.PAYMENT_STATUS == 1) {
-                    $("#payment_status").html('<span class="label label-success pull-right">LUNAS</span>'); 
-                } else {
-                    $("#payment_status").html('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
-                }
-                $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
-                $("#img_pending_payment").text(result.IMG_PENDING_PAYMENT);
+    //     url = url.replace(':filename', gTransactionId);
+
+    //     $.ajax({
+    //         type: "GET",
+    //         url: url,
+    //         dataType: 'json',
+    //         traditional: true,
+
+    //         success: function(result) {
+    //             // $("#transaction_id").text(result.TRANSACTION_ID);
+    //             // $("#customer_name").text(result.CUSTOMER_NAME);
+    //             // $("#customer_contact").text(result.CUSTOMER_CONTACT);
+    //             // $("#customer_amount").text(result.CUSTOMER_AMOUNT);
+    //             // $("#destination").text(result.DESTINATION);
+    //             // $("#remark").text(result.REMARK);
+    //             // $("#date_from_to").text(moment(result.DATE_FROM).format('DD MMM YYYY') + ' - ' + moment(result.DATE_TO).format('DD MMM YYYY'));
+    //             // $("#time").text(result.TIME);
+    //             // $("#transport").text(result.TRANSPORT_CODE);
+    //             // $("#driver_name").text(result.DRIVER_NAME);
+    //             // $("#kondektur_name").text(result.KONDEKTUR_NAME);
+    //             // $("#amount").text(number_format(result.AMOUNT));
+    //             // $("#paid_payment").text(number_format(result.PAID_PAYMENT));
+    //             // $("#pending_payment").text(number_format(result.PENDING_PAYMENT));
+    //             // $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
+
+    //             // if(result.PAYMENT_STATUS == 1) {
+    //             //     $("#payment_status").html('<span class="label label-success pull-right">LUNAS</span>'); 
+    //             // } else {
+    //             //     $("#payment_status").html('<span class="label label-primary pull-right">DANA PERTAMA</span>'); 
+    //             // }
+    //             // $("#img_paid_payment").text(result.IMG_PAID_PAYMENT);
+    //             // $("#img_pending_payment").text(result.IMG_PENDING_PAYMENT);
                 
-                var url_paid = '{{ route("transaksi.image", ":filename") }}';
-                var url_pending = '{{ route("transaksi.image", ":filename") }}';
+    //             // var url_paid = '{{ route("transaksi.image", ":filename") }}';
+    //             // var url_pending = '{{ route("transaksi.image", ":filename") }}';
 
-                url_paid = url_paid.replace(':filename', result.IMG_PAID_PAYMENT);
-                $("#download_paid_img").attr("href", url_paid);
+    //             // url_paid = url_paid.replace(':filename', result.IMG_PAID_PAYMENT);
+    //             // $("#download_paid_img").attr("href", url_paid);
 
-                url_pending = url_pending.replace(':filename', result.IMG_PENDING_PAYMENT);
-                $("#download_pending_img").attr("href", url_pending);
+    //             // url_pending = url_pending.replace(':filename', result.IMG_PENDING_PAYMENT);
+    //             // $("#download_pending_img").attr("href", url_pending);
 
-                $("#detailPopup").modal('show');
-            }
-        });
+    //             // $("#detailPopup").modal('show');
+    //         }
+    //     });
 
-    }
+    // }
 
     function getLunasData() {
         $.ajax({

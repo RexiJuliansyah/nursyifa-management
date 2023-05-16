@@ -34,7 +34,7 @@
                 <th>Status Transaksi</th>
                 <th>Harga</th>
                 <th>Dibayar</th>
-                <th>Total Expense</th>
+                <th>Pengeluaran</th>
                 <th>Dibuat Oleh</th>
             </tr>
         </thead>

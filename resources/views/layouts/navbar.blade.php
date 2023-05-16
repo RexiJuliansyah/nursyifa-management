@@ -55,9 +55,8 @@
             </li> -->
 
             <li class="dropdown auth-drp">
-                <a href="#" class="dropdown-toggle pr-0" data-toggle="dropdown">
-                    <img src="{{ asset('admin') }}/dist/img/user1.png" alt="user_auth"
-                        class="user-auth-img img-circle" /><span class="user-online-status"></span>
+                <a href="#" class="dropdown-toggle pr-10" data-toggle="dropdown">
+                    <h6 class="txt-dark mt-20 mb-20">{{ Auth::user()->FULL_NAME }}<i class="fa fa-caret-down ml-10"></i></h6>
                 </a>
 
                 <ul class="dropdown-menu user-auth-dropdown" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">

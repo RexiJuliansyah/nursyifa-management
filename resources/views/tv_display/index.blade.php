@@ -134,6 +134,12 @@
             { data: 'STATUS', name: 'STATUS', className: 'text-center' },
         ]
         });
+
+        setInterval(function () {
+            table.draw();
+        }, 60000);
+
+
     });
   
 </script>

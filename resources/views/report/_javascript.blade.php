@@ -68,11 +68,7 @@
                     d.DATE_FROM_TO = $('#DATE_FROM_TO').val();
                 }
             },
-            columns: [{
-                    data: 'checkbox',
-                    className: 'text-center',
-                    name: 'checkbox'
-                },
+            columns: [
                 {
                     data: 'TRANSACTION_ID',
                     name: 'TRANSACTION_ID',

@@ -94,7 +94,6 @@
                     <table id="table-report" class="table-bordered display table">
                         <thead class="thead-dark">
                             <tr>
-                                <th style="width: 0px;">#</th>
                                 <th>Kode Transaksi</th>
                                 <th>Pelanggan</th>
                                 <th>Bus</th>
@@ -104,7 +103,7 @@
                                 <th>Status Transaksi</th>
                                 <th>Harga</th>
                                 <th>Dibayar</th>
-                                <th>Total Expense</th>
+                                <th>Pengeluaran</th>
                                 <th>Dibuat Oleh</th>
                             </tr>
                         </thead>
