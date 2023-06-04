@@ -19,6 +19,7 @@ use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Style;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Color;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 class TransactionExport implements
     FromCollection,
@@ -27,7 +28,8 @@ class TransactionExport implements
     ShouldAutoSize,
     WithHeadings,
     WithStyles,
-    WithDefaultStyles
+    WithDefaultStyles,
+    WithColumnWidths
 {
     protected $transaction;
     protected $started_line = '5';
@@ -57,7 +59,8 @@ class TransactionExport implements
             'Status Transaksi',
             'Harga',
             'Dibayar',
-            'Pengeluaran',
+            'Detail Pengeluaran',
+            'Total Pengeluaran',
             'Dibuat Oleh',
         ];
     }
@@ -75,7 +78,7 @@ class TransactionExport implements
 
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A' . $this->header_line . ':M' . $this->transaction->count() + $this->header_line)->applyFromArray([
+        $sheet->getStyle('A' . $this->header_line . ':N' . $this->transaction->count() + $this->header_line)->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => Border::BORDER_THIN,
@@ -129,6 +132,7 @@ class TransactionExport implements
             $transaction->STATUS,
             $transaction->AMOUNT,
             $transaction->PAID_PAYMENT,
+            $transaction->EXPENSE_DETAIL,
             $transaction->TOTAL_EXPENSE,
             $transaction->CREATED_BY,
         ];
@@ -153,5 +157,12 @@ class TransactionExport implements
 
     private function populateSheet($sheet)
     {
+    }
+
+    public function columnWidths(): array
+    {
+        return [
+            'L' => 50,         
+        ];
     }
 }

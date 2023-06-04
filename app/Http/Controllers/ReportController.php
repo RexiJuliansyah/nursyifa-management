@@ -6,6 +6,7 @@ use App\Exports\TransactionExport;
 use App\Models\System;
 use App\Models\Transport;
 use App\Models\Transaction;
+use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use DataTables;
@@ -148,6 +149,25 @@ class ReportController extends BaseController
             if ($transaction->TOTAL_EXPENSE != null) {
                 $transaction->TOTAL_EXPENSE = 'Rp. ' . number_format($transaction->TOTAL_EXPENSE, 0, '', '.');
             }
+
+            // Pengeluaran
+
+            $transaction->EXPENSE_DETAIL = null;
+
+            $expense = Expense::where('TRANSACTION_ID', '=', $transaction->TRANSACTION_ID)
+            ->orderBy('UPDATED_DATE', 'DESC')
+            ->get();
+
+            if (sizeof($expense) > 0 ) {
+                $pengeluaran = '';
+                foreach ($expense as $item) {
+                    $pengeluaran .= $item->EXPENSE_NAME . ' : Rp. ' . number_format($item->EXPENSE_AMOUNT, 0, '', '.') . ', ';
+                }
+                $detail_pengeluaran = substr($pengeluaran, 0, -2);
+
+                $transaction->EXPENSE_DETAIL = $detail_pengeluaran;
+            }
+
         }
 
         try {
